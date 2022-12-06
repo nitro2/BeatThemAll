@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 
 set(ProjectName BeatThemAll)
 # set the project name and version
@@ -13,8 +13,10 @@ set(BUILD_SHARED_LIBS OFF)
 # to the source code
 configure_file(Config.h.in Config.h)
 
+add_library(gameobject "")
+add_subdirectory(src)
 
-list(APPEND EXTRA_LIBS )
+list(APPEND EXTRA_LIBS gameobject "")
 list(APPEND EXTRA_INCLUDES 
     )
 
