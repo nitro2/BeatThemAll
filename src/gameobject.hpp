@@ -4,8 +4,8 @@
 class GameObject
 {
 public:
-    GameObject();
-    ~GameObject();
+    GameObject(){};
+    ~GameObject(){};
 
 private:
     float width;
