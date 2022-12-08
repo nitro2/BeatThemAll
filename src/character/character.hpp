@@ -25,7 +25,7 @@ public:
     Warrior()
     {
         this->attack = 10;
-        this->defend = 15;
+        this->defend = 5;
         this->health = 120;
     }
     ~Warrior(){};
@@ -37,7 +37,7 @@ public:
     Wizard()
     {
         this->attack = 15;
-        this->defend = 10;
+        this->defend = 3;
         this->health = 100;
     }
     ~Wizard(){};

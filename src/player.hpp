@@ -17,7 +17,25 @@ public:
     Player(CHARACTER_TYPE c);
     ~Player();
 
+    std::string getName() { return this->name; };
+
+    int getAttack() { return this->attack; };
+    int getDefend() { return this->defend; };
+    int getHealth() { return this->health; };
+    void printStat();
+    // Attack animation
+    void shoot();
+    void swing();
+    void throwAway();
+
+    // Get hit animation
+    void takeDamage(int damage);
+
+    // Just for debugging
+    void test();
+
 private:
+    std::string name;
     int attack;
     int defend;
     int health;
