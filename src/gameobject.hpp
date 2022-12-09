@@ -7,6 +7,12 @@ public:
     GameObject(){};
     ~GameObject(){};
 
+    // Movement
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
+
 private:
     float width;
     float height;
