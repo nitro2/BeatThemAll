@@ -30,7 +30,7 @@ Player::Player(CHARACTER_TYPE c)
         this->defend = 0;
         this->health = 0;
     }
-    this->name = "Player" + std::to_string(1);
+    this->name = "Player" + std::to_string(random());
 }
 
 Player::~Player(){};
@@ -38,13 +38,13 @@ Player::~Player(){};
 void Player::takeDamage(int damage)
 {
     int actual_damage = (float)damage * (1 - ((0.06 * this->defend) / (1 + 0.06 * abs(this->defend))));
-    std::cout << "Player " << this->name << " take " << damage
+    std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
 }
 
 void Player::printStat()
 {
-    std::cout << "Player " << this->name
+    std::cout << this->name
               << " attack=" << this->attack
               << " defend=" << this->defend
               << " health=" << this->health
@@ -57,5 +57,25 @@ void Player::test()
     {
         this->takeDamage(i);
         this->printStat();
+    }
+}
+
+void Player::pickWeapon(WEAPON_TYPE w)
+{
+    switch (w)
+    {
+    case WEAPON_TYPE::GUN:
+        this->weapon = std::make_shared<Gun>();
+        break;
+    case WEAPON_TYPE::SWORD:
+        this->weapon = std::make_shared<Sword>();
+        break;
+    default:
+        break;
+    }
+    if (this->weapon)
+    {
+        this->attack += this->weapon->getAttack();
+        this->defend += this->weapon->getDefend();
     }
 }

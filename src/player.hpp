@@ -14,6 +14,12 @@ public:
         WIZARD
     };
 
+    enum class WEAPON_TYPE
+    {
+        GUN,
+        SWORD
+    };
+
     Player(CHARACTER_TYPE c);
     ~Player();
 
@@ -23,6 +29,13 @@ public:
     int getDefend() { return this->defend; };
     int getHealth() { return this->health; };
     void printStat();
+
+    // Movement
+    void jump();
+
+    // Pick weapon
+    void pickWeapon(WEAPON_TYPE w);
+
     // Attack animation
     void shoot();
     void swing();
