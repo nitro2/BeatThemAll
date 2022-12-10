@@ -2,7 +2,6 @@
 #include <filesystem>
 #include "game.hpp"
 #include "character.hpp"
-#include "skeleton.hpp"
 // Constructor
 Game::Game()
 {
