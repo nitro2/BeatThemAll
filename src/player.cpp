@@ -59,23 +59,3 @@ void Player::test()
         this->printStat();
     }
 }
-
-void Player::pickWeapon(WEAPON_TYPE w)
-{
-    switch (w)
-    {
-    case WEAPON_TYPE::GUN:
-        this->weapon = std::make_shared<Gun>();
-        break;
-    case WEAPON_TYPE::SWORD:
-        this->weapon = std::make_shared<Sword>();
-        break;
-    default:
-        break;
-    }
-    if (this->weapon)
-    {
-        this->attack += this->weapon->getAttack();
-        this->defend += this->weapon->getDefend();
-    }
-}

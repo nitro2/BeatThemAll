@@ -3,7 +3,6 @@
 
 #include "gameobject.hpp"
 #include "character.hpp"
-#include "weapon.hpp"
 
 class Player : public GameObject
 {
@@ -12,12 +11,6 @@ public:
     {
         WARRIOR,
         WIZARD
-    };
-
-    enum class WEAPON_TYPE
-    {
-        GUN,
-        SWORD
     };
 
     Player(CHARACTER_TYPE c);
@@ -32,9 +25,6 @@ public:
 
     // Movement
     void jump();
-
-    // Pick weapon
-    void pickWeapon(WEAPON_TYPE w);
 
     // Attack animation
     void shoot();
@@ -53,7 +43,6 @@ private:
     int defend;
     int health;
     std::shared_ptr<Character> character;
-    std::shared_ptr<Weapon> weapon;
 };
 
 #endif // _PLAYER_HPP_

@@ -12,7 +12,6 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/gameobject.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/weapon/weapon.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.hpp
 )
 
@@ -27,6 +26,5 @@ target_sources(gamecore
 target_include_directories(gamecore
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/character"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/weapon"
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
 )
