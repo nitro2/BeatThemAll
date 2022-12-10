@@ -1,10 +1,10 @@
 #ifndef _CHARACTER_HPP_
 #define _CHARACTER_HPP_
 
-#include "gameobject.hpp"
 #include "SFML/Graphics.hpp"
+#include "gameobject.hpp"
 
-class Character : public GameObject
+class Character : public GameObject, public sf::Sprite
 {
 public:
     Character(){};
@@ -21,7 +21,6 @@ protected:
     int attack;
     int defend;
     int health;
-    sf::Sprite characterImg;
     sf::Texture characterTexture;
     int characterIdleFrameNum;
 };

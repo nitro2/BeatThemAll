@@ -5,7 +5,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "skeleton.hpp"
 class Game
 {
 public:
@@ -19,9 +18,6 @@ public:
 private:
     std::shared_ptr<sf::RenderWindow> window;
     std::vector<std::shared_ptr<sf::Drawable>> drawable_obj_list;
-
-    std::shared_ptr<sf::Sprite> characterImg;
-    std::shared_ptr<sf::Texture> characterTexture;
 };
 
 #endif // _GAME_HPP_

@@ -1,33 +1,20 @@
 #include <iostream>
-
+#include <filesystem>
 #include "game.hpp"
-
+#include "character.hpp"
+#include "skeleton.hpp"
 // Constructor
 Game::Game()
 {
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1600, 900), "Beat them all");
+    this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // window.setFramerateLimit(24);
     this->window->setActive(false);
 
     // Test
-    // auto c = std::make_shared<sf::Drawable>();
-
-    std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
-    auto characterIdleFrameNum = 11;
-    std::string filename = "../assets/skeleton/Skeleton/Sprite_Sheets/Skeleton_Idle.png";
-    std::cout << filename << std::endl;
-
-    this->characterImg = std::make_shared<sf::Sprite>();
-    this->characterTexture = std::make_shared<sf::Texture>();
-
-    this->characterTexture->loadFromFile(filename);
-    this->characterImg->setTexture(*this->characterTexture);
-    this->characterImg->setPosition(200, 200);
-    this->characterImg->setTextureRect(sf::IntRect(0, 0, this->characterTexture->getSize().x / characterIdleFrameNum,
-                                                   this->characterTexture->getSize().y));
-
-    this->drawable_obj_list.push_back(this->characterImg);
+    auto s = std::make_shared<Skeleton>();
+    this->drawable_obj_list.push_back(s);
 }
 // Destructor
 Game::~Game()
@@ -58,6 +45,9 @@ void Game::draw()
 
 void Game::run()
 {
+
+    std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
+
     // run the program as long as the window is open
     while (this->window->isOpen())
     {
@@ -82,7 +72,7 @@ void Game::run()
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // auto m = sf::Mouse::getPosition(this->window);
-            std::cout << "Mouse click" << std::endl;
+            // std::cout << "Mouse click" << std::endl;
         }
 
         this->update();

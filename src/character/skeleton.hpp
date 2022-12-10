@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _SKELETON_HPP_
 #define _SKELETON_HPP_
 
@@ -13,4 +12,4 @@ public:
 private:
 };
 
-#endif // !SKELETON_H
+#endif // _SKELETON_HPP_

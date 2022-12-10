@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-class GameObject : public sf::Drawable
+class GameObject
 {
 public:
     GameObject(){};
