@@ -15,7 +15,7 @@ public:
     void moveUp();
     void moveDown();
 
-private:
+protected:
     float width;
     float height;
     float x;

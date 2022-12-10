@@ -7,7 +7,7 @@
 class Character : public GameObject, public sf::Sprite
 {
 public:
-    Character(){};
+    Character();
     ~Character(){};
 
     int getAttack() { return this->attack; };
@@ -21,6 +21,9 @@ protected:
     int attack;
     int defend;
     int health;
+
+    // Image handle
+    void loadImage(std::string filename);
     sf::Texture characterTexture;
     int characterIdleFrameNum;
 };
