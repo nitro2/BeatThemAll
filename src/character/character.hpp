@@ -14,7 +14,7 @@ public:
     int getDefend() { return this->defend; };
     int getHealth() { return this->health; };
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
 protected:

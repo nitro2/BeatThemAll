@@ -22,3 +22,7 @@ void Character::loadImage(std::string filename)
     this->setScale(this->width / w, this->height / h);
     this->setPosition(sf::Vector2f({this->x, this->y}));
 }
+
+void Character::update(float deltaTime) {
+
+}

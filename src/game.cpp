@@ -20,8 +20,14 @@ Game::~Game()
 {
 }
 
-void Game::update()
+void Game::update(float deltaTime)
 {
+    for (auto& obj : this->drawable_obj_list)
+    {
+        std::shared_ptr<Character> derived =
+            std::dynamic_pointer_cast<Character>(obj);
+        derived->update(deltaTime);
+    }
 }
 
 void Game::draw()
@@ -47,9 +53,16 @@ void Game::run()
 
     std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
     this->window->setActive(true);
+
+    // delta time
+    float deltaTime = 0.0f;
+    sf::Clock clock;
+
     // run the program as long as the window is open
     while (this->window->isOpen())
     {
+        // update delta time
+        deltaTime = clock.restart().asSeconds();
         // std::cout << __FUNCTION__ << " " << __LINE__ << std::endl;
         sf::Event event;
         while (this->window->pollEvent(event))
@@ -74,7 +87,7 @@ void Game::run()
             // std::cout << "Mouse click" << std::endl;
         }
 
-        this->update();
+        this->update(deltaTime);
 
         // draw...
         this->window->clear(sf::Color(0, 220, 220));
