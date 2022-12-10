@@ -37,7 +37,7 @@ Player::~Player(){};
 
 void Player::takeDamage(int damage)
 {
-    int actual_damage = (float)damage * (1 - ((0.06 * this->defend) / (1 + 0.06 * abs(this->defend))));
+    int actual_damage = (float)damage * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend))));
     std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
 }
@@ -57,25 +57,5 @@ void Player::test()
     {
         this->takeDamage(i);
         this->printStat();
-    }
-}
-
-void Player::pickWeapon(WEAPON_TYPE w)
-{
-    switch (w)
-    {
-    case WEAPON_TYPE::GUN:
-        this->weapon = std::make_shared<Gun>();
-        break;
-    case WEAPON_TYPE::SWORD:
-        this->weapon = std::make_shared<Sword>();
-        break;
-    default:
-        break;
-    }
-    if (this->weapon)
-    {
-        this->attack += this->weapon->getAttack();
-        this->defend += this->weapon->getDefend();
     }
 }

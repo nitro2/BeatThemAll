@@ -1,14 +1,19 @@
 #include <iostream>
-
+#include <filesystem>
 #include "game.hpp"
-
+#include "character.hpp"
 // Constructor
 Game::Game()
 {
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1600, 900), "Beat them all");
+    this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // window.setFramerateLimit(24);
     this->window->setActive(false);
+
+    // Test
+    auto s = std::make_shared<Skeleton>();
+    this->drawable_obj_list.push_back(s);
 }
 // Destructor
 Game::~Game()
@@ -39,6 +44,9 @@ void Game::draw()
 
 void Game::run()
 {
+
+    std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
+
     // run the program as long as the window is open
     while (this->window->isOpen())
     {
@@ -63,7 +71,7 @@ void Game::run()
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // auto m = sf::Mouse::getPosition(this->window);
-            std::cout << "Mouse click" << std::endl;
+            // std::cout << "Mouse click" << std::endl;
         }
 
         this->update();

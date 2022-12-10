@@ -1,6 +1,8 @@
 #ifndef _GAME_OBJECT_HPP_
 #define _GAME_OBJECT_HPP_
 
+#include <iostream>
+#include <SFML/Graphics.hpp>
 class GameObject
 {
 public:
@@ -13,7 +15,7 @@ public:
     void moveUp();
     void moveDown();
 
-private:
+protected:
     float width;
     float height;
     float x;
