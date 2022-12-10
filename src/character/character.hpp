@@ -2,6 +2,7 @@
 #define _CHARACTER_HPP_
 
 #include "gameobject.hpp"
+#include "SFML/Graphics.hpp"
 
 class Character : public GameObject
 {
@@ -13,10 +14,16 @@ public:
     int getDefend() { return this->defend; };
     int getHealth() { return this->health; };
 
+    void update();
+    void draw();
+
 protected:
     int attack;
     int defend;
     int health;
+    sf::Sprite characterImg;
+    sf::Texture characterTexture;
+    int characterIdleFrameNum;
 };
 
 class Warrior : public Character

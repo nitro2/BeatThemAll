@@ -9,6 +9,25 @@ Game::Game()
     this->window->setVerticalSyncEnabled(true);
     // window.setFramerateLimit(24);
     this->window->setActive(false);
+
+    // Test
+    // auto c = std::make_shared<sf::Drawable>();
+
+    std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
+    auto characterIdleFrameNum = 11;
+    std::string filename = "../assets/skeleton/Skeleton/Sprite_Sheets/Skeleton_Idle.png";
+    std::cout << filename << std::endl;
+
+    this->characterImg = std::make_shared<sf::Sprite>();
+    this->characterTexture = std::make_shared<sf::Texture>();
+
+    this->characterTexture->loadFromFile(filename);
+    this->characterImg->setTexture(*this->characterTexture);
+    this->characterImg->setPosition(200, 200);
+    this->characterImg->setTextureRect(sf::IntRect(0, 0, this->characterTexture->getSize().x / characterIdleFrameNum,
+                                                   this->characterTexture->getSize().y));
+
+    this->drawable_obj_list.push_back(this->characterImg);
 }
 // Destructor
 Game::~Game()
