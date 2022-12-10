@@ -24,5 +24,7 @@ void Character::loadImage(std::string filename)
 }
 
 void Character::update(float deltaTime) {
+    this->characterAnimation.update(0, deltaTime);
 
+    this->setTextureRect(this->characterAnimation.uvRect);
 }

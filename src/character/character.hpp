@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
+#include "animation.hpp"
 
 class Character : public GameObject, public sf::Sprite
 {
@@ -26,6 +27,8 @@ protected:
     void loadImage(std::string filename);
     sf::Texture characterTexture;
     int characterIdleFrameNum;
+
+    Animation characterAnimation;
 };
 
 class Warrior : public Character
@@ -60,6 +63,7 @@ public:
         this->characterIdleFrameNum = 11;
         const std::string filename = "assets/skeleton/Sprite_Sheets/Skeleton_Idle.png";
         this->loadImage(filename);
+        this->characterAnimation.init(&characterTexture, sf::Vector2u(11, 1), 0.08f);
         this->attack = 10;
         this->defend = 5;
         this->health = 120;
