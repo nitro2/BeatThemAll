@@ -10,10 +10,14 @@ Character::Character()
 
 void Character::loadImage(std::string filename)
 {
+    std::cout << __FUNCTION__ << " at line " << __LINE__
+              << " Load path " << filename
+              << std::endl;
+    // this->characterTexture.loadFromFile(filename, sf::IntRect(sf::Vector2i(this->x, this->y),sf::Vector2i(this->width, this->height)));
     this->characterTexture.loadFromFile(filename);
     this->setTexture(this->characterTexture);
-    float w = this->characterTexture.getSize().x / this->characterIdleFrameNum;
-    float h = this->characterTexture.getSize().y;
+    auto w = this->characterTexture.getSize().x / this->characterIdleFrameNum;
+    auto h = this->characterTexture.getSize().y;
     this->setTextureRect(sf::IntRect(0, 0, w, h));
     this->setScale(this->width / w, this->height / h);
     this->setPosition(sf::Vector2f({this->x, this->y}));
