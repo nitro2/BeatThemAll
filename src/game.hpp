@@ -18,10 +18,7 @@ public:
 
 private:
     std::shared_ptr<sf::RenderWindow> window;
-    std::vector<std::shared_ptr<sf::Drawable>> drawable_obj_list;
-
-    std::shared_ptr<sf::Sprite> characterImg;
-    std::shared_ptr<sf::Texture> characterTexture;
+    std::vector<std::shared_ptr<sf::Sprite>> drawable_obj_list;
 };
 
 #endif // _GAME_HPP_

@@ -25,7 +25,7 @@ protected:
     sf::Texture characterTexture;
     int characterIdleFrameNum;
 };
-
+/*
 class Warrior : public Character
 {
 public:
@@ -34,7 +34,7 @@ public:
         this->attack = 10;
         this->defend = 5;
         this->health = 120;
-    }
+    };
     ~Warrior(){};
 };
 
@@ -48,6 +48,6 @@ public:
         this->health = 100;
     }
     ~Wizard(){};
-};
+};*/
 
 #endif // _CHARACTER_HPP_

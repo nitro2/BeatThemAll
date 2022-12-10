@@ -9,10 +9,10 @@ Player::Player(CHARACTER_TYPE c)
     switch (c)
     {
     case CHARACTER_TYPE::WARRIOR:
-        this->character = std::make_shared<Warrior>();
+        //this->character = std::make_shared<Warrior>();
         break;
     case CHARACTER_TYPE::WIZARD:
-        this->character = std::make_shared<Wizard>();
+        //this->character = std::make_shared<Wizard>();
         break;
 
     default:
@@ -65,10 +65,10 @@ void Player::pickWeapon(WEAPON_TYPE w)
     switch (w)
     {
     case WEAPON_TYPE::GUN:
-        this->weapon = std::make_shared<Gun>();
+        //this->weapon = std::make_shared<Gun>();
         break;
     case WEAPON_TYPE::SWORD:
-        this->weapon = std::make_shared<Sword>();
+        //this->weapon = std::make_shared<Sword>();
         break;
     default:
         break;
