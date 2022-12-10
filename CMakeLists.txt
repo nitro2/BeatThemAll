@@ -17,12 +17,29 @@ configure_file(Config.h.in Config.h)
 add_library(gamecore "")
 add_subdirectory(src)
 
+if(MSVC OR MSYS OR MINGW) # for detecting Windows compilers
+    message("Build on Windows")
+    set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libWindows")
+    # TODO add SFML dynamic library
+    message(FATAL_ERROR "Not add libraries yet")
+elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
+    message("Build on Mac OSX")
+    set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
+elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
+    message("Build on Linux")
+    set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
+    # TODO add SFML dynamic library
+    message(FATAL_ERROR "Not add libraries yet")
+else() # Undefined
+    message(FATAL_ERROR "Undefined build system")
+endif()
+
 list(APPEND EXTRA_LIBS
-    "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64/libsfml-audio.2.5.dylib"
-    "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64/libsfml-graphics.2.5.dylib"
-    "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64/libsfml-network.2.5.dylib"
-    "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64/libsfml-system.2.5.dylib"
-    "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64/libsfml-window.2.5.dylib"
+    "${SFML_LIB_PATH}/libsfml-audio.2.5.dylib"
+    "${SFML_LIB_PATH}/libsfml-graphics.2.5.dylib"
+    "${SFML_LIB_PATH}/libsfml-network.2.5.dylib"
+    "${SFML_LIB_PATH}/libsfml-system.2.5.dylib"
+    "${SFML_LIB_PATH}/libsfml-window.2.5.dylib"
 )
 list(APPEND EXTRA_INCLUDES 
     "${PROJECT_SOURCE_DIR}/include"
