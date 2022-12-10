@@ -4,7 +4,20 @@
 #include <iostream>
 #include "player.hpp"
 
-Player::Player(CHARACTER_TYPE c)
+Player::Player(std::string name)
+{
+    this->attack = 0;
+    this->defend = 0;
+    this->health = 0;
+    this->name = name;
+}
+
+Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
+{
+    this->setCharacter(c);
+}
+
+void Player::setCharacter(CHARACTER_TYPE c)
 {
     switch (c)
     {
@@ -13,6 +26,9 @@ Player::Player(CHARACTER_TYPE c)
         break;
     case CHARACTER_TYPE::WIZARD:
         this->character = std::make_shared<Wizard>();
+        break;
+    case CHARACTER_TYPE::SKELETON:
+        this->character = std::make_shared<Skeleton>();
         break;
 
     default:
@@ -24,13 +40,6 @@ Player::Player(CHARACTER_TYPE c)
         this->defend = this->character->getDefend();
         this->health = this->character->getHealth();
     }
-    else
-    {
-        this->attack = 0;
-        this->defend = 0;
-        this->health = 0;
-    }
-    this->name = "Player";
 }
 
 Player::~Player(){};

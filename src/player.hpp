@@ -9,11 +9,14 @@ class Player : public GameObject
 public:
     enum class CHARACTER_TYPE
     {
+
         WARRIOR,
-        WIZARD
+        WIZARD,
+        SKELETON
     };
 
-    Player(CHARACTER_TYPE c);
+    Player(std::string name);
+    Player(std::string name, CHARACTER_TYPE c);
     ~Player();
 
     std::string getName() { return this->name; };
@@ -22,6 +25,9 @@ public:
     int getDefend() { return this->defend; };
     int getHealth() { return this->health; };
     void printStat();
+
+    void setName(std::string name) { this->name = name; };
+    void setCharacter(CHARACTER_TYPE c);
 
     // Movement
     void jump();
