@@ -30,7 +30,7 @@ Player::Player(CHARACTER_TYPE c)
         this->defend = 0;
         this->health = 0;
     }
-    this->name = "Player" + std::to_string(random());
+    this->name = "Player";
 }
 
 Player::~Player(){};

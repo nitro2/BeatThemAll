@@ -20,11 +20,31 @@ add_subdirectory(src)
 if(MSVC OR MSYS OR MINGW) # for detecting Windows compilers
     message("Build on Windows")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libWindows")
-    # TODO add SFML dynamic library
-    message(FATAL_ERROR "Not add libraries yet")
+    list(APPEND EXTRA_LIBS
+     "${SFML_LIB_PATH}/sfml-audio.lib"
+     "${SFML_LIB_PATH}/sfml-graphics.lib"
+     "${SFML_LIB_PATH}/sfml-network.lib"
+     "${SFML_LIB_PATH}/sfml-system.lib"
+     "${SFML_LIB_PATH}/sfml-window.lib"
+    )
+    list(APPEND EXTRA_DLL
+     "${SFML_LIB_PATH}/sfml-audio-2.dll"
+     "${SFML_LIB_PATH}/sfml-graphics-2.dll"
+     "${SFML_LIB_PATH}/sfml-network-2.dll"
+     "${SFML_LIB_PATH}/sfml-system-2.dll"
+     "${SFML_LIB_PATH}/sfml-window-2.dll"
+    )
+    file(COPY ${EXTRA_DLL} DESTINATION ${PROJECT_BINARY_DIR}/Debug)
 elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
     message("Build on Mac OSX")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
+    list(APPEND EXTRA_LIBS
+     "${SFML_LIB_PATH}/libsfml-audio.2.5.dylib"
+     "${SFML_LIB_PATH}/libsfml-graphics.2.5.dylib"
+     "${SFML_LIB_PATH}/libsfml-network.2.5.dylib"
+     "${SFML_LIB_PATH}/libsfml-system.2.5.dylib"
+     "${SFML_LIB_PATH}/libsfml-window.2.5.dylib"
+    )
 elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
     message("Build on Linux")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
@@ -34,13 +54,7 @@ else() # Undefined
     message(FATAL_ERROR "Undefined build system")
 endif()
 
-list(APPEND EXTRA_LIBS
-    "${SFML_LIB_PATH}/libsfml-audio.2.5.dylib"
-    "${SFML_LIB_PATH}/libsfml-graphics.2.5.dylib"
-    "${SFML_LIB_PATH}/libsfml-network.2.5.dylib"
-    "${SFML_LIB_PATH}/libsfml-system.2.5.dylib"
-    "${SFML_LIB_PATH}/libsfml-window.2.5.dylib"
-)
+
 list(APPEND EXTRA_INCLUDES 
     "${PROJECT_SOURCE_DIR}/include"
 )
@@ -63,4 +77,5 @@ target_include_directories("${ProjectName}"
 target_include_directories("${ProjectName}"
                             PUBLIC "${PROJECT_BINARY_DIR}"
                             PUBLIC ${EXTRA_LIBS}  
+                            PUBLIC ${EXTRA_DLL}
                            )
