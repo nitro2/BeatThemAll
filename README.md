@@ -1,5 +1,5 @@
 # BeatThemAll
-Universal Game using SFML
+2D fighting game using SFML.
 
 # Compile
 ```
