@@ -11,7 +11,7 @@ public:
     Game();
     ~Game();
 
-    void update();
+    void update(float deltaTime);
     void draw();
     void run();
 

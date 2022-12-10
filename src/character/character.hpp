@@ -3,8 +3,9 @@
 
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
+#include "animation.hpp"
 
-class Character : public GameObject, public sf::Sprite
+class Character : public GameObject
 {
 public:
     Character();
@@ -14,7 +15,7 @@ public:
     int getDefend() { return this->defend; };
     int getHealth() { return this->health; };
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
 protected:
@@ -25,7 +26,7 @@ protected:
     // Image handle
     void loadImage(std::string filename);
     sf::Texture characterTexture;
-    int characterIdleFrameNum;
+    std::shared_ptr<Animation> characterAnimation;
 };
 
 class Warrior : public Character
@@ -57,7 +58,7 @@ class Skeleton : public Character
 public:
     Skeleton()
     {
-        this->characterIdleFrameNum = 11;
+        //this->characterIdleFrameNum = 11;
         const std::string filename = "assets/skeleton/Sprite_Sheets/Skeleton_Idle.png";
         this->loadImage(filename);
         this->attack = 10;
