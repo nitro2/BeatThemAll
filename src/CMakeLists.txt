@@ -7,6 +7,7 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/wizard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/warrior.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
 )
 
 list(APPEND COMMON_HEADERS
@@ -17,6 +18,7 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/wizard.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/warrior.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/animation.hpp
 )
 
 target_sources(gamecore
