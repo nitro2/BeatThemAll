@@ -21,20 +21,21 @@ if(MSVC OR MSYS OR MINGW) # for detecting Windows compilers
     message("Build on Windows")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libWindows")
     list(APPEND EXTRA_LIBS
-     "${SFML_LIB_PATH}/sfml-audio.lib"
-     "${SFML_LIB_PATH}/sfml-graphics.lib"
-     "${SFML_LIB_PATH}/sfml-network.lib"
-     "${SFML_LIB_PATH}/sfml-system.lib"
-     "${SFML_LIB_PATH}/sfml-window.lib"
+     "${SFML_LIB_PATH}/sfml-audio-d.lib"
+     "${SFML_LIB_PATH}/sfml-graphics-d.lib"
+     "${SFML_LIB_PATH}/sfml-network-d.lib"
+     "${SFML_LIB_PATH}/sfml-system-d.lib"
+     "${SFML_LIB_PATH}/sfml-window-d.lib"
     )
     list(APPEND EXTRA_DLL
-     "${SFML_LIB_PATH}/sfml-audio-2.dll"
-     "${SFML_LIB_PATH}/sfml-graphics-2.dll"
-     "${SFML_LIB_PATH}/sfml-network-2.dll"
-     "${SFML_LIB_PATH}/sfml-system-2.dll"
-     "${SFML_LIB_PATH}/sfml-window-2.dll"
+     "${SFML_LIB_PATH}/sfml-audio-d-2.dll"
+     "${SFML_LIB_PATH}/sfml-graphics-d-2.dll"
+     "${SFML_LIB_PATH}/sfml-network-d-2.dll"
+     "${SFML_LIB_PATH}/sfml-system-d-2.dll"
+     "${SFML_LIB_PATH}/sfml-window-d-2.dll"
     )
     file(COPY ${EXTRA_DLL} DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+    file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${PROJECT_BINARY_DIR}/Debug)
 elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
     message("Build on Mac OSX")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
@@ -79,3 +80,8 @@ target_include_directories("${ProjectName}"
                             PUBLIC ${EXTRA_LIBS}  
                             PUBLIC ${EXTRA_DLL}
                            )
+
+add_custom_target(assets
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_LIST_DIR}/copy-assets.cmake
+)
+add_dependencies("${ProjectName}" assets)

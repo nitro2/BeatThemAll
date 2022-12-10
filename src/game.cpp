@@ -46,7 +46,7 @@ void Game::run()
 {
 
     std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
-
+    this->window->setActive(true);
     // run the program as long as the window is open
     while (this->window->isOpen())
     {
