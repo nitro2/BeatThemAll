@@ -46,7 +46,6 @@ void Game::update(float deltaTime)
         auto p = std::dynamic_pointer_cast<Character>(obj);
         if (p)
         {
-            std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
             std::dynamic_pointer_cast<Character>(obj)->update(deltaTime);
         }
     }
@@ -73,7 +72,7 @@ void Game::draw()
 void Game::run()
 {
 
-    std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
+    DEBUG_PRINT("running");
     this->window->setActive(true);
 
     // delta time

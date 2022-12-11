@@ -27,10 +27,6 @@ Animation::~Animation()
 
 void Animation::update(int row, float deltaTime)
 {
-    std::cout << __FUNCTION__ << " at line " << __LINE__
-              << " totalTime=" << totalTime
-              << " deltaTime=" << deltaTime
-              << std::endl;
     currentImage.y = row;
     totalTime += deltaTime;
     if (totalTime >= switchTime)

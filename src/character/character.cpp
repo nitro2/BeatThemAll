@@ -21,11 +21,10 @@ void Character::loadImage(State state, std::string filename, int frames)
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->setScale(this->width / w, this->height / h);
     this->setPosition(sf::Vector2f({this->x, this->y}));
-    std::cout << __FUNCTION__ << " at line " << __LINE__
-              << " Load path " << filename
-              << " w=" << w << " h=" << h
-              << " texture.getSize().x=" << ani->texture.getSize().x
-              << std::endl;
+    DEBUG_PRINT(" Load path " << filename
+                              << " w=" << w << " h=" << h
+                              << " texture.getSize().x=" << ani->texture.getSize().x
+                              << std::endl);
 }
 
 void Character::update(float deltaTime)
