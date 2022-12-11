@@ -20,6 +20,22 @@ Game::~Game()
 {
 }
 
+std::shared_ptr<Player> Game::addPlayer(std::string name)
+{
+    for (auto &p : this->player_list)
+    {
+        if (p->getName() == name)
+        {
+            // Ignore if Player already created
+            return nullptr;
+        }
+    }
+    std::cout << "Created new player " << name << std::endl;
+    auto p = std::make_shared<Player>(name);
+    this->player_list.push_back(p);
+    return p;
+}
+
 void Game::update(float deltaTime)
 {
     std::shared_ptr<Character> currChar = std::make_shared<Character>(drawable_obj_list[0]);
@@ -71,18 +87,37 @@ void Game::run()
             case sf::Event::Closed:
                 this->window->close();
                 break;
+            case sf::Event::KeyPressed:
+                // Manual add Player by pressing key for testing
+                // MUST change in future
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
+                {
+                    auto p = this->addPlayer("Player1");
+                    if (p)
+                    {
+                        p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+                    }
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
+                {
+                    auto p = this->addPlayer("Player2");
+                    if (p)
+                    {
+                        p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
+                    }
+                }
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                {
+                    // auto m = sf::Mouse::getPosition(this->window);
+                    // std::cout << "Mouse click" << std::endl;
+                }
+                break;
             default:
+                // std::cout << event.type << std::endl;f
                 break;
             }
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-        {
-            std::cout << "Down key" << std::endl;
-        }
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            // auto m = sf::Mouse::getPosition(this->window);
-            // std::cout << "Mouse click" << std::endl;
         }
 
         this->update(deltaTime);
