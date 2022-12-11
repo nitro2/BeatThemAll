@@ -8,8 +8,8 @@ class Animation {
 public:
 	Animation();
 	~Animation();
-
 	void init(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
+	~Animation();
 	void update(int row, float deltaTime);
 
 	sf::IntRect uvRect;

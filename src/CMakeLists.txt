@@ -3,6 +3,7 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/game.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/gameobject.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/wizard.cpp
