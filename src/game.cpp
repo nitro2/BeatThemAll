@@ -103,7 +103,6 @@ void Game::handleButton(const sf::Event &event)
             p->pressKey(event.key.code);
         }
         break;
-        break;
     }
     default:
         break;
@@ -114,6 +113,7 @@ void Game::update(float deltaTime)
 {
     for (auto &obj : this->drawable_obj_list)
     {
+        // TODO: check why this not work
         // if (instanceof <Character>(obj))
         auto p = std::dynamic_pointer_cast<Character>(obj);
         if (p)
@@ -125,7 +125,6 @@ void Game::update(float deltaTime)
 
 void Game::draw()
 {
-    // std::cout << __FUNCTION__ << " " << __LINE__ << std::endl;
     this->window->setActive(false);
 
     for (auto &obj : this->drawable_obj_list)
@@ -156,7 +155,6 @@ void Game::run()
     {
         // update delta time
         deltaTime = clock.restart().asSeconds();
-        // std::cout << __FUNCTION__ << " " << __LINE__ << std::endl;
         sf::Event event;
         while (this->window->pollEvent(event))
         {
@@ -177,7 +175,6 @@ void Game::run()
                 }
                 break;
             default:
-                // std::cout << event.type << std::endl;f
                 break;
             }
         }
@@ -187,7 +184,6 @@ void Game::run()
         // draw...
         this->window->clear(sf::Color(0, 220, 220));
         this->draw();
-        // end the current frame -- this is a rendering function (it requires the context to be active)
         this->window->display();
     }
 }
