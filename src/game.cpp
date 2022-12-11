@@ -24,7 +24,7 @@ Game::~Game()
 
 std::shared_ptr<Player> Game::addPlayer(std::string name)
 {
-    for (auto &p : this->player_list)
+    for (auto &p : this->playerList)
     {
         if (p->getName() == name)
         {
@@ -34,8 +34,66 @@ std::shared_ptr<Player> Game::addPlayer(std::string name)
     }
     std::cout << "Created new player " << name << std::endl;
     auto p = std::make_shared<Player>(name);
-    this->player_list.push_back(p);
+    this->playerList.push_back(p);
     return p;
+}
+
+std::shared_ptr<Player> Game::getPlayer(const std::string &name)
+{
+    for (auto &p : this->playerList)
+    {
+        if (p->getName() == name)
+        {
+            return p;
+        }
+    }
+    return nullptr;
+}
+
+void Game::handleButton(const sf::Event &event)
+{
+    // Manual add Player by pressing key for testing
+    // MUST change in future
+    // DEBUG_PRINT("Pressed key=" << event.key.code);
+    switch (event.key.code)
+    {
+    case sf::Keyboard::Key::Num1:
+    {
+        auto p = this->addPlayer("Player1");
+        if (p)
+        {
+            DEBUG_PRINT("Created Player 1");
+            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
+            p->pressKey(sf::Keyboard::Key::D);
+        }
+        break;
+    }
+    case sf::Keyboard::Key::Num2:
+    {
+        auto p = this->addPlayer("Player2");
+        if (p)
+        {
+            DEBUG_PRINT("Created Player 2");
+            p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
+        }
+        break;
+    }
+    case sf::Keyboard::Key::A:
+    case sf::Keyboard::Key::D:
+    case sf::Keyboard::Key::W:
+    case sf::Keyboard::Key::F:
+    {
+        auto p = this->getPlayer("Player1");
+        if (p)
+        {
+            p->pressKey(event.key.code);
+        }
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void Game::update(float deltaTime)
@@ -95,24 +153,7 @@ void Game::run()
                 this->window->close();
                 break;
             case sf::Event::KeyPressed:
-                // Manual add Player by pressing key for testing
-                // MUST change in future
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
-                {
-                    auto p = this->addPlayer("Player1");
-                    if (p)
-                    {
-                        p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
-                    }
-                }
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
-                {
-                    auto p = this->addPlayer("Player2");
-                    if (p)
-                    {
-                        p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
-                    }
-                }
+                this->handleButton(event);
                 break;
             case sf::Event::MouseButtonPressed:
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left))

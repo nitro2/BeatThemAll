@@ -68,3 +68,36 @@ void Player::test()
         this->printStat();
     }
 }
+
+void Player::moveLeft()
+{
+    DEBUG_PRINT("");
+};
+
+void Player::moveRight()
+{
+    DEBUG_PRINT("");
+};
+
+void Player::jump()
+{
+    DEBUG_PRINT("");
+}
+
+void Player::attackAct()
+{
+    DEBUG_PRINT("");
+}
+
+void Player::bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack)
+{
+    this->keyList[kLeft] = &Player::moveLeft;
+    this->keyList[kRight] = &Player::moveRight;
+    this->keyList[kJump] = &Player::jump;
+    this->keyList[kAttack] = &Player::attackAct;
+}
+
+void Player::pressKey(sf::Keyboard::Key key)
+{
+    (this->*(this->keyList[key]))();
+}
