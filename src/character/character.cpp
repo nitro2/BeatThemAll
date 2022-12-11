@@ -8,23 +8,42 @@ Character::Character()
     this->y = 100;
 }
 
-void Character::loadImage(std::string filename)
+void Character::loadImage(State state, std::string filename, int frames)
 {
     std::cout << __FUNCTION__ << " at line " << __LINE__
               << " Load path " << filename
               << std::endl;
-    // this->characterTexture.loadFromFile(filename, sf::IntRect(sf::Vector2i(this->x, this->y),sf::Vector2i(this->width, this->height)));
-    this->characterTexture.loadFromFile(filename);
-    this->setTexture(this->characterTexture);
-    auto w = this->characterTexture.getSize().x / this->characterIdleFrameNum;
-    auto h = this->characterTexture.getSize().y;
+    AnimationTexture_t *ani = &aniTexture[state];
+    ani->frames = frames;
+    ani->texture.loadFromFile(filename);
+    this->setTexture(ani->texture);
+    auto w = ani->texture.getSize().x / ani->frames;
+    auto h = ani->texture.getSize().y;
     this->setTextureRect(sf::IntRect(0, 0, w, h));
     this->setScale(this->width / w, this->height / h);
     this->setPosition(sf::Vector2f({this->x, this->y}));
 }
 
-void Character::update(float deltaTime) {
+void Character::update(float deltaTime)
+{
     this->characterAnimation.update(0, deltaTime);
-
     this->setTextureRect(this->characterAnimation.uvRect);
+}
+
+void Character::setState(State s)
+{
+    switch (s)
+    {
+    case State::Walk:
+        break;
+    case State::Attack:
+        break;
+    case State::Hit:
+        break;
+    case State::Dead:
+        break;
+    case State::Idle:
+    default:
+        break;
+    }
 }
