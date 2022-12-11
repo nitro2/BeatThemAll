@@ -5,9 +5,6 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/player.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/character/wizard.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/character/warrior.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
 )
 
@@ -16,9 +13,6 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/gameobject.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/character/wizard.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/character/warrior.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.hpp
 )
 
