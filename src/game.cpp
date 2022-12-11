@@ -2,6 +2,7 @@
 #include <filesystem>
 #include "game.hpp"
 #include "character.hpp"
+#include "utils.hpp"
 // Constructor
 Game::Game()
 {
@@ -40,9 +41,10 @@ void Game::update(float deltaTime)
 {
     for (auto &obj : this->drawable_obj_list)
     {
-        std::shared_ptr<Character> derived =
-            std::dynamic_pointer_cast<Character>(obj);
-        derived->update(deltaTime);
+        if (instanceof <Character>(obj))
+        {
+            std::dynamic_pointer_cast<Character>(obj)->update(deltaTime);
+        }
     }
 }
 
