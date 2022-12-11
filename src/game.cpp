@@ -65,7 +65,6 @@ void Game::handleButton(const sf::Event &event)
             DEBUG_PRINT("Created Player 1");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
-            p->pressKey(sf::Keyboard::Key::D);
         }
         break;
     }
@@ -75,7 +74,8 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 2");
-            p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
+            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::BackSlash);
         }
         break;
     }
@@ -89,6 +89,20 @@ void Game::handleButton(const sf::Event &event)
         {
             p->pressKey(event.key.code);
         }
+        break;
+    }
+
+    case sf::Keyboard::Key::Left:
+    case sf::Keyboard::Key::Right:
+    case sf::Keyboard::Key::Up:
+    case sf::Keyboard::Key::BackSlash:
+    {
+        auto p = this->getPlayer("Player2");
+        if (p)
+        {
+            p->pressKey(event.key.code);
+        }
+        break;
         break;
     }
     default:

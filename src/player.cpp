@@ -71,22 +71,22 @@ void Player::test()
 
 void Player::moveLeft()
 {
-    DEBUG_PRINT("");
+    DEBUG_PRINT(this->name);
 };
 
 void Player::moveRight()
 {
-    DEBUG_PRINT("");
+    DEBUG_PRINT(this->name);
 };
 
 void Player::jump()
 {
-    DEBUG_PRINT("");
+    DEBUG_PRINT(this->name);
 }
 
 void Player::attackAct()
 {
-    DEBUG_PRINT("");
+    DEBUG_PRINT(this->name);
 }
 
 void Player::bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack)
