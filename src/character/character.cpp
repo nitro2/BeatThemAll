@@ -6,15 +6,18 @@ Character::Character()
     this->height = 320;
     this->x = 100;
     this->y = 100;
+    characterAnimation = std::make_shared<Animation>(&characterTexture, sf::Vector2u(0, 11), 0.1f);
 }
 
 void Character::loadImage(std::string filename)
 {
+    std::cout << __FUNCTION__ << " at line " << __LINE__
+              << " Load path " << filename
+              << std::endl;
+    // this->characterTexture.loadFromFile(filename, sf::IntRect(sf::Vector2i(this->x, this->y),sf::Vector2i(this->width, this->height)));
     this->characterTexture.loadFromFile(filename);
-    this->setTexture(this->characterTexture);
-    float w = this->characterTexture.getSize().x / this->characterIdleFrameNum;
-    float h = this->characterTexture.getSize().y;
-    this->setTextureRect(sf::IntRect(0, 0, w, h));
-    this->setScale(this->width / w, this->height / h);
-    this->setPosition(sf::Vector2f({this->x, this->y}));
+}
+
+void Character::update(float deltaTime) {
+
 }

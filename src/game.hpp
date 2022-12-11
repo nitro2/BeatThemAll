@@ -14,7 +14,8 @@ public:
 
     std::shared_ptr<Player> addPlayer(std::string name);
 
-    void update();
+    void update(float deltaTime);
+
     void draw();
     void run();
 
