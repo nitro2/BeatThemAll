@@ -4,14 +4,16 @@
 
 #include "SFML/Graphics.hpp"
 
-class Animation {
+class Animation
+{
 public:
-	Animation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
+	Animation();
 	~Animation();
-
+	void init(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
 	void update(int row, float deltaTime);
 
 	sf::IntRect uvRect;
+
 private:
 	sf::Vector2u imageCount;
 	sf::Vector2u currentImage;

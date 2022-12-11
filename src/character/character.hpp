@@ -5,7 +5,7 @@
 #include "gameobject.hpp"
 #include "animation.hpp"
 
-class Character : public GameObject
+class Character : public GameObject, public sf::Sprite
 {
 public:
     Character();
@@ -26,7 +26,9 @@ protected:
     // Image handle
     void loadImage(std::string filename);
     sf::Texture characterTexture;
-    std::shared_ptr<Animation> characterAnimation;
+    int characterIdleFrameNum;
+
+    Animation characterAnimation;
 };
 
 class Warrior : public Character
@@ -58,9 +60,10 @@ class Skeleton : public Character
 public:
     Skeleton()
     {
-        //this->characterIdleFrameNum = 11;
+        this->characterIdleFrameNum = 11;
         const std::string filename = "assets/skeleton/Sprite_Sheets/Skeleton_Idle.png";
         this->loadImage(filename);
+        this->characterAnimation.init(&characterTexture, sf::Vector2u(11, 1), 0.08f);
         this->attack = 10;
         this->defend = 5;
         this->health = 120;

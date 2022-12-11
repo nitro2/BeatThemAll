@@ -13,9 +13,7 @@ public:
     ~Game();
 
     std::shared_ptr<Player> addPlayer(std::string name);
-
     void update(float deltaTime);
-
     void draw();
     void run();
 
