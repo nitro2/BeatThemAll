@@ -9,7 +9,8 @@ Game::Game()
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1600, 900), "Beat them all");
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
-    // window.setFramerateLimit(24);
+    // DEBUG: Enable this for testing in slow speed
+    // this->window->setFramerateLimit(5);
     this->window->setActive(false);
 
     // Test
@@ -41,8 +42,11 @@ void Game::update(float deltaTime)
 {
     for (auto &obj : this->drawable_obj_list)
     {
-        if (instanceof <Character>(obj))
+        // if (instanceof <Character>(obj))
+        auto p = std::dynamic_pointer_cast<Character>(obj);
+        if (p)
         {
+            std::cout << __FUNCTION__ << " at line " << __LINE__ << std::endl;
             std::dynamic_pointer_cast<Character>(obj)->update(deltaTime);
         }
     }

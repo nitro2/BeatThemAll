@@ -10,18 +10,22 @@ Character::Character()
 
 void Character::loadImage(State state, std::string filename, int frames)
 {
-    std::cout << __FUNCTION__ << " at line " << __LINE__
-              << " Load path " << filename
-              << std::endl;
     AnimationTexture_t *ani = &aniTexture[state];
     ani->frames = frames;
     ani->texture.loadFromFile(filename);
+
     this->setTexture(ani->texture);
     auto w = ani->texture.getSize().x / ani->frames;
     auto h = ani->texture.getSize().y;
     this->setTextureRect(sf::IntRect(0, 0, w, h));
+    // In case the image is smaller than expected rectangle, we have to scale it up
     this->setScale(this->width / w, this->height / h);
     this->setPosition(sf::Vector2f({this->x, this->y}));
+    std::cout << __FUNCTION__ << " at line " << __LINE__
+              << " Load path " << filename
+              << " w=" << w << " h=" << h
+              << " texture.getSize().x=" << ani->texture.getSize().x
+              << std::endl;
 }
 
 void Character::update(float deltaTime)
