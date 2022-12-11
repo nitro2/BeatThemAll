@@ -11,6 +11,16 @@ public:
     Character();
     ~Character(){};
 
+    enum State
+    {
+        Idle = 0,
+        Walk,
+        Attack,
+        Hit,
+        Dead,
+        MaxState
+    };
+
     int getAttack() { return this->attack; };
     int getDefend() { return this->defend; };
     int getHealth() { return this->health; };
@@ -18,15 +28,26 @@ public:
     void update(float deltaTime);
     void draw();
 
+    void setState(State s);
+
 protected:
     int attack;
     int defend;
     int health;
+    State state;
 
     // Image handle
-    void loadImage(std::string filename);
-    sf::Texture characterTexture;
-    int characterIdleFrameNum;
+    void loadImage(State state, std::string filename, int frames, float switchTime);
+
+    typedef struct AnimationTexture_t
+    {
+        sf::Texture texture;
+        int frames;
+        unsigned int imgWidth;
+        unsigned int imgHeight;
+        float switchTime;
+    } AnimationTexture_t;
+    AnimationTexture_t aniTexture[State::MaxState];
 
     Animation characterAnimation;
 };
@@ -60,10 +81,12 @@ class Skeleton : public Character
 public:
     Skeleton()
     {
-        this->characterIdleFrameNum = 11;
-        const std::string filename = "assets/skeleton/Sprite_Sheets/Skeleton_Idle.png";
-        this->loadImage(filename);
-        this->characterAnimation.init(&characterTexture, sf::Vector2u(11, 1), 0.08f);
+        this->loadImage(State::Idle, "assets/skeleton/Sprite_Sheets/Skeleton_Idle.png", 11, 0.08f);
+        this->loadImage(State::Attack, "assets/skeleton/Sprite_Sheets/Skeleton_Attack.png", 18, 0.08f);
+        this->loadImage(State::Dead, "assets/skeleton/Sprite_Sheets/Skeleton_Dead.png", 15, 0.08f);
+        this->loadImage(State::Hit, "assets/skeleton/Sprite_Sheets/Skeleton_Hit.png", 8, 0.08f);
+        this->loadImage(State::Walk, "assets/skeleton/Sprite_Sheets/Skeleton_Walk.png", 13, 0.08f);
+        this->setState(State::Idle);
         this->attack = 10;
         this->defend = 5;
         this->health = 120;
