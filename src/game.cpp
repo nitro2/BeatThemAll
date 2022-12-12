@@ -10,7 +10,7 @@ Game::Game()
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // DEBUG: Enable this for testing in slow speed
-    // this->window->setFramerateLimit(5);
+    this->window->setFramerateLimit(60);
     this->window->setActive(false);
 
     // Test
@@ -131,7 +131,8 @@ void Game::draw()
     {
         if (obj)
         {
-            this->window->draw(*obj);
+            // this->window->draw(*obj);
+            obj->render(this->window);
         }
         else
         {
