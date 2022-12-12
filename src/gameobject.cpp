@@ -16,3 +16,8 @@ void GameObject::moveDown()
 {
     DEBUG_PRINT("");
 };
+
+void GameObject::render(std::shared_ptr<sf::RenderWindow> window)
+{
+    DEBUG_PRINT("");
+}

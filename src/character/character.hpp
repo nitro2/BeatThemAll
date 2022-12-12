@@ -5,7 +5,7 @@
 #include "gameobject.hpp"
 #include "animation.hpp"
 
-class Character : public GameObject, public sf::Sprite
+class Character : public GameObject
 {
 public:
     Character();
@@ -26,7 +26,7 @@ public:
     int getHealth() { return this->health; };
 
     void update(float deltaTime);
-    void draw();
+    void render(std::shared_ptr<sf::RenderWindow> window);
 
     void setState(State s);
 
@@ -50,6 +50,7 @@ protected:
     AnimationTexture_t aniTexture[State::MaxState];
 
     Animation characterAnimation;
+    sf::Sprite body;
 };
 
 class Warrior : public Character

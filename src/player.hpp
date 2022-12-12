@@ -43,6 +43,9 @@ public:
     // Get hit animation
     void takeDamage(int damage);
 
+    // Draw this player
+    void render(std::shared_ptr<sf::RenderWindow> window);
+
     // Just for debugging
     void test();
 

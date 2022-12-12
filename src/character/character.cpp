@@ -7,6 +7,7 @@ Character::Character()
     this->x = 100;
     this->y = 100;
     this->state = State::Idle;
+    this->body.setPosition(sf::Vector2f(this->x, this->y));
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -21,7 +22,12 @@ void Character::loadImage(State state, std::string filename, int frames, float s
 void Character::update(float deltaTime)
 {
     this->characterAnimation.update(0, deltaTime);
-    this->setTextureRect(this->characterAnimation.uvRect);
+    this->body.setTextureRect(this->characterAnimation.uvRect);
+}
+
+void Character::render(std::shared_ptr<sf::RenderWindow> window)
+{
+    window->draw(this->body);
 }
 
 void Character::setState(State s)
@@ -44,11 +50,11 @@ void Character::setState(State s)
 
     // Change image with to animation if needed
     AnimationTexture_t *ani = &aniTexture[s];
-    this->setTexture(aniTexture[this->state].texture);
+    this->body.setTexture(aniTexture[this->state].texture);
     this->characterAnimation.init(&ani->texture, sf::Vector2u(ani->frames, 1), ani->switchTime);
-    this->setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
+    this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
-    this->setScale(this->width / ani->imgWidth, this->height / ani->imgHeight);
+    this->body.setScale(this->width / ani->imgWidth, this->height / ani->imgHeight);
     // TODO: No need to change position
-    this->setPosition(sf::Vector2f({this->x, this->y}));
+    this->body.setPosition(sf::Vector2f({this->x, this->y}));
 }

@@ -101,3 +101,8 @@ void Player::pressKey(sf::Keyboard::Key key)
 {
     (this->*(this->keyList[key]))();
 }
+
+void Player::render(std::shared_ptr<sf::RenderWindow> window)
+{
+    this->character->render(window);
+}
