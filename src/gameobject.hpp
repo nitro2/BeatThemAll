@@ -12,10 +12,10 @@ public:
     ~GameObject(){};
 
     // Movement
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
+    virtual void moveLeft();
+    virtual void moveRight();
+    virtual void moveUp();
+    virtual void moveDown();
 
 protected:
     float width;
