@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "utils.hpp"
+#include "gamecfg.hpp"
 class GameObject
 {
 public:

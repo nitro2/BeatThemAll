@@ -2,8 +2,8 @@
 
 Character::Character()
 {
-    this->width = 240;
-    this->height = 320;
+    this->width = CFG_CHARACTER_WIDTH;
+    this->height = CFG_CHARACTER_HEIGHT;
     this->x = 100;
     this->y = 100;
     this->state = State::Idle;
