@@ -7,7 +7,7 @@ Character::Character()
     this->x = 100;
     this->y = 100;
     this->state = State::Idle;
-    this->body.setPosition(sf::Vector2f(this->x, this->y));
+    // this->body.setPosition(sf::Vector2f(this->x, this->y));
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -23,6 +23,11 @@ void Character::update(float deltaTime)
 {
     this->characterAnimation.update(0, deltaTime);
     this->body.setTextureRect(this->characterAnimation.uvRect);
+}
+
+void Character::movement(float delta_x, float delta_y)
+{
+    this->body.move(delta_x, delta_y);
 }
 
 void Character::render(std::shared_ptr<sf::RenderWindow> window)

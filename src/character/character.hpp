@@ -26,6 +26,7 @@ public:
     int getHealth() { return this->health; };
 
     void update(float deltaTime);
+    void movement(float delta_x, float delta_y);
     void render(std::shared_ptr<sf::RenderWindow> window);
 
     void setState(State s);

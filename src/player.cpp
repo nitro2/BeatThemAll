@@ -10,6 +10,7 @@ Player::Player(std::string name)
     this->defend = 0;
     this->health = 0;
     this->name = name;
+    this->movementSpeed = 30.f;
 }
 
 Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
@@ -39,6 +40,7 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->attack = this->character->getAttack();
         this->defend = this->character->getDefend();
         this->health = this->character->getHealth();
+        // this->character.setPosition()
     }
 }
 
@@ -72,11 +74,13 @@ void Player::test()
 void Player::moveLeft()
 {
     DEBUG_PRINT(this->name);
+    this->character->movement(-this->movementSpeed, 0.f);
 };
 
 void Player::moveRight()
 {
     DEBUG_PRINT(this->name);
+    this->character->movement(this->movementSpeed, 0.f);
 };
 
 void Player::jump()
@@ -102,7 +106,7 @@ void Player::pressKey(sf::Keyboard::Key key)
     (this->*(this->keyList[key]))();
 }
 
-void Player::render(std::shared_ptr<sf::RenderWindow> window)
+std::shared_ptr<GameObject> Player::getDrawableObject()
 {
-    this->character->render(window);
+    return this->character;
 }
