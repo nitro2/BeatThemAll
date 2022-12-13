@@ -24,8 +24,9 @@ void Character::update(float deltaTime)
 {
     this->characterAnimation.update(0, deltaTime, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
-    if (this->characterAnimation.isAnimationFinish())
+    if ((this->state != State::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
+        // Return the character to idle state after do any animation
         this->setState(State::Idle);
     }
 }
@@ -74,4 +75,5 @@ void Character::setState(State s)
     this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->body.setScale(this->width / ani->imgWidth, this->height / ani->imgHeight);
+    this->update(0.0f);
 }
