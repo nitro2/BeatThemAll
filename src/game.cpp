@@ -132,7 +132,16 @@ void Game::draw()
         if (obj)
         {
             this->window->draw(*obj);
-            sf::RectangleShape rect;
+            auto p = std::dynamic_pointer_cast<Character>(obj);
+            if (p)
+            {
+                sf::RectangleShape  rect;
+                std::tuple<float, float, float, float> characterRect = p->getRect();
+                rect.setPosition(std::get<0>(characterRect), std::get<1>(characterRect));
+                rect.setSize(sf::Vector2f(std::get<2>(characterRect), std::get<3>(characterRect)));
+                rect.setFillColor(sf::Color(255, 255, 255, 100));
+                this->window->draw(rect);
+            }
         }
         else
         {

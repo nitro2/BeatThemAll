@@ -1,12 +1,14 @@
 #include <iostream>
 #include "animation.hpp"
 
-Animation::Animation(std::string name)
+Animation::Animation(std::string name, float scale, float originX, float originY)
 {
 	this->name = name;
 	this->currentFrame = 0;
 	this->frameTimer = 0;
 	this->status = "playing";
+	this->scale = scale;
+	setAnimOrigin(originX, originY);
 }
 
 Animation::~Animation()
@@ -49,6 +51,11 @@ void Animation::resume()
 	status = "playing";
 }
 
+float Animation::getScale()
+{
+	return scale;
+}
+
 std::tuple<int, int, int, int> Animation::grid(std::tuple<int, int, int, int> gridRect, std::pair<int, int> frameCoord)
 {
 	int x, y;
@@ -59,4 +66,15 @@ std::tuple<int, int, int, int> Animation::grid(std::tuple<int, int, int, int> gr
 
 std::tuple<int, int, int, int, float> Animation::getCurrentFrameInfo() {
 	return frames[currentFrame];
+}
+
+void Animation::setAnimOrigin(float oX, float oY)
+{
+	originX = oX;
+	originY = oY;
+}
+
+std::pair<float, float> Animation::getAnimOrigin()
+{
+	return std::make_pair(originX, originY);
 }

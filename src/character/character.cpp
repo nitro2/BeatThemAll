@@ -6,7 +6,7 @@ Character::Character()
     this->height = CFG_CHARACTER_HEIGHT;
     this->x = 100;
     this->y = 100;
-    this->state = State::Idle;
+    this->state = State::Attack;
     this->currentAnim = this->state;
 }
 
@@ -22,8 +22,11 @@ void Character::update(float deltaTime)
     int x, y, width, height; float time;
     std::tie(x, y, width, height, time) = this->characterAnimations[this->currentAnim].getCurrentFrameInfo();
     this->setTextureRect(sf::IntRect(x, y, width, height));
-    this->setOrigin(width/2, height/2);
-    this->setPosition(12, 16);
+    std::pair<float, float> animOrigin = this->characterAnimations[this->currentAnim].getAnimOrigin();
+    this->setOrigin(animOrigin.first, animOrigin.second);
+    this->setPosition(this->x + this->width / 2, this->y + this->height / 2);
+    float animScale = this->characterAnimations[this->currentAnim].getScale();
+    this->setScale(animScale, animScale);
 }
 
 void Character::setState(State s)
@@ -55,4 +58,9 @@ void Character::setState(State s)
     this->setPosition(sf::Vector2f({this->x, this->y}));*/
 
 
+}
+
+std::tuple<float, float, float, float> Character::getRect()
+{
+    return std::make_tuple(x, y, width, height);
 }
