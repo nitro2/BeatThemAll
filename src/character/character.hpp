@@ -37,9 +37,6 @@ protected:
     int health;
     State state;
 
-    // Image handle
-    void loadImage(State state, std::string filename, int frames, float switchTime);
-
     typedef struct AnimationTexture_t
     {
         sf::Texture texture;
@@ -52,6 +49,10 @@ protected:
 
     Animation characterAnimation;
     sf::Sprite body;
+    bool faceRight;
+
+    // Image handle
+    void loadImage(State state, std::string filename, int frames, float switchTime);
 };
 
 class Warrior : public Character

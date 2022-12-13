@@ -7,7 +7,8 @@ Character::Character()
     this->x = 100;
     this->y = 100;
     this->state = State::Idle;
-    // this->body.setPosition(sf::Vector2f(this->x, this->y));
+    this->faceRight = true;
+    this->body.setPosition(sf::Vector2f(this->x, this->y));
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -21,13 +22,26 @@ void Character::loadImage(State state, std::string filename, int frames, float s
 
 void Character::update(float deltaTime)
 {
-    this->characterAnimation.update(0, deltaTime);
+    this->characterAnimation.update(0, deltaTime, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
+    if (this->characterAnimation.isAnimationFinish())
+    {
+        this->setState(State::Idle);
+    }
 }
 
 void Character::movement(float delta_x, float delta_y)
 {
     this->body.move(delta_x, delta_y);
+    if (delta_x > 0.0f)
+    {
+        this->faceRight = true;
+    }
+    else
+    {
+        this->faceRight = false;
+    }
+    this->setState(State::Walk);
 }
 
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
@@ -60,6 +74,4 @@ void Character::setState(State s)
     this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->body.setScale(this->width / ani->imgWidth, this->height / ani->imgHeight);
-    // TODO: No need to change position
-    this->body.setPosition(sf::Vector2f({this->x, this->y}));
 }
