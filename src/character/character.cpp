@@ -23,6 +23,7 @@ void Character::update(float deltaTime)
     std::tie(x, y, width, height, time) = this->characterAnimations[this->currentAnim].getCurrentFrameInfo();
     this->setTextureRect(sf::IntRect(x, y, width, height));
     this->setOrigin(width/2, height/2);
+    this->setPosition(12, 16);
 }
 
 void Character::setState(State s)

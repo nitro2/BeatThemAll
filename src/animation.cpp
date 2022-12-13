@@ -28,7 +28,6 @@ void Animation::update(float deltaTime)
 {
 	if (status != "playing") return;
 	frameTimer += deltaTime;
-	std::cout << frameTimer << "\n";
 	if (frameTimer >= std::get<4>(frames[currentFrame]))
 	{
 		frameTimer = 0;
