@@ -14,10 +14,10 @@ public:
     enum State
     {
         Idle = 0,
-        Walk,
-        Attack,
-        Hit,
-        Dead,
+        Walk = 1,
+        Attack = 2,
+        Hit = 3,
+        Dead = 4,
         MaxState
     };
 
@@ -26,8 +26,6 @@ public:
     int getHealth() { return this->health; };
 
     void update(float deltaTime);
-    void draw();
-
     void setState(State s);
 
 protected:
@@ -36,20 +34,14 @@ protected:
     int health;
     State state;
 
+    sf::Texture characterTexture;
+
+    std::vector<Animation> characterAnimations;
+    int currentAnim;
+
     // Image handle
-    void loadImage(State state, std::string filename, int frames, float switchTime);
+    void loadImage(std::string filename);
 
-    typedef struct AnimationTexture_t
-    {
-        sf::Texture texture;
-        int frames;
-        unsigned int imgWidth;
-        unsigned int imgHeight;
-        float switchTime;
-    } AnimationTexture_t;
-    AnimationTexture_t aniTexture[State::MaxState];
-
-    Animation characterAnimation;
 };
 
 class Warrior : public Character
@@ -81,12 +73,22 @@ class Skeleton : public Character
 public:
     Skeleton()
     {
-        this->loadImage(State::Idle, CFG_SKELETON_IMG_IDLE_PATH, CFG_SKELETON_IMG_IDLE_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Attack, CFG_SKELETON_IMG_ATTACK_PATH, CFG_SKELETON_IMG_ATTACK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Dead, CFG_SKELETON_IMG_DEAD_PATH, CFG_SKELETON_IMG_DEAD_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Hit, CFG_SKELETON_IMG_HIT_PATH, CFG_SKELETON_IMG_HIT_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Walk, CFG_SKELETON_IMG_WALK_PATH, CFG_SKELETON_IMG_WALK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
+        this->loadImage(CFG_SKELETON_IMG_PATH);
         this->setState(State::Idle);
+        Animation idleAnim = Animation("idle");
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(0, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(1, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(2, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(3, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(4, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(5, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(6, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(7, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(8, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(9, 0)), std::make_tuple(0.1f)));
+        idleAnim.addFrame(std::tuple_cat(idleAnim.grid(std::make_tuple(0, 0, 24, 32), std::make_pair(10, 0)), std::make_tuple(0.1f)));
+
+        this->characterAnimations.push_back(idleAnim);
         this->attack = CFG_SKELETON_STAT_ATTACK;
         this->defend = CFG_SKELETON_STAT_DEFEND;
         this->health = CFG_SKELETON_STAT_HEALTH;

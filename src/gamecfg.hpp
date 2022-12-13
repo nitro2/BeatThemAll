@@ -7,16 +7,11 @@
 #define CFG_CHARACTER_HEIGHT 320
 
 // Skeleton
-#define CFG_SKELETON_IMG_SWITCH_TIME 0.5f
-#define CFG_SKELETON_IMG_ATTACK_PATH "assets/char/skeleton/image/skeleton_attack.png"
+#define CFG_SKELETON_IMG_PATH "assets/char/skeleton/image/skeleton.png"
 #define CFG_SKELETON_IMG_ATTACK_FRAMES 18
-#define CFG_SKELETON_IMG_DEAD_PATH "assets/char/skeleton/image/skeleton_dead.png"
 #define CFG_SKELETON_IMG_DEAD_FRAMES 15
-#define CFG_SKELETON_IMG_HIT_PATH "assets/char/skeleton/image/skeleton_hit.png"
 #define CFG_SKELETON_IMG_HIT_FRAMES 8
-#define CFG_SKELETON_IMG_IDLE_PATH "assets/char/skeleton/image/skeleton_idle.png"
 #define CFG_SKELETON_IMG_IDLE_FRAMES 11
-#define CFG_SKELETON_IMG_WALK_PATH "assets/char/skeleton/image/skeleton_walk.png"
 #define CFG_SKELETON_IMG_WALK_FRAMES 13
 #define CFG_SKELETON_STAT_ATTACK 10
 #define CFG_SKELETON_STAT_DEFEND 5

@@ -1,41 +1,63 @@
 #include <iostream>
 #include "animation.hpp"
-Animation::Animation()
-{
-    uvRect.left = 0;
-    uvRect.top = 0;
-    uvRect.width = 0;
-    uvRect.height = 0;
-}
 
-void Animation::init(sf::Texture *texture, sf::Vector2u imageCount, float switchTime)
+Animation::Animation(std::string name)
 {
-    this->imageCount = imageCount;
-    this->switchTime = switchTime;
-    totalTime = 0.0f;
-    currentImage.x = 0;
-
-    uvRect.width = texture->getSize().x / imageCount.x;
-    uvRect.height = texture->getSize().y / imageCount.y;
+	this->name = name;
+	this->currentFrame = 0;
+	this->frameTimer = 0;
+	this->status = "playing";
 }
 
 Animation::~Animation()
 {
+
 }
 
-void Animation::update(int row, float deltaTime)
+void Animation::init(std::string mode)
 {
-    currentImage.y = row;
-    totalTime += deltaTime;
-    if (totalTime >= switchTime)
-    {
-        totalTime -= switchTime;
-        currentImage.x++;
-        if (currentImage.x >= imageCount.x)
-        {
-            currentImage.x = 0;
-        }
-    }
-    uvRect.left = currentImage.x * uvRect.width;
-    uvRect.top = currentImage.y * uvRect.height;
+	
+}
+
+void Animation::addFrame(std::tuple<int, int, int, int, float> frame)
+{
+	frames.push_back(frame);
+}
+
+void Animation::update(float deltaTime)
+{
+	if (status != "playing") return;
+	frameTimer += deltaTime;
+	std::cout << frameTimer << "\n";
+	if (frameTimer >= std::get<4>(frames[currentFrame]))
+	{
+		frameTimer = 0;
+		currentFrame++;
+		if (currentFrame >= frames.size())
+		{
+			currentFrame = 0;
+		}
+	}
+}
+
+void Animation::pause()
+{
+	status = "paused";
+}
+
+void Animation::resume()
+{
+	status = "playing";
+}
+
+std::tuple<int, int, int, int> Animation::grid(std::tuple<int, int, int, int> gridRect, std::pair<int, int> frameCoord)
+{
+	int x, y;
+	x = std::get<0>(gridRect) + frameCoord.first * std::get<2>(gridRect);
+	y = std::get<1>(gridRect) + frameCoord.second * std::get<3>(gridRect);
+	return std::make_tuple(x, y, std::get<2>(gridRect), std::get<3>(gridRect));
+}
+
+std::tuple<int, int, int, int, float> Animation::getCurrentFrameInfo() {
+	return frames[currentFrame];
 }

@@ -132,6 +132,7 @@ void Game::draw()
         if (obj)
         {
             this->window->draw(*obj);
+            sf::RectangleShape rect;
         }
         else
         {
