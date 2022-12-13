@@ -4,22 +4,20 @@
 
 #include "SFML/Graphics.hpp"
 
+struct grid {
+	int startX, startY, cellWidth, cellHeight;
+};
+
 class Animation
 {
 public:
 	Animation();
 	~Animation();
-	void init(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
-	void update(int row, float deltaTime);
-
-	sf::IntRect uvRect;
-
+	void init(sf::Texture *texture, std::vector<std::pair<grid, std::string>> animate, std::string mode);
+	void update(float deltaTime);
 private:
-	sf::Vector2u imageCount;
 	sf::Vector2u currentImage;
-
-	float totalTime;
-	float switchTime;
+	float frameTimer;
 };
 
 #endif // !_ANIMATION_HPP_

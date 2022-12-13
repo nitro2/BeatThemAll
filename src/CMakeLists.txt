@@ -15,6 +15,7 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/player.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/gamecfg.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
 )
 
 target_sources(gamecore
