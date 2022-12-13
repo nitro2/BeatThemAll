@@ -31,7 +31,7 @@ void Character::update(float deltaTime)
     }
 }
 
-void Character::movement(float delta_x, float delta_y)
+void Character::movementAct(float delta_x, float delta_y)
 {
     this->body.move(delta_x, delta_y);
     if (delta_x > 0.0f)
@@ -43,6 +43,11 @@ void Character::movement(float delta_x, float delta_y)
         this->faceRight = false;
     }
     this->setState(State::Walk);
+}
+
+void Character::attackAct()
+{
+    this->setState(State::Attack);
 }
 
 void Character::render(std::shared_ptr<sf::RenderWindow> window)

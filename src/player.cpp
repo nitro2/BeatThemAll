@@ -74,13 +74,13 @@ void Player::test()
 void Player::moveLeft()
 {
     DEBUG_PRINT(this->name);
-    this->character->movement(-this->movementSpeed, 0.f);
+    this->character->movementAct(-this->movementSpeed, 0.f);
 };
 
 void Player::moveRight()
 {
     DEBUG_PRINT(this->name);
-    this->character->movement(this->movementSpeed, 0.f);
+    this->character->movementAct(this->movementSpeed, 0.f);
 };
 
 void Player::jump()
@@ -91,6 +91,7 @@ void Player::jump()
 void Player::attackAct()
 {
     DEBUG_PRINT(this->name);
+    this->character->attackAct();
 }
 
 void Player::bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack)
