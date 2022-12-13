@@ -14,6 +14,7 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/gamecfg.hpp
 )
 
 target_sources(gamecore
