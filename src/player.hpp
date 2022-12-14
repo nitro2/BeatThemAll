@@ -4,7 +4,7 @@
 #include "gameobject.hpp"
 #include "character.hpp"
 
-class Player : public GameObject
+class Player
 {
 public:
     enum class CHARACTER_TYPE
@@ -43,6 +43,8 @@ public:
     // Get hit animation
     void takeDamage(int damage);
 
+    std::shared_ptr<GameObject> getDrawableObject();
+
     // Just for debugging
     void test();
 
@@ -52,6 +54,7 @@ private:
     int defend;
     int health;
     std::shared_ptr<Character> character;
+    float movementSpeed;
 
     std::map<sf::Keyboard::Key, void (Player::*)(void)> keyList;
 };

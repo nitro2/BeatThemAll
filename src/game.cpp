@@ -10,12 +10,12 @@ Game::Game()
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // DEBUG: Enable this for testing in slow speed
-    // this->window->setFramerateLimit(5);
+    this->window->setFramerateLimit(60);
     this->window->setActive(false);
 
     // Test
-    auto s = std::make_shared<Skeleton>();
-    this->drawable_obj_list.push_back(s);
+    // auto s = std::make_shared<Skeleton>();
+    // this->drawableObjList.push_back(s);
 }
 // Destructor
 Game::~Game()
@@ -65,6 +65,7 @@ void Game::handleButton(const sf::Event &event)
             DEBUG_PRINT("Created Player 1");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
+            this->drawableObjList.push_back(p->getDrawableObject());
         }
         break;
     }
@@ -76,6 +77,7 @@ void Game::handleButton(const sf::Event &event)
             DEBUG_PRINT("Created Player 2");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::BackSlash);
+            this->drawableObjList.push_back(p->getDrawableObject());
         }
         break;
     }
@@ -111,7 +113,7 @@ void Game::handleButton(const sf::Event &event)
 
 void Game::update(float deltaTime)
 {
-    for (auto &obj : this->drawable_obj_list)
+    for (auto &obj : this->drawableObjList)
     {
         // TODO: check why this not work
         // if (instanceof <Character>(obj))
@@ -127,11 +129,12 @@ void Game::draw()
 {
     this->window->setActive(false);
 
-    for (auto &obj : this->drawable_obj_list)
+    for (auto &obj : this->drawableObjList)
     {
         if (obj)
         {
-            this->window->draw(*obj);
+            // this->window->draw(*obj);
+            obj->render(this->window);
         }
         else
         {

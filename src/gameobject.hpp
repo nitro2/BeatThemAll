@@ -17,6 +17,8 @@ public:
     virtual void moveUp();
     virtual void moveDown();
 
+    virtual void render(std::shared_ptr<sf::RenderWindow> window);
+
 protected:
     float width;
     float height;

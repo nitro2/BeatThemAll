@@ -5,7 +5,7 @@
 #include "gameobject.hpp"
 #include "animation.hpp"
 
-class Character : public GameObject, public sf::Sprite
+class Character : public GameObject
 {
 public:
     Character();
@@ -26,7 +26,9 @@ public:
     int getHealth() { return this->health; };
 
     void update(float deltaTime);
-    void draw();
+    void movementAct(float delta_x, float delta_y);
+    void attackAct();
+    void render(std::shared_ptr<sf::RenderWindow> window);
 
     void setState(State s);
 
@@ -35,9 +37,6 @@ protected:
     int defend;
     int health;
     State state;
-
-    // Image handle
-    void loadImage(State state, std::string filename, int frames, float switchTime);
 
     typedef struct AnimationTexture_t
     {
@@ -50,6 +49,11 @@ protected:
     AnimationTexture_t aniTexture[State::MaxState];
 
     Animation characterAnimation;
+    sf::Sprite body;
+    bool faceRight;
+
+    // Image handle
+    void loadImage(State state, std::string filename, int frames, float switchTime);
 };
 
 class Warrior : public Character

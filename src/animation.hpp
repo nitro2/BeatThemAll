@@ -10,8 +10,9 @@ public:
 	Animation();
 	~Animation();
 	void init(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
-	void update(int row, float deltaTime);
+	void update(int row, float deltaTime, bool faceRight);
 
+	bool isAnimationFinish();
 	sf::IntRect uvRect;
 
 private:
@@ -20,6 +21,7 @@ private:
 
 	float totalTime;
 	float switchTime;
+	bool isFinish;
 };
 
 #endif // !_ANIMATION_HPP_
