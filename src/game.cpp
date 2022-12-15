@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include "game.hpp"
+#include "grid.hpp"
 #include "character.hpp"
 #include "utils.hpp"
 // Constructor
@@ -16,6 +17,10 @@ Game::Game()
     // Test
     // auto s = std::make_shared<Skeleton>();
     // this->drawableObjList.push_back(s);
+
+    // Add grid to debug pixels
+    auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 11, 20, 100.0f, sf::Color::Red);
+    this->drawableObjList.push_back(grid);
 }
 // Destructor
 Game::~Game()
