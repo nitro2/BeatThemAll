@@ -4,10 +4,14 @@ Character::Character()
 {
     this->width = CFG_CHARACTER_WIDTH;
     this->height = CFG_CHARACTER_HEIGHT;
-    this->x = 100;
-    this->y = 100;
+    this->x = 0;
+    this->y = 0;
     this->state = State::Idle;
     this->faceRight = true;
+void Character::setPosition(float x, float y)
+{
+    this->x = x;
+    this->y = y;
     this->body.setPosition(sf::Vector2f(this->x, this->y));
 }
 
@@ -42,7 +46,11 @@ void Character::movementAct(float delta_x, float delta_y)
     {
         this->faceRight = false;
     }
+    this->x += delta_x;
+    this->y += delta_y;
+    this->body.setPosition(this->x, this->y);
     this->setState(State::Walk);
+    DEBUG_PRINT("x=" << x << " y=" << y);
 }
 
 void Character::attackAct()

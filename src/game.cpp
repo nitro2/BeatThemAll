@@ -64,6 +64,7 @@ void Game::handleButton(const sf::Event &event)
         {
             DEBUG_PRINT("Created Player 1");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setPosition(100, 200);
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
             this->drawableObjList.push_back(p->getDrawableObject());
         }
@@ -76,6 +77,7 @@ void Game::handleButton(const sf::Event &event)
         {
             DEBUG_PRINT("Created Player 2");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setPosition(800, 200);
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::BackSlash);
             this->drawableObjList.push_back(p->getDrawableObject());
         }

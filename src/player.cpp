@@ -18,6 +18,8 @@ Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
     this->setCharacter(c);
 }
 
+Player::~Player(){};
+
 void Player::setCharacter(CHARACTER_TYPE c)
 {
     switch (c)
@@ -42,9 +44,16 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->health = this->character->getHealth();
         // this->character.setPosition()
     }
+    else
+    {
+        DEBUG_PRINT("Failed to create character");
+    }
 }
 
-Player::~Player(){};
+void Player::setPosition(float x, float y)
+{
+    this->character->setPosition(x, y);
+}
 
 void Player::takeDamage(int damage)
 {
