@@ -6,7 +6,7 @@
 // Constructor
 Game::Game()
 {
-    this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1600, 900), "Beat them all");
+    this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1920, 1080), "Beat them all");
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // DEBUG: Enable this for testing in slow speed
