@@ -7,6 +7,7 @@
 #define CFG_CHARACTER_HEIGHT 320
 
 // Skeleton
+#define CFG_SKELETON_IMG_SCALE (CFG_CHARACTER_HEIGHT / (32.0f))
 #define CFG_SKELETON_IMG_SWITCH_TIME 0.5f
 #define CFG_SKELETON_IMG_ATTACK_PATH "assets/char/skeleton/image/skeleton_attack.png"
 #define CFG_SKELETON_IMG_ATTACK_FRAMES 18

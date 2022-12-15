@@ -8,6 +8,9 @@ Character::Character()
     this->y = 0;
     this->state = State::Idle;
     this->faceRight = true;
+    this->scale = 1.0f;
+}
+
 void Character::setPosition(float x, float y)
 {
     this->x = x;
@@ -87,6 +90,6 @@ void Character::setState(State s)
     this->characterAnimation.init(&ani->texture, sf::Vector2u(ani->frames, 1), ani->switchTime);
     this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
-    this->body.setScale(this->width / ani->imgWidth, this->height / ani->imgHeight);
+    this->body.setScale(this->scale, this->scale);
     this->update(0.0f);
 }

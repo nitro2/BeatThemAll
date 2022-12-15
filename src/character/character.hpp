@@ -48,6 +48,7 @@ protected:
         float switchTime;
     } AnimationTexture_t;
     AnimationTexture_t aniTexture[State::MaxState];
+    float scale;
 
     Animation characterAnimation;
     sf::Sprite body;
@@ -84,17 +85,18 @@ public:
 class Skeleton : public Character
 {
 public:
-    Skeleton()
+    Skeleton() : Character()
     {
         this->loadImage(State::Idle, CFG_SKELETON_IMG_IDLE_PATH, CFG_SKELETON_IMG_IDLE_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
         this->loadImage(State::Attack, CFG_SKELETON_IMG_ATTACK_PATH, CFG_SKELETON_IMG_ATTACK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
         this->loadImage(State::Dead, CFG_SKELETON_IMG_DEAD_PATH, CFG_SKELETON_IMG_DEAD_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
         this->loadImage(State::Hit, CFG_SKELETON_IMG_HIT_PATH, CFG_SKELETON_IMG_HIT_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
         this->loadImage(State::Walk, CFG_SKELETON_IMG_WALK_PATH, CFG_SKELETON_IMG_WALK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->setState(State::Idle);
         this->attack = CFG_SKELETON_STAT_ATTACK;
         this->defend = CFG_SKELETON_STAT_DEFEND;
         this->health = CFG_SKELETON_STAT_HEALTH;
+        this->scale = CFG_SKELETON_IMG_SCALE;
+        this->setState(State::Idle);
     }
     ~Skeleton(){};
 
