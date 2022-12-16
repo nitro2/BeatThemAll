@@ -113,7 +113,11 @@ void Player::bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyb
 
 void Player::pressKey(sf::Keyboard::Key key)
 {
-    (this->*(this->keyList[key]))();
+    // Check if the key exist then call the binding function to handle the button
+    if (this->keyList.count(key) > 0)
+    {
+        (this->*(this->keyList[key]))();
+    }
 }
 
 std::shared_ptr<GameObject> Player::getDrawableObject()
