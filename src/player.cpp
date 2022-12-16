@@ -82,24 +82,24 @@ void Player::test()
 
 void Player::moveLeft()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
     this->character->movementAct(-this->movementSpeed, 0.f);
 };
 
 void Player::moveRight()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
     this->character->movementAct(this->movementSpeed, 0.f);
 };
 
 void Player::jump()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
 }
 
 void Player::attackAct()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
     this->character->attackAct();
 }
 

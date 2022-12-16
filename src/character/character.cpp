@@ -31,6 +31,7 @@ void Character::update(float deltaTime)
 {
     this->characterAnimation.update(0, deltaTime, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
+
     if ((this->state != State::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
         // Return the character to idle state after do any animation
@@ -53,7 +54,7 @@ void Character::movementAct(float delta_x, float delta_y)
     this->y += delta_y;
     if (this->state != State::Walk)
     {
-    this->setState(State::Walk);
+        this->setState(State::Walk);
     }
     DEBUG_PRINT("x=" << x << " y=" << y);
 }
@@ -93,5 +94,7 @@ void Character::setState(State s)
     this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->body.setScale(this->scale, this->scale);
+    // Set origin of image to bottom left corner, so we will have smoothly transition between Idle and Attack
+    this->body.setOrigin(0.0f, (float)this->aniTexture[this->state].imgHeight);
     this->update(0.0f);
 }
