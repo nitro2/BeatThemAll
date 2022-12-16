@@ -51,8 +51,10 @@ void Character::movementAct(float delta_x, float delta_y)
     }
     this->x += delta_x;
     this->y += delta_y;
-    this->body.setPosition(this->x, this->y);
+    if (this->state != State::Walk)
+    {
     this->setState(State::Walk);
+    }
     DEBUG_PRINT("x=" << x << " y=" << y);
 }
 
