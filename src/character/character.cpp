@@ -6,7 +6,7 @@ Character::Character()
     this->height = CFG_CHARACTER_HEIGHT;
     this->x = 0;
     this->y = 0;
-    this->state = State::Idle;
+    this->state = State::MaxState; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
 }
@@ -52,11 +52,7 @@ void Character::movementAct(float delta_x, float delta_y)
     }
     this->x += delta_x;
     this->y += delta_y;
-    if (this->state != State::Walk)
-    {
-        this->setState(State::Walk);
-    }
-    DEBUG_PRINT("x=" << x << " y=" << y);
+    this->setState(State::Walk);
 }
 
 void Character::attackAct()
@@ -71,6 +67,12 @@ void Character::render(std::shared_ptr<sf::RenderWindow> window)
 
 void Character::setState(State s)
 {
+    // No update if state not change
+    if (this->state == s)
+    {
+        return;
+    }
+
     switch (s)
     {
     case State::Walk:
@@ -95,6 +97,10 @@ void Character::setState(State s)
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->body.setScale(this->scale, this->scale);
     // Set origin of image to bottom left corner, so we will have smoothly transition between Idle and Attack
-    this->body.setOrigin(0.0f, (float)this->aniTexture[this->state].imgHeight);
-    this->update(0.0f);
+    this->body.setOrigin((float)(this->aniTexture[this->state].imgWidth / 2), (float)this->aniTexture[this->state].imgHeight);
+    this->characterAnimation.update(0, 0.0f, this->faceRight);
+    this->body.setTextureRect(this->characterAnimation.uvRect);
+    DEBUG_PRINT(" state=" << this->state
+                          << " x=" << x
+                          << " y=" << y);
 }
