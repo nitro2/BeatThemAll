@@ -1,12 +1,13 @@
 #include <iostream>
 #include <filesystem>
 #include "game.hpp"
+#include "grid.hpp"
 #include "character.hpp"
 #include "utils.hpp"
 // Constructor
 Game::Game()
 {
-    this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1600, 900), "Beat them all");
+    this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1920, 1080), "Beat them all");
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // DEBUG: Enable this for testing in slow speed
@@ -16,6 +17,10 @@ Game::Game()
     // Test
     // auto s = std::make_shared<Skeleton>();
     // this->drawableObjList.push_back(s);
+
+    // Add grid to debug pixels
+    auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 11, 20, 100.0f, sf::Color::Red);
+    this->drawableObjList.push_back(grid);
 }
 // Destructor
 Game::~Game()
@@ -64,6 +69,7 @@ void Game::handleButton(const sf::Event &event)
         {
             DEBUG_PRINT("Created Player 1");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setPosition(100, 400);
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
             this->drawableObjList.push_back(p->getDrawableObject());
         }
@@ -76,7 +82,8 @@ void Game::handleButton(const sf::Event &event)
         {
             DEBUG_PRINT("Created Player 2");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
-            p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::BackSlash);
+            p->setPosition(800, 400);
+            p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
             this->drawableObjList.push_back(p->getDrawableObject());
         }
         break;
@@ -97,7 +104,7 @@ void Game::handleButton(const sf::Event &event)
     case sf::Keyboard::Key::Left:
     case sf::Keyboard::Key::Right:
     case sf::Keyboard::Key::Up:
-    case sf::Keyboard::Key::BackSlash:
+    case sf::Keyboard::Key::M:
     {
         auto p = this->getPlayer("Player2");
         if (p)

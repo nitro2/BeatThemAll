@@ -27,6 +27,7 @@ public:
 
     void setName(std::string name) { this->name = name; };
     void setCharacter(CHARACTER_TYPE c);
+    void setPosition(float x, float y);
 
     // Bind keyboard to Player
     void bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack);

@@ -18,6 +18,8 @@ Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
     this->setCharacter(c);
 }
 
+Player::~Player(){};
+
 void Player::setCharacter(CHARACTER_TYPE c)
 {
     switch (c)
@@ -42,9 +44,16 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->health = this->character->getHealth();
         // this->character.setPosition()
     }
+    else
+    {
+        DEBUG_PRINT("Failed to create character");
+    }
 }
 
-Player::~Player(){};
+void Player::setPosition(float x, float y)
+{
+    this->character->setPosition(x, y);
+}
 
 void Player::takeDamage(int damage)
 {
@@ -73,24 +82,24 @@ void Player::test()
 
 void Player::moveLeft()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
     this->character->movementAct(-this->movementSpeed, 0.f);
 };
 
 void Player::moveRight()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
     this->character->movementAct(this->movementSpeed, 0.f);
 };
 
 void Player::jump()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
 }
 
 void Player::attackAct()
 {
-    DEBUG_PRINT(this->name);
+    // DEBUG_PRINT(this->name);
     this->character->attackAct();
 }
 
@@ -104,7 +113,11 @@ void Player::bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyb
 
 void Player::pressKey(sf::Keyboard::Key key)
 {
-    (this->*(this->keyList[key]))();
+    // Check if the key exist then call the binding function to handle the button
+    if (this->keyList.count(key) > 0)
+    {
+        (this->*(this->keyList[key]))();
+    }
 }
 
 std::shared_ptr<GameObject> Player::getDrawableObject()

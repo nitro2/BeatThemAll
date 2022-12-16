@@ -4,10 +4,17 @@ Character::Character()
 {
     this->width = CFG_CHARACTER_WIDTH;
     this->height = CFG_CHARACTER_HEIGHT;
-    this->x = 100;
-    this->y = 100;
-    this->state = State::Idle;
+    this->x = 0;
+    this->y = 0;
+    this->state = State::MaxState; // Dummy init
     this->faceRight = true;
+    this->scale = 1.0f;
+}
+
+void Character::setPosition(float x, float y)
+{
+    this->x = x;
+    this->y = y;
     this->body.setPosition(sf::Vector2f(this->x, this->y));
 }
 
@@ -24,6 +31,7 @@ void Character::update(float deltaTime)
 {
     this->characterAnimation.update(0, deltaTime, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
+
     if ((this->state != State::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
         // Return the character to idle state after do any animation
@@ -42,6 +50,8 @@ void Character::movementAct(float delta_x, float delta_y)
     {
         this->faceRight = false;
     }
+    this->x += delta_x;
+    this->y += delta_y;
     this->setState(State::Walk);
 }
 
@@ -57,6 +67,12 @@ void Character::render(std::shared_ptr<sf::RenderWindow> window)
 
 void Character::setState(State s)
 {
+    // No update if state not change
+    if (this->state == s)
+    {
+        return;
+    }
+
     switch (s)
     {
     case State::Walk:
@@ -79,6 +95,12 @@ void Character::setState(State s)
     this->characterAnimation.init(&ani->texture, sf::Vector2u(ani->frames, 1), ani->switchTime);
     this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
-    this->body.setScale(this->width / ani->imgWidth, this->height / ani->imgHeight);
-    this->update(0.0f);
+    this->body.setScale(this->scale, this->scale);
+    // Set origin of image to bottom left corner, so we will have smoothly transition between Idle and Attack
+    this->body.setOrigin((float)(this->aniTexture[this->state].imgWidth / 2), (float)this->aniTexture[this->state].imgHeight);
+    this->characterAnimation.update(0, 0.0f, this->faceRight);
+    this->body.setTextureRect(this->characterAnimation.uvRect);
+    DEBUG_PRINT(" state=" << this->state
+                          << " x=" << x
+                          << " y=" << y);
 }
