@@ -88,32 +88,11 @@ void Game::handleButton(const sf::Event &event)
         }
         break;
     }
-    case sf::Keyboard::Key::A:
-    case sf::Keyboard::Key::D:
-    case sf::Keyboard::Key::W:
-    case sf::Keyboard::Key::F:
-    {
-        auto p = this->getPlayer("Player1");
-        if (p)
-        {
-            p->pressKey(event.key.code);
-        }
-        break;
-    }
-
-    case sf::Keyboard::Key::Left:
-    case sf::Keyboard::Key::Right:
-    case sf::Keyboard::Key::Up:
-    case sf::Keyboard::Key::M:
-    {
-        auto p = this->getPlayer("Player2");
-        if (p)
-        {
-            p->pressKey(event.key.code);
-        }
-        break;
-    }
     default:
+        for (auto &p : this->playerList)
+        {
+            p->checkKeyPress();
+        }
         break;
     }
 }
