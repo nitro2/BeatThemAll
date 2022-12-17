@@ -120,6 +120,24 @@ void Player::pressKey(sf::Keyboard::Key key)
     }
 }
 
+void Player::checkKeyPress()
+{
+    // Simultaneously check and do key action
+    for (auto &k : this->keyList)
+    {
+        auto key = k.first;
+        // TODO: Determine which action takes highest priority
+        // Eg: When player presses Attack, then he cannot move?
+        if (sf::Keyboard::isKeyPressed(key))
+        {
+            if (this->keyList.count(key) > 0)
+            {
+                (this->*(this->keyList[key]))();
+            }
+        }
+    }
+}
+
 std::shared_ptr<GameObject> Player::getDrawableObject()
 {
     return this->character;

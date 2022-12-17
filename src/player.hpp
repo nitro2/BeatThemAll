@@ -32,6 +32,7 @@ public:
     // Bind keyboard to Player
     void bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack);
     void pressKey(sf::Keyboard::Key key);
+    void checkKeyPress();
 
     // Movement
     void moveLeft();
