@@ -6,8 +6,9 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/grid.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/debug.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.cpp
 )
 
 list(APPEND COMMON_HEADERS
@@ -16,8 +17,9 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/grid.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/debug.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.hpp
 )
 
 target_sources(gamecore
@@ -31,5 +33,7 @@ target_sources(gamecore
 target_include_directories(gamecore
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/character"
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/obstruction"
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/debug"
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
 )

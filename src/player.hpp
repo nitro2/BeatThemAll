@@ -3,7 +3,7 @@
 
 #include "gameobject.hpp"
 #include "character.hpp"
-#include "debug.hpp"
+
 class Player
 {
 public:
@@ -27,7 +27,9 @@ public:
 
     void setName(std::string name) { this->name = name; };
     void setCharacter(CHARACTER_TYPE c);
+    void destroyCharacter();
     void setPosition(float x, float y);
+    sf::Vector2f getPosition();
 
     // Bind keyboard to Player
     void bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack);
@@ -44,6 +46,7 @@ public:
 
     // Get hit animation
     void takeDamage(int damage);
+    void beKilled();
 
     std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
 
@@ -56,7 +59,6 @@ private:
     int defend;
     int health;
     std::shared_ptr<Character> character;
-    std::shared_ptr<DebugRectangle> debugShape; // Debug only
     float movementSpeed;
 
     std::vector<std::shared_ptr<GameObject>> drawableObjList;

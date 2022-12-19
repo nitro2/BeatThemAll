@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
 #include "animation.hpp"
-
+#include "box.hpp" // Debug box
 class Character : public GameObject
 {
 public:
@@ -26,11 +26,12 @@ public:
     int getHealth() { return this->health; };
 
     void setPosition(float x, float y);
+    sf::FloatRect getBounds() override;
 
-    void update(float deltaTime);
+    void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
     void movementAct(float delta_x, float delta_y);
     void attackAct();
-    void render(std::shared_ptr<sf::RenderWindow> window);
+    void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     void setState(State s);
 
@@ -54,6 +55,8 @@ protected:
     Animation characterAnimation;
     sf::Sprite body;
     bool faceRight;
+
+    std::shared_ptr<DebugRectangle> debugShape; // Debug only
 
     // Image handle
     void loadImage(State state, std::string filename, int frames, float switchTime);

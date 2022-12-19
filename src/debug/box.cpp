@@ -1,4 +1,4 @@
-#include "debug.hpp"
+#include "box.hpp"
 
 DebugRectangle::DebugRectangle(float x, float y, float width, float height, sf::Color color)
     : GameObject(x, y, width, height)

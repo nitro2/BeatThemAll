@@ -9,13 +9,23 @@ Character::Character()
     this->state = State::MaxState; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
+
+    /* Add debug shape */
+    this->debugShape = std::make_shared<DebugRectangle>(
+        this->x, this->y, this->width, this->height, sf::Color(255, 0, 0, 100));
 }
 
 void Character::setPosition(float x, float y)
 {
     this->x = x;
     this->y = y;
-    this->body.setPosition(sf::Vector2f(this->x, this->y));
+    this->body.setPosition(this->x, this->y);
+    this->debugShape->setPosition(x, y);
+}
+
+sf::FloatRect Character::getBounds()
+{
+    return sf::FloatRect(this->x - (this->width / 2.0f), this->y - this->height, this->width, this->height);
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -27,7 +37,7 @@ void Character::loadImage(State state, std::string filename, int frames, float s
     ani->imgHeight = ani->texture.getSize().y;
 }
 
-void Character::update(float deltaTime)
+void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList)
 {
     this->characterAnimation.update(0, deltaTime, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
@@ -37,11 +47,24 @@ void Character::update(float deltaTime)
         // Return the character to idle state after do any animation
         this->setState(State::Idle);
     }
+
+    // Process gravity here
+    this->y += CFG_GRAVITY_SPEED;
+    for (auto obj : obstructionList)
+    {
+        if (this->getBounds().intersects(obj->getBounds()))
+        {
+            this->y -= CFG_GRAVITY_SPEED;
+        }
+    }
+
+    this->body.setPosition(this->x, this->y);
+    this->debugShape->setPosition(this->x, this->y);
 }
 
 void Character::movementAct(float delta_x, float delta_y)
 {
-    this->body.move(delta_x, delta_y);
+    // this->body.move(delta_x, delta_y);
     if (delta_x > 0.0f)
     {
         this->faceRight = true;
@@ -63,6 +86,7 @@ void Character::attackAct()
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
 {
     window->draw(this->body);
+    this->debugShape->render(window);
 }
 
 void Character::setState(State s)

@@ -1,5 +1,5 @@
-#ifndef _DEBUG_HPP_
-#define _DEBUG_HPP_
+#ifndef _BOX_HPP_
+#define _BOX_HPP_
 
 #include <SFML/Graphics.hpp>
 #include "gameobject.hpp"
@@ -19,4 +19,4 @@ private:
     sf::Font font;
 };
 
-#endif // _DEBUG_HPP_
+#endif // _BOX_HPP_

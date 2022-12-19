@@ -29,6 +29,17 @@ float GameObject::getHeight()
     return this->height;
 }
 
+bool GameObject::isCollision(const sf::FloatRect &other)
+{
+    sf::FloatRect rect(this->x, this->y, this->width, this->height);
+    return rect.intersects(other);
+}
+
+sf::FloatRect GameObject::getBounds()
+{
+    return sf::FloatRect(this->x, this->y, this->width, this->height);
+}
+
 void GameObject::move(float delta_x, float delta_y)
 {
     // DEBUG_PRINT("");

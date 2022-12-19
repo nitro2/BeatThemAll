@@ -4,10 +4,15 @@
 #include "grid.hpp"
 #include "character.hpp"
 #include "utils.hpp"
+#include "wall.hpp"
+
+#define SCREEN_WIDTH (1920)
+#define SCREEN_HEIGHT (1080)
+
 // Constructor
 Game::Game()
 {
-    this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1920, 1080), "Beat them all");
+    this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Beat them all");
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
     // DEBUG: Enable this for testing in slow speed
@@ -21,6 +26,12 @@ Game::Game()
     // Add grid to debug pixels
     auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 11, 20, 100.0f, sf::Color::Red);
     this->drawableObjList.push_back(grid);
+
+    // Create test wall , we will create map later
+    // auto wall = std::make_shared<Wall>(960.0f, 850.0f, 800.0f, 150.0f, sf::Color::White);
+    auto wall = std::make_shared<Wall>(200.0f, 850.0f, 1800.0f, 150.0f, sf::Color::Green);
+    this->drawableObjList.push_back(wall);
+    this->obstructionList.push_back(wall);
 }
 // Destructor
 Game::~Game()
@@ -113,10 +124,20 @@ void Game::update(float deltaTime)
     {
         // TODO: check why this not work
         // if (instanceof <Character>(obj))
-        auto p = std::dynamic_pointer_cast<Character>(obj);
-        if (p)
+        auto c = std::dynamic_pointer_cast<Character>(obj);
+        if (c)
         {
-            std::dynamic_pointer_cast<Character>(obj)->update(deltaTime);
+            std::dynamic_pointer_cast<Character>(obj)->update(deltaTime, obstructionList);
+        }
+    }
+
+    // Character will be death if moving outside of the screen
+    for (auto &p : this->playerList)
+    {
+        if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
+        {
+            // DEBUG_PRINT("Character is outside");
+            p->beKilled();
         }
     }
 }

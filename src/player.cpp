@@ -42,13 +42,7 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->attack = this->character->getAttack();
         this->defend = this->character->getDefend();
         this->health = this->character->getHealth();
-        // this->character.setPosition()
         this->drawableObjList.push_back(this->character);
-        /* Add debug shape */
-        this->debugShape = std::make_shared<DebugRectangle>(
-            this->character->getPosition().x, this->character->getPosition().y,
-            this->character->getWidth(), this->character->getHeight(), sf::Color(255, 0, 0, 100));
-        this->drawableObjList.push_back(this->debugShape);
     }
     else
     {
@@ -56,10 +50,19 @@ void Player::setCharacter(CHARACTER_TYPE c)
     }
 }
 
+void Player::destroyCharacter()
+{
+    this->drawableObjList.clear();
+}
+
 void Player::setPosition(float x, float y)
 {
     this->character->setPosition(x, y);
-    this->debugShape->setPosition(x, y);
+}
+
+sf::Vector2f Player::getPosition()
+{
+    return this->character->getPosition();
 }
 
 void Player::takeDamage(int damage)
@@ -67,6 +70,12 @@ void Player::takeDamage(int damage)
     int actual_damage = (float)damage * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend))));
     std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
+}
+
+void Player::beKilled()
+{
+    this->health = 0;
+    this->destroyCharacter();
 }
 
 void Player::printStat()
@@ -91,14 +100,12 @@ void Player::moveLeft()
 {
     // DEBUG_PRINT(this->name);
     this->character->movementAct(-this->movementSpeed, 0.f);
-    this->debugShape->move(-this->movementSpeed, 0.f);
 };
 
 void Player::moveRight()
 {
     // DEBUG_PRINT(this->name);
     this->character->movementAct(this->movementSpeed, 0.f);
-    this->debugShape->move(this->movementSpeed, 0.f);
 };
 
 void Player::jump()
