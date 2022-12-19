@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
 #include "animation.hpp"
-#include "debug.hpp"
+#include "box.hpp" // Debug box
 class Character : public GameObject
 {
 public:
