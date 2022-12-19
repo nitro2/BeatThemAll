@@ -1,4 +1,5 @@
 #include "character.hpp"
+#include <math.h>
 
 Character::Character()
 {
@@ -6,11 +7,12 @@ Character::Character()
     this->height = CFG_CHARACTER_HEIGHT;
     this->x = 0;
     this->y = 0;
-    this->pendingX = 0;
-    this->pendingY = 0;
+    this->velocity.x = 0;
+    this->velocity.y = 0;
     this->state = State::MaxState; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
+    this->ableJump = false;
 
     /* Add debug shape */
     this->debugShape = std::make_shared<DebugRectangle>(
@@ -50,17 +52,23 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
         this->setState(State::Idle);
     }
 
+    // Smooth movements
+    this->velocity.x *= 0.2f;
+    this->velocity.y += CFG_GRAVITATION_ACCELERATION * deltaTime;
+
     // Apply pending movements
-    this->x += this->pendingX * deltaTime;
-    this->y += this->pendingY * deltaTime;
+    this->x += this->velocity.x * deltaTime;
+    this->y += this->velocity.y * deltaTime;
 
     // Process gravity here
-    this->y += CFG_GRAVITY_SPEED * deltaTime;
     for (auto obj : obstructionList)
     {
-        if (this->getBounds().intersects(obj->getBounds()))
+        while (this->getBounds().intersects(obj->getBounds()))
         {
-            this->y -= CFG_GRAVITY_SPEED * deltaTime;
+            // TODO: Need to improve this via direction detection
+            this->y -= 1.0f;
+            this->velocity.y = 0;
+            this->ableJump = true;
         }
     }
 
@@ -69,17 +77,17 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
     {
         if (this->getBounds().intersects(obj->getBounds()))
         {
-            this->x -= this->pendingX * deltaTime;
-            this->y -= this->pendingY * deltaTime;
+            this->x -= this->velocity.x * deltaTime;
         }
     }
 
-    // Reset pending movements
-    this->pendingX = 0;
-    this->pendingY = 0;
-
     this->body.setPosition(this->x, this->y);
     this->debugShape->setPosition(this->x, this->y);
+    DEBUG_PRINT(" state=" << this->state
+                          << " x=" << x
+                          << " y=" << y
+                          << " v_x=" << velocity.x
+                          << " v_y=" << velocity.y);
 }
 
 void Character::movementAct(float delta_x, float delta_y)
@@ -97,8 +105,8 @@ void Character::movementAct(float delta_x, float delta_y)
     {
         // Do nothing
     }
-    this->pendingX += delta_x;
-    this->pendingY += delta_y;
+    this->velocity.x += delta_x;
+    this->velocity.y += delta_y;
 
     if (delta_y == 0)
     {
@@ -107,6 +115,35 @@ void Character::movementAct(float delta_x, float delta_y)
     else
     {
         this->setState(State::Jump);
+    }
+}
+
+void Character::moveLeft()
+{
+    // DEBUG_PRINT(this->name);
+    this->faceRight = false;
+    this->velocity.x -= CFG_CHARACTER_SPEED;
+    // this->velocity.x -= sqrtf(2.0f * CFG_CHARACTER_ACCELERATION * 100.0f);
+    this->setState(State::Walk);
+};
+
+void Character::moveRight()
+{
+    // DEBUG_PRINT(this->name);
+    this->faceRight = true;
+    this->velocity.x += CFG_CHARACTER_SPEED;
+    // this->velocity.x += sqrtf(2.0f * CFG_CHARACTER_ACCELERATION * 100.0f);
+    this->setState(State::Walk);
+};
+
+void Character::jump()
+{
+    // DEBUG_PRINT(this->name);
+    if (this->ableJump)
+    {
+        this->velocity.y -= sqrtf(2.0f * CFG_GRAVITATION_ACCELERATION * CFG_CHARACTER_JUMP_HEIGHT);
+        this->setState(State::Jump);
+        this->ableJump = false;
     }
 }
 
