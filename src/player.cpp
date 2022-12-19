@@ -10,7 +10,7 @@ Player::Player(std::string name)
     this->defend = 0;
     this->health = 0;
     this->name = name;
-    this->movementSpeed = 30.f;
+    this->movementSpeed = CFG_CHARACTER_SPEED;
 }
 
 Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
