@@ -26,12 +26,12 @@ public:
     int getHealth() { return this->health; };
 
     void setPosition(float x, float y);
-    sf::FloatRect getBounds();
+    sf::FloatRect getBounds() override;
 
     void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
     void movementAct(float delta_x, float delta_y);
     void attackAct();
-    void render(std::shared_ptr<sf::RenderWindow> window);
+    void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     void setState(State s);
 
