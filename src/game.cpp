@@ -28,10 +28,13 @@ Game::Game()
     this->drawableObjList.push_back(grid);
 
     // Create test wall , we will create map later
-    // auto wall = std::make_shared<Wall>(960.0f, 850.0f, 800.0f, 150.0f, sf::Color::White);
     auto wall = std::make_shared<Wall>(200.0f, 850.0f, 1800.0f, 150.0f, sf::Color::Green);
     this->drawableObjList.push_back(wall);
     this->obstructionList.push_back(wall);
+
+    auto wall2 = std::make_shared<Wall>(100.0f, 600.0f, 500.0f, 150.0f, sf::Color::Green);
+    this->drawableObjList.push_back(wall2);
+    this->obstructionList.push_back(wall2);
 }
 // Destructor
 Game::~Game()

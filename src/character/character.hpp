@@ -41,6 +41,10 @@ protected:
     int health;
     State state;
 
+    // User input keys will be recorded here. Then update in update() function
+    float pendingX;
+    float pendingY;
+
     typedef struct AnimationTexture_t
     {
         sf::Texture texture;

@@ -2,13 +2,13 @@
 #define _GAMECFG_HPP_
 
 // Gravity falling speed
-#define CFG_GRAVITY_SPEED 100.0f
+#define CFG_GRAVITY_SPEED 200.0f
 
 // Common character config
 #define CFG_CHARACTER_HEALTH 100
 #define CFG_CHARACTER_WIDTH 120
 #define CFG_CHARACTER_HEIGHT 160
-#define CFG_CHARACTER_SPEED (20.0f)
+#define CFG_CHARACTER_SPEED (1000.0f)
 
 // Skeleton
 #define CFG_SKELETON_IMG_SCALE (CFG_CHARACTER_HEIGHT / (32.0f))

@@ -6,6 +6,8 @@ Character::Character()
     this->height = CFG_CHARACTER_HEIGHT;
     this->x = 0;
     this->y = 0;
+    this->pendingX = 0;
+    this->pendingY = 0;
     this->state = State::MaxState; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
@@ -48,6 +50,10 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
         this->setState(State::Idle);
     }
 
+    // Apply pending movements
+    this->x += this->pendingX * deltaTime;
+    this->y += this->pendingY * deltaTime;
+
     // Process gravity here
     this->y += CFG_GRAVITY_SPEED * deltaTime;
     for (auto obj : obstructionList)
@@ -57,6 +63,20 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
             this->y -= CFG_GRAVITY_SPEED * deltaTime;
         }
     }
+
+    // Process movements
+    for (auto obj : obstructionList)
+    {
+        if (this->getBounds().intersects(obj->getBounds()))
+        {
+            this->x -= this->pendingX * deltaTime;
+            this->y -= this->pendingY * deltaTime;
+        }
+    }
+
+    // Reset pending movements
+    this->pendingX = 0;
+    this->pendingY = 0;
 
     this->body.setPosition(this->x, this->y);
     this->debugShape->setPosition(this->x, this->y);
@@ -73,8 +93,8 @@ void Character::movementAct(float delta_x, float delta_y)
     {
         this->faceRight = false;
     }
-    this->x += delta_x;
-    this->y += delta_y;
+    this->pendingX += delta_x;
+    this->pendingY += delta_y;
     this->setState(State::Walk);
 }
 
