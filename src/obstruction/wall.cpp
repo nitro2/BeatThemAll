@@ -5,7 +5,7 @@ Wall::Wall(float x, float y, float width, float height, sf::Color color)
 {
     this->shape = std::make_shared<sf::RectangleShape>(sf::Vector2f(width, height));
     this->shape->setFillColor(color);
-    this->shape->setOrigin(this->width / 2, this->height);
+    this->shape->setOrigin(0, 0);
 }
 
 Wall::~Wall()

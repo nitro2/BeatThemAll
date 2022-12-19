@@ -42,13 +42,17 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->attack = this->character->getAttack();
         this->defend = this->character->getDefend();
         this->health = this->character->getHealth();
-        // this->character.setPosition()
         this->drawableObjList.push_back(this->character);
     }
     else
     {
         DEBUG_PRINT("Failed to create character");
     }
+}
+
+void Player::destroyCharacter()
+{
+    this->drawableObjList.clear();
 }
 
 void Player::setPosition(float x, float y)
@@ -66,6 +70,12 @@ void Player::takeDamage(int damage)
     int actual_damage = (float)damage * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend))));
     std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
+}
+
+void Player::beKilled()
+{
+    this->health = 0;
+    this->destroyCharacter();
 }
 
 void Player::printStat()

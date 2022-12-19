@@ -29,7 +29,7 @@ Game::Game()
 
     // Create test wall , we will create map later
     // auto wall = std::make_shared<Wall>(960.0f, 850.0f, 800.0f, 150.0f, sf::Color::White);
-    auto wall = std::make_shared<Wall>(200.0f, 850.0f, 1800.0f, 150.0f, sf::Color::White);
+    auto wall = std::make_shared<Wall>(200.0f, 850.0f, 1800.0f, 150.0f, sf::Color::Green);
     this->drawableObjList.push_back(wall);
     this->obstructionList.push_back(wall);
 }
@@ -136,7 +136,7 @@ void Game::update(float deltaTime)
     {
         if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
         {
-            DEBUG_PRINT("Character is outside");
+            // DEBUG_PRINT("Character is outside");
             p->beKilled();
         }
     }

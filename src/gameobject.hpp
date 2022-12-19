@@ -18,7 +18,7 @@ public:
     float getHeight();
 
     bool isCollision(const sf::FloatRect &other);
-    sf::FloatRect getBounds();
+    virtual sf::FloatRect getBounds();
 
     // Movement
     virtual void move(float delta_x, float delta_y);

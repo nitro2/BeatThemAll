@@ -27,6 +27,7 @@ public:
 
     void setName(std::string name) { this->name = name; };
     void setCharacter(CHARACTER_TYPE c);
+    void destroyCharacter();
     void setPosition(float x, float y);
     sf::Vector2f getPosition();
 
@@ -45,6 +46,7 @@ public:
 
     // Get hit animation
     void takeDamage(int damage);
+    void beKilled();
 
     std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
 

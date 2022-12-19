@@ -26,6 +26,7 @@ public:
     int getHealth() { return this->health; };
 
     void setPosition(float x, float y);
+    sf::FloatRect getBounds();
 
     void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
     void movementAct(float delta_x, float delta_y);

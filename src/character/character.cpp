@@ -23,6 +23,11 @@ void Character::setPosition(float x, float y)
     this->debugShape->setPosition(x, y);
 }
 
+sf::FloatRect Character::getBounds()
+{
+    return sf::FloatRect(this->x - (this->width / 2.0f), this->y - this->height, this->width, this->height);
+}
+
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
 {
     AnimationTexture_t *ani = &aniTexture[state];
