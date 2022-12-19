@@ -49,12 +49,12 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
     }
 
     // Process gravity here
-    this->y += CFG_GRAVITY_SPEED;
+    this->y += CFG_GRAVITY_SPEED * deltaTime;
     for (auto obj : obstructionList)
     {
         if (this->getBounds().intersects(obj->getBounds()))
         {
-            this->y -= CFG_GRAVITY_SPEED;
+            this->y -= CFG_GRAVITY_SPEED * deltaTime;
         }
     }
 

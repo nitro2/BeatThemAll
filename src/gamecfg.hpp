@@ -2,7 +2,7 @@
 #define _GAMECFG_HPP_
 
 // Gravity falling speed
-#define CFG_GRAVITY_SPEED 10.0f
+#define CFG_GRAVITY_SPEED 100.0f
 
 // Common character config
 #define CFG_CHARACTER_HEALTH 100
