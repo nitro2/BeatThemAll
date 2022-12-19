@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "gameobject.hpp"
+#include "utils.hpp"
 
 class DebugRectangle : public GameObject
 {
@@ -14,6 +15,8 @@ public:
 
 private:
     std::shared_ptr<sf::RectangleShape> shape;
+    std::shared_ptr<sf::Text> coordinate;
+    sf::Font font;
 };
 
 #endif // _DEBUG_HPP_
