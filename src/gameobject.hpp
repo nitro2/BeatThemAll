@@ -8,10 +8,17 @@
 class GameObject
 {
 public:
+    GameObject(float x, float y, float width, float height);
     GameObject(){};
     ~GameObject(){};
 
+    void setPosition(float x, float y);
+    sf::Vector2f getPosition();
+    float getWidth();
+    float getHeight();
+
     // Movement
+    virtual void move(float delta_x, float delta_y);
     virtual void moveLeft();
     virtual void moveRight();
     virtual void moveUp();
