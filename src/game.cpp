@@ -4,6 +4,7 @@
 #include "grid.hpp"
 #include "character.hpp"
 #include "utils.hpp"
+#include "wall.hpp"
 // Constructor
 Game::Game()
 {
@@ -21,6 +22,10 @@ Game::Game()
     // Add grid to debug pixels
     auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 11, 20, 100.0f, sf::Color::Red);
     this->drawableObjList.push_back(grid);
+
+    // Create test wall , we will create map later
+    auto wall = std::make_shared<Wall>(960.0f, 850.0f, 800.0f, 150.0f, sf::Color::White);
+    this->drawableObjList.push_back(wall);
 }
 // Destructor
 Game::~Game()
