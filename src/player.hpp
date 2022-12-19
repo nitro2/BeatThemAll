@@ -45,7 +45,7 @@ public:
     // Get hit animation
     void takeDamage(int damage);
 
-    std::shared_ptr<GameObject> getDrawableObject();
+    std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
 
     // Just for debugging
     void test();
@@ -58,6 +58,7 @@ private:
     std::shared_ptr<Character> character;
     float movementSpeed;
 
+    std::vector<std::shared_ptr<GameObject>> drawableObjList;
     std::map<sf::Keyboard::Key, void (Player::*)(void)> keyList;
 };
 

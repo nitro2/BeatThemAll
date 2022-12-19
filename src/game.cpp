@@ -70,8 +70,13 @@ void Game::handleButton(const sf::Event &event)
             DEBUG_PRINT("Created Player 1");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
             p->setPosition(100, 400);
+            // Bind movement keys to Player1
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
-            this->drawableObjList.push_back(p->getDrawableObject());
+            // Draw all objects associate with the player
+            for (auto &obj : p->getDrawableObjects())
+            {
+                this->drawableObjList.push_back(obj);
+            }
         }
         break;
     }
@@ -83,8 +88,13 @@ void Game::handleButton(const sf::Event &event)
             DEBUG_PRINT("Created Player 2");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
             p->setPosition(800, 400);
+            // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
-            this->drawableObjList.push_back(p->getDrawableObject());
+            // Draw all objects associate with the player
+            for (auto &obj : p->getDrawableObjects())
+            {
+                this->drawableObjList.push_back(obj);
+            }
         }
         break;
     }

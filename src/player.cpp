@@ -43,6 +43,7 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->defend = this->character->getDefend();
         this->health = this->character->getHealth();
         // this->character.setPosition()
+        this->drawableObjList.push_back(this->character);
     }
     else
     {
@@ -138,7 +139,7 @@ void Player::checkKeyPress()
     }
 }
 
-std::shared_ptr<GameObject> Player::getDrawableObject()
+std::vector<std::shared_ptr<GameObject>> Player::getDrawableObjects()
 {
-    return this->character;
+    return this->drawableObjList;
 }
