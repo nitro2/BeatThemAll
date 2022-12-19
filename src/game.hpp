@@ -17,6 +17,7 @@ public:
 private:
     std::shared_ptr<sf::RenderWindow> window;
     std::vector<std::shared_ptr<GameObject>> drawableObjList;
+    std::vector<std::shared_ptr<GameObject>> obstructionList;
     std::vector<std::shared_ptr<Player>> playerList;
 
     std::shared_ptr<Player> addPlayer(std::string name);

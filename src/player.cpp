@@ -56,6 +56,11 @@ void Player::setPosition(float x, float y)
     this->character->setPosition(x, y);
 }
 
+sf::Vector2f Player::getPosition()
+{
+    return this->character->getPosition();
+}
+
 void Player::takeDamage(int damage)
 {
     int actual_damage = (float)damage * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend))));

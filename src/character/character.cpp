@@ -32,7 +32,7 @@ void Character::loadImage(State state, std::string filename, int frames, float s
     ani->imgHeight = ani->texture.getSize().y;
 }
 
-void Character::update(float deltaTime)
+void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList)
 {
     this->characterAnimation.update(0, deltaTime, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
@@ -45,6 +45,14 @@ void Character::update(float deltaTime)
 
     // Process gravity here
     this->y += CFG_GRAVITY_SPEED;
+    for (auto obj : obstructionList)
+    {
+        if (this->getBounds().intersects(obj->getBounds()))
+        {
+            this->y -= CFG_GRAVITY_SPEED;
+        }
+    }
+
     this->body.setPosition(this->x, this->y);
     this->debugShape->setPosition(this->x, this->y);
 }

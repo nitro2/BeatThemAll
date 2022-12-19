@@ -27,7 +27,7 @@ public:
 
     void setPosition(float x, float y);
 
-    void update(float deltaTime);
+    void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
     void movementAct(float delta_x, float delta_y);
     void attackAct();
     void render(std::shared_ptr<sf::RenderWindow> window);
