@@ -44,6 +44,11 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->health = this->character->getHealth();
         // this->character.setPosition()
         this->drawableObjList.push_back(this->character);
+        /* Add debug shape */
+        this->debugShape = std::make_shared<DebugRectangle>(
+            this->character->getPosition().x, this->character->getPosition().y,
+            this->character->getWidth(), this->character->getHeight(), sf::Color(255, 0, 0, 100));
+        this->drawableObjList.push_back(this->debugShape);
     }
     else
     {
@@ -54,6 +59,7 @@ void Player::setCharacter(CHARACTER_TYPE c)
 void Player::setPosition(float x, float y)
 {
     this->character->setPosition(x, y);
+    this->debugShape->setPosition(x, y);
 }
 
 void Player::takeDamage(int damage)
@@ -85,12 +91,14 @@ void Player::moveLeft()
 {
     // DEBUG_PRINT(this->name);
     this->character->movementAct(-this->movementSpeed, 0.f);
+    this->debugShape->move(-this->movementSpeed, 0.f);
 };
 
 void Player::moveRight()
 {
     // DEBUG_PRINT(this->name);
     this->character->movementAct(this->movementSpeed, 0.f);
+    this->debugShape->move(this->movementSpeed, 0.f);
 };
 
 void Player::jump()

@@ -3,7 +3,7 @@
 
 #include "gameobject.hpp"
 #include "character.hpp"
-
+#include "debug.hpp"
 class Player
 {
 public:
@@ -56,6 +56,7 @@ private:
     int defend;
     int health;
     std::shared_ptr<Character> character;
+    std::shared_ptr<DebugRectangle> debugShape; // Debug only
     float movementSpeed;
 
     std::vector<std::shared_ptr<GameObject>> drawableObjList;

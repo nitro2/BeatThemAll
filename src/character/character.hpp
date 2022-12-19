@@ -26,6 +26,7 @@ public:
     int getHealth() { return this->health; };
 
     void setPosition(float x, float y);
+
     void update(float deltaTime);
     void movementAct(float delta_x, float delta_y);
     void attackAct();
