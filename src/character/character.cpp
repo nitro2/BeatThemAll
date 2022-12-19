@@ -9,13 +9,18 @@ Character::Character()
     this->state = State::MaxState; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
+
+    /* Add debug shape */
+    this->debugShape = std::make_shared<DebugRectangle>(
+        this->x, this->y, this->width, this->height, sf::Color(255, 0, 0, 100));
 }
 
 void Character::setPosition(float x, float y)
 {
     this->x = x;
     this->y = y;
-    this->body.setPosition(sf::Vector2f(this->x, this->y));
+    this->body.setPosition(this->x, this->y);
+    this->debugShape->setPosition(x, y);
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -37,11 +42,16 @@ void Character::update(float deltaTime)
         // Return the character to idle state after do any animation
         this->setState(State::Idle);
     }
+
+    // Process gravity here
+    this->y += CFG_GRAVITY_SPEED;
+    this->body.setPosition(this->x, this->y);
+    this->debugShape->setPosition(this->x, this->y);
 }
 
 void Character::movementAct(float delta_x, float delta_y)
 {
-    this->body.move(delta_x, delta_y);
+    // this->body.move(delta_x, delta_y);
     if (delta_x > 0.0f)
     {
         this->faceRight = true;
@@ -63,6 +73,7 @@ void Character::attackAct()
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
 {
     window->draw(this->body);
+    this->debugShape->render(window);
 }
 
 void Character::setState(State s)

@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
 #include "animation.hpp"
-
+#include "debug.hpp"
 class Character : public GameObject
 {
 public:
@@ -54,6 +54,8 @@ protected:
     Animation characterAnimation;
     sf::Sprite body;
     bool faceRight;
+
+    std::shared_ptr<DebugRectangle> debugShape; // Debug only
 
     // Image handle
     void loadImage(State state, std::string filename, int frames, float switchTime);
