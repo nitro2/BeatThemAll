@@ -89,13 +89,25 @@ void Character::movementAct(float delta_x, float delta_y)
     {
         this->faceRight = true;
     }
-    else
+    else if (delta_x < 0.0f)
     {
         this->faceRight = false;
     }
+    else
+    {
+        // Do nothing
+    }
     this->pendingX += delta_x;
     this->pendingY += delta_y;
-    this->setState(State::Walk);
+
+    if (delta_y == 0)
+    {
+        this->setState(State::Walk);
+    }
+    else
+    {
+        this->setState(State::Jump);
+    }
 }
 
 void Character::attackAct()

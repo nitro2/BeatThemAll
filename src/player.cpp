@@ -111,6 +111,7 @@ void Player::moveRight()
 void Player::jump()
 {
     // DEBUG_PRINT(this->name);
+    this->character->movementAct(0.f, -this->movementSpeed * 4.0f);
 }
 
 void Player::attackAct()
