@@ -31,8 +31,47 @@ float GameObject::getHeight()
 
 bool GameObject::isCollision(const sf::FloatRect &other)
 {
-    sf::FloatRect rect(this->x, this->y, this->width, this->height);
-    return rect.intersects(other);
+    return this->getBounds().intersects(other);
+}
+
+/* Check collision and push back the object */
+bool GameObject::AABBCollision(const sf::FloatRect &otherRect, sf::Vector2f &pushBack)
+{
+    auto thisRect = this->getBounds();
+    float deltaX = otherRect.left - thisRect.left;
+    float deltaY = otherRect.top - thisRect.top;
+    float intersectX = abs(deltaX) - (otherRect.width + thisRect.width) / 2.0f;
+    float intersectY = abs(deltaY) - (otherRect.height + thisRect.height) / 2.0f;
+    pushBack.x = 0.0f;
+    pushBack.y = 0.0f;
+
+    if ((intersectX < 0.0f) && (intersectY < 0.0f))
+    {
+        if (intersectX > intersectY)
+        {
+            if (deltaX > 0.0f)
+            {
+                pushBack.x = -intersectX;
+            }
+            else
+            {
+                pushBack.x = intersectX;
+            }
+        }
+        else
+        {
+            if (deltaY > 0.0f)
+            {
+                pushBack.y = -intersectY;
+            }
+            else
+            {
+                pushBack.y = intersectY;
+            }
+        }
+        return true;
+    }
+    return false;
 }
 
 sf::FloatRect GameObject::getBounds()

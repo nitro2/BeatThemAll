@@ -52,10 +52,25 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
         this->setState(State::Idle);
     }
 
+    /*
+        v = v0 + a*t
+        s = v*t
+    */
     // Smooth movements
-    this->velocity.x *= 0.2f;
+    if (this->velocity.x > 0)
+    {
+        this->velocity.x -= (CFG_CHARACTER_ACCELERATION * deltaTime) / 2.0f;
+    }
+    else
+    {
+        this->velocity.x += (CFG_CHARACTER_ACCELERATION * deltaTime) / 2.0f;
+    }
     this->velocity.y += CFG_GRAVITATION_ACCELERATION * deltaTime;
 
+    if (velocity.y > CFG_GRAVITY_MAX_FALLING)
+    {
+        velocity.y = CFG_GRAVITY_MAX_FALLING;
+    }
     // Apply pending movements
     this->x += this->velocity.x * deltaTime;
     this->y += this->velocity.y * deltaTime;
@@ -63,23 +78,23 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
     // Process gravity here
     for (auto obj : obstructionList)
     {
-        while (this->getBounds().intersects(obj->getBounds()))
+        sf::Vector2f pushBack(0, 0);
+        while (obj->AABBCollision(this->getBounds(), pushBack))
         {
             // TODO: Need to improve this via direction detection
-            this->y -= 1.0f;
-            this->velocity.y = 0;
-            this->ableJump = true;
+            this->x += pushBack.x;
+            this->y += pushBack.y;
+            if (pushBack.y)
+            {
+                this->velocity.y = 0;
+                this->ableJump = true;
+            }
+            // DEBUG_PRINT("Collision"
+            //             << " x=" << this->x << " y=" << this->y
+            //             << " px=" << pushBack.x << " py" << pushBack.y);
         }
     }
-
-    // Process movements
-    for (auto obj : obstructionList)
-    {
-        if (this->getBounds().intersects(obj->getBounds()))
-        {
-            this->x -= this->velocity.x * deltaTime;
-        }
-    }
+    this->velocity.x *= 0.9f;
 
     this->body.setPosition(this->x, this->y);
     this->debugShape->setPosition(this->x, this->y);
