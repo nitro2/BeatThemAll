@@ -140,6 +140,10 @@ void Game::update(float deltaTime)
         if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
         {
             // DEBUG_PRINT("Character is outside");
+            for (auto &d : p->getDrawableObjects())
+            {
+                this->drawableObjList.erase(std::remove(this->drawableObjList.begin(), this->drawableObjList.end(), d), this->drawableObjList.end());
+            }
             p->beKilled();
         }
     }
