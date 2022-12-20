@@ -182,6 +182,11 @@ void Game::run()
     {
         // update delta time
         deltaTime = clock.restart().asSeconds();
+        // prevent bug when the framerate lower than 20fps
+        if (deltaTime > 1.0f / 20.0f)
+        {
+            deltaTime = 1.0f / 20.0f;
+        }
         sf::Event event;
         while (this->window->pollEvent(event))
         {
