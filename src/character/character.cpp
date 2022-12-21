@@ -71,9 +71,22 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
     {
         velocity.y = CFG_GRAVITY_MAX_FALLING;
     }
+
+    // Ignore smaller 1 pixel movements
+    auto deltaX = this->velocity.x * deltaTime;
+    if (abs(deltaX) < 1.0f)
+    {
+        deltaX = 0.0f;
+    }
+    auto deltaY = this->velocity.y * deltaTime;
+    if (abs(deltaY) < 1.0f)
+    {
+        deltaY = 0.0f;
+    }
+
     // Apply pending movements
-    this->x += this->velocity.x * deltaTime;
-    this->y += this->velocity.y * deltaTime;
+    this->x += deltaX;
+    this->y += deltaY;
 
     // Process gravity here
     for (auto obj : obstructionList)
@@ -81,7 +94,7 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
         sf::Vector2f pushBack(0, 0);
         while (obj->AABBCollision(this->getBounds(), pushBack))
         {
-            // TODO: Need to improve this via direction detection
+
             this->x += pushBack.x;
             this->y += pushBack.y;
             if (pushBack.y)
@@ -90,19 +103,23 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
                 this->ableJump = true;
             }
             // DEBUG_PRINT("Collision"
-            //             << " x=" << this->x << " y=" << this->y
-            //             << " px=" << pushBack.x << " py" << pushBack.y);
+            //             << " obj:" << obj->positionToString() << "\n"
+            //             << " pla:" << this->positionToString() << "\n"
+            //             << " x=" << this->getBounds().left
+            //             << " y=" << this->getBounds().top
+            //             << " w=" << this->getBounds().width
+            //             << " h=" << this->getBounds().height);
         }
     }
     this->velocity.x *= 0.9f;
 
     this->body.setPosition(this->x, this->y);
     this->debugShape->setPosition(this->x, this->y);
-    DEBUG_PRINT(" state=" << this->state
-                          << " x=" << x
-                          << " y=" << y
-                          << " v_x=" << velocity.x
-                          << " v_y=" << velocity.y);
+    // DEBUG_PRINT(" state=" << this->state
+    //                       << " x=" << x
+    //                       << " y=" << y
+    //                       << " v_x=" << velocity.x
+    //                       << " v_y=" << velocity.y);
 }
 
 void Character::movementAct(float delta_x, float delta_y)

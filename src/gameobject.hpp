@@ -30,6 +30,8 @@ public:
 
     virtual void render(std::shared_ptr<sf::RenderWindow> window);
 
+    virtual std::string positionToString();
+
 protected:
     float width;
     float height;

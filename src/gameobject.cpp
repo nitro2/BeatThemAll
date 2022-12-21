@@ -69,6 +69,9 @@ bool GameObject::AABBCollision(const sf::FloatRect &otherRect, sf::Vector2f &pus
                 pushBack.y = intersectY;
             }
         }
+        DEBUG_PRINT(" dx=" << deltaX << " dy=" << deltaY
+                           << " intersectX=" << intersectX
+                           << " intersectY=" << intersectY);
         return true;
     }
     return false;
@@ -109,4 +112,9 @@ void GameObject::moveDown()
 void GameObject::render(std::shared_ptr<sf::RenderWindow> window)
 {
     DEBUG_PRINT("");
+}
+
+std::string GameObject::positionToString()
+{
+    return std::string(" x=") + std::to_string(this->x) + std::string(" y=") + std::to_string(this->y) + std::string(" w=") + std::to_string(this->width) + std::string(" h=") + std::to_string(this->height);
 }
