@@ -9,9 +9,10 @@ class Player
 public:
     enum class CHARACTER_TYPE
     {
+        SKELETON,
+        KNIGHT,
         WARRIOR,
-        WIZARD,
-        SKELETON
+        WIZARD
     };
 
     Player(std::string name);

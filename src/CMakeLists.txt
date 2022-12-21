@@ -5,6 +5,10 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/player.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/character/knight.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/character/skeleton.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/character/warrior.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/character/wizard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.cpp

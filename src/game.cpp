@@ -2,7 +2,6 @@
 #include <filesystem>
 #include "game.hpp"
 #include "grid.hpp"
-#include "character.hpp"
 #include "utils.hpp"
 #include "wall.hpp"
 
