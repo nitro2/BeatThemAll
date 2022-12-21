@@ -2,27 +2,32 @@
 #define _GAMECFG_HPP_
 
 // Gravity falling speed
-#define CFG_GRAVITY_SPEED 10.0f
+#define CFG_GRAVITATION_ACCELERATION 981.0f
+#define CFG_GRAVITY_MAX_FALLING 1000.0f
 
 // Common character config
 #define CFG_CHARACTER_HEALTH 100
-#define CFG_CHARACTER_WIDTH 120
-#define CFG_CHARACTER_HEIGHT 160
-#define CFG_CHARACTER_SPEED (20.0f)
+#define CFG_CHARACTER_WIDTH 120.0f
+#define CFG_CHARACTER_HEIGHT 160.0f
+#define CFG_CHARACTER_ACCELERATION 300.0f
+#define CFG_CHARACTER_SPEED (300.0f)
+#define CFG_CHARACTER_JUMP_HEIGHT (1.5f * CFG_CHARACTER_HEIGHT)
 
 // Skeleton
 #define CFG_SKELETON_IMG_SCALE (CFG_CHARACTER_HEIGHT / (32.0f))
 #define CFG_SKELETON_IMG_SWITCH_TIME 0.5f
-#define CFG_SKELETON_IMG_ATTACK_PATH "assets/char/skeleton/image/skeleton_attack.png"
+#define CFG_SKELETON_IMG_ATTACK_PATH "assets/char/skeleton/image/attack.png"
 #define CFG_SKELETON_IMG_ATTACK_FRAMES 18
-#define CFG_SKELETON_IMG_DEAD_PATH "assets/char/skeleton/image/skeleton_dead.png"
+#define CFG_SKELETON_IMG_DEAD_PATH "assets/char/skeleton/image/dead.png"
 #define CFG_SKELETON_IMG_DEAD_FRAMES 15
-#define CFG_SKELETON_IMG_HIT_PATH "assets/char/skeleton/image/skeleton_hit.png"
+#define CFG_SKELETON_IMG_HIT_PATH "assets/char/skeleton/image/hit.png"
 #define CFG_SKELETON_IMG_HIT_FRAMES 8
-#define CFG_SKELETON_IMG_IDLE_PATH "assets/char/skeleton/image/skeleton_idle.png"
+#define CFG_SKELETON_IMG_IDLE_PATH "assets/char/skeleton/image/idle.png"
 #define CFG_SKELETON_IMG_IDLE_FRAMES 11
-#define CFG_SKELETON_IMG_WALK_PATH "assets/char/skeleton/image/skeleton_walk.png"
+#define CFG_SKELETON_IMG_WALK_PATH "assets/char/skeleton/image/walk.png"
 #define CFG_SKELETON_IMG_WALK_FRAMES 13
+#define CFG_SKELETON_IMG_JUMP_PATH "assets/char/skeleton/image/jump.png"
+#define CFG_SKELETON_IMG_JUMP_FRAMES 13
 #define CFG_SKELETON_STAT_ATTACK 10
 #define CFG_SKELETON_STAT_DEFEND 5
 #define CFG_SKELETON_STAT_HEALTH CFG_CHARACTER_HEALTH

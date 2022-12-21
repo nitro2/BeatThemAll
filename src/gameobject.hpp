@@ -18,6 +18,7 @@ public:
     float getHeight();
 
     bool isCollision(const sf::FloatRect &other);
+    bool AABBCollision(const sf::FloatRect &other, sf::Vector2f &pushBack);
     virtual sf::FloatRect getBounds();
 
     // Movement
@@ -28,6 +29,8 @@ public:
     virtual void moveDown();
 
     virtual void render(std::shared_ptr<sf::RenderWindow> window);
+
+    virtual std::string positionToString();
 
 protected:
     float width;

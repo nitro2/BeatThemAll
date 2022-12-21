@@ -31,8 +31,50 @@ float GameObject::getHeight()
 
 bool GameObject::isCollision(const sf::FloatRect &other)
 {
-    sf::FloatRect rect(this->x, this->y, this->width, this->height);
-    return rect.intersects(other);
+    return this->getBounds().intersects(other);
+}
+
+/* Check collision and push back the object */
+bool GameObject::AABBCollision(const sf::FloatRect &otherRect, sf::Vector2f &pushBack)
+{
+    auto thisRect = this->getBounds();
+    float deltaX = (otherRect.left + otherRect.width / 2.0f) - (thisRect.left + thisRect.width / 2.0f);
+    float deltaY = (otherRect.top + otherRect.height / 2.0f) - (thisRect.top + thisRect.height / 2.0f);
+    float intersectX = abs(deltaX) - (otherRect.width + thisRect.width) / 2.0f;
+    float intersectY = abs(deltaY) - (otherRect.height + thisRect.height) / 2.0f;
+    pushBack.x = 0.0f;
+    pushBack.y = 0.0f;
+
+    if ((intersectX < 0.0f) && (intersectY < 0.0f))
+    {
+        if (intersectX > intersectY)
+        {
+            if (deltaX > 0.0f)
+            {
+                pushBack.x = -intersectX;
+            }
+            else
+            {
+                pushBack.x = intersectX;
+            }
+        }
+        else
+        {
+            if (deltaY > 0.0f)
+            {
+                pushBack.y = -intersectY;
+            }
+            else
+            {
+                pushBack.y = intersectY;
+            }
+        }
+        // DEBUG_PRINT(" dx=" << deltaX << " dy=" << deltaY
+        //                    << " intersectX=" << intersectX
+        //                    << " intersectY=" << intersectY);
+        return true;
+    }
+    return false;
 }
 
 sf::FloatRect GameObject::getBounds()
@@ -70,4 +112,9 @@ void GameObject::moveDown()
 void GameObject::render(std::shared_ptr<sf::RenderWindow> window)
 {
     DEBUG_PRINT("");
+}
+
+std::string GameObject::positionToString()
+{
+    return std::string(" x=") + std::to_string(this->x) + std::string(" y=") + std::to_string(this->y) + std::string(" w=") + std::to_string(this->width) + std::string(" h=") + std::to_string(this->height);
 }

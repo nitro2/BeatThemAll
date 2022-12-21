@@ -18,6 +18,7 @@ public:
         Attack,
         Hit,
         Dead,
+        Jump,
         MaxState
     };
 
@@ -30,6 +31,10 @@ public:
 
     void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
     void movementAct(float delta_x, float delta_y);
+    void moveLeft() override;
+    void moveRight() override;
+    void jump();
+
     void attackAct();
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
@@ -40,6 +45,10 @@ protected:
     int defend;
     int health;
     State state;
+
+    // User input keys will be recorded here. Then update in update() function
+    sf::Vector2f velocity;
+    bool ableJump;
 
     typedef struct AnimationTexture_t
     {
@@ -96,6 +105,7 @@ public:
         this->loadImage(State::Dead, CFG_SKELETON_IMG_DEAD_PATH, CFG_SKELETON_IMG_DEAD_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
         this->loadImage(State::Hit, CFG_SKELETON_IMG_HIT_PATH, CFG_SKELETON_IMG_HIT_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
         this->loadImage(State::Walk, CFG_SKELETON_IMG_WALK_PATH, CFG_SKELETON_IMG_WALK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
+        this->loadImage(State::Jump, CFG_SKELETON_IMG_JUMP_PATH, CFG_SKELETON_IMG_JUMP_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME * 3);
         this->attack = CFG_SKELETON_STAT_ATTACK;
         this->defend = CFG_SKELETON_STAT_DEFEND;
         this->health = CFG_SKELETON_STAT_HEALTH;

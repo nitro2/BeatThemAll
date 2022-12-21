@@ -1,4 +1,5 @@
 #include "character.hpp"
+#include <math.h>
 
 Character::Character()
 {
@@ -6,9 +7,12 @@ Character::Character()
     this->height = CFG_CHARACTER_HEIGHT;
     this->x = 0;
     this->y = 0;
+    this->velocity.x = 0;
+    this->velocity.y = 0;
     this->state = State::MaxState; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
+    this->ableJump = false;
 
     /* Add debug shape */
     this->debugShape = std::make_shared<DebugRectangle>(
@@ -48,18 +52,74 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
         this->setState(State::Idle);
     }
 
+    /*
+        v = v0 + a*t
+        s = v*t
+    */
+    // Smooth movements
+    if (this->velocity.x > 0)
+    {
+        this->velocity.x -= (CFG_CHARACTER_ACCELERATION * deltaTime) / 2.0f;
+    }
+    else
+    {
+        this->velocity.x += (CFG_CHARACTER_ACCELERATION * deltaTime) / 2.0f;
+    }
+    this->velocity.y += CFG_GRAVITATION_ACCELERATION * deltaTime;
+
+    if (velocity.y > CFG_GRAVITY_MAX_FALLING)
+    {
+        velocity.y = CFG_GRAVITY_MAX_FALLING;
+    }
+
+    // Ignore smaller 1 pixel movements
+    auto deltaX = this->velocity.x * deltaTime;
+    if (abs(deltaX) < 1.0f)
+    {
+        deltaX = 0.0f;
+    }
+    auto deltaY = this->velocity.y * deltaTime;
+    if (abs(deltaY) < 1.0f)
+    {
+        deltaY = 0.0f;
+    }
+
+    // Apply pending movements
+    this->x += deltaX;
+    this->y += deltaY;
+
     // Process gravity here
-    this->y += CFG_GRAVITY_SPEED;
     for (auto obj : obstructionList)
     {
-        if (this->getBounds().intersects(obj->getBounds()))
+        sf::Vector2f pushBack(0, 0);
+        while (obj->AABBCollision(this->getBounds(), pushBack))
         {
-            this->y -= CFG_GRAVITY_SPEED;
+
+            this->x += pushBack.x;
+            this->y += pushBack.y;
+            if (pushBack.y)
+            {
+                this->velocity.y = 0;
+                this->ableJump = true;
+            }
+            // DEBUG_PRINT("Collision"
+            //             << " obj:" << obj->positionToString() << "\n"
+            //             << " pla:" << this->positionToString() << "\n"
+            //             << " x=" << this->getBounds().left
+            //             << " y=" << this->getBounds().top
+            //             << " w=" << this->getBounds().width
+            //             << " h=" << this->getBounds().height);
         }
     }
+    this->velocity.x *= 0.9f;
 
     this->body.setPosition(this->x, this->y);
     this->debugShape->setPosition(this->x, this->y);
+    // DEBUG_PRINT(" state=" << this->state
+    //                       << " x=" << x
+    //                       << " y=" << y
+    //                       << " v_x=" << velocity.x
+    //                       << " v_y=" << velocity.y);
 }
 
 void Character::movementAct(float delta_x, float delta_y)
@@ -69,13 +129,54 @@ void Character::movementAct(float delta_x, float delta_y)
     {
         this->faceRight = true;
     }
-    else
+    else if (delta_x < 0.0f)
     {
         this->faceRight = false;
     }
-    this->x += delta_x;
-    this->y += delta_y;
+    else
+    {
+        // Do nothing
+    }
+    this->velocity.x += delta_x;
+    this->velocity.y += delta_y;
+
+    if (delta_y == 0)
+    {
+        this->setState(State::Walk);
+    }
+    else
+    {
+        this->setState(State::Jump);
+    }
+}
+
+void Character::moveLeft()
+{
+    // DEBUG_PRINT(this->name);
+    this->faceRight = false;
+    this->velocity.x -= CFG_CHARACTER_SPEED;
+    // this->velocity.x -= sqrtf(2.0f * CFG_CHARACTER_ACCELERATION * 100.0f);
     this->setState(State::Walk);
+};
+
+void Character::moveRight()
+{
+    // DEBUG_PRINT(this->name);
+    this->faceRight = true;
+    this->velocity.x += CFG_CHARACTER_SPEED;
+    // this->velocity.x += sqrtf(2.0f * CFG_CHARACTER_ACCELERATION * 100.0f);
+    this->setState(State::Walk);
+};
+
+void Character::jump()
+{
+    // DEBUG_PRINT(this->name);
+    if (this->ableJump)
+    {
+        this->velocity.y -= sqrtf(2.0f * CFG_GRAVITATION_ACCELERATION * CFG_CHARACTER_JUMP_HEIGHT);
+        this->setState(State::Jump);
+        this->ableJump = false;
+    }
 }
 
 void Character::attackAct()

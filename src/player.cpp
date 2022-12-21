@@ -10,7 +10,6 @@ Player::Player(std::string name)
     this->defend = 0;
     this->health = 0;
     this->name = name;
-    this->movementSpeed = CFG_CHARACTER_SPEED;
 }
 
 Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
@@ -99,18 +98,19 @@ void Player::test()
 void Player::moveLeft()
 {
     // DEBUG_PRINT(this->name);
-    this->character->movementAct(-this->movementSpeed, 0.f);
+    this->character->moveLeft();
 };
 
 void Player::moveRight()
 {
     // DEBUG_PRINT(this->name);
-    this->character->movementAct(this->movementSpeed, 0.f);
+    this->character->moveRight();
 };
 
 void Player::jump()
 {
     // DEBUG_PRINT(this->name);
+    this->character->jump();
 }
 
 void Player::attackAct()
