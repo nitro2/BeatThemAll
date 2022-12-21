@@ -24,17 +24,21 @@ Game::Game()
     // this->drawableObjList.push_back(s);
 
     // Add grid to debug pixels
-    auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 11, 20, 100.0f, sf::Color::Red);
+    auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 12, 21, 100.0f, sf::Color::Red);
     this->drawableObjList.push_back(grid);
 
     // Create test wall , we will create map later
-    auto wall = std::make_shared<Wall>(200.0f, 850.0f, 1800.0f, 150.0f, sf::Color::Green);
+    auto wall = std::make_shared<Wall>(500.0f, 500.0f, 500.0f, 150.0f, sf::Color::Green);
     this->drawableObjList.push_back(wall);
     this->obstructionList.push_back(wall);
 
-    auto wall2 = std::make_shared<Wall>(100.0f, 600.0f, 500.0f, 150.0f, sf::Color::Green);
-    this->drawableObjList.push_back(wall2);
-    this->obstructionList.push_back(wall2);
+    wall = std::make_shared<Wall>(200.0f, 900.0f, 1000.0f, 150.0f, sf::Color::Green);
+    this->drawableObjList.push_back(wall);
+    this->obstructionList.push_back(wall);
+
+    wall = std::make_shared<Wall>(1200.0f, 700.0f, 400.0f, 150.0f, sf::Color::Green);
+    this->drawableObjList.push_back(wall);
+    this->obstructionList.push_back(wall);
 }
 // Destructor
 Game::~Game()
@@ -83,7 +87,7 @@ void Game::handleButton(const sf::Event &event)
         {
             DEBUG_PRINT("Created Player 1");
             p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
-            p->setPosition(100, 400);
+            p->setPosition(300, 400);
             // Bind movement keys to Player1
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
             // Draw all objects associate with the player

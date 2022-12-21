@@ -38,8 +38,8 @@ bool GameObject::isCollision(const sf::FloatRect &other)
 bool GameObject::AABBCollision(const sf::FloatRect &otherRect, sf::Vector2f &pushBack)
 {
     auto thisRect = this->getBounds();
-    float deltaX = otherRect.left - thisRect.left;
-    float deltaY = otherRect.top - thisRect.top;
+    float deltaX = (otherRect.left + otherRect.width / 2.0f) - (thisRect.left + thisRect.width / 2.0f);
+    float deltaY = (otherRect.top + otherRect.height / 2.0f) - (thisRect.top + thisRect.height / 2.0f);
     float intersectX = abs(deltaX) - (otherRect.width + thisRect.width) / 2.0f;
     float intersectY = abs(deltaY) - (otherRect.height + thisRect.height) / 2.0f;
     pushBack.x = 0.0f;
@@ -69,9 +69,9 @@ bool GameObject::AABBCollision(const sf::FloatRect &otherRect, sf::Vector2f &pus
                 pushBack.y = intersectY;
             }
         }
-        DEBUG_PRINT(" dx=" << deltaX << " dy=" << deltaY
-                           << " intersectX=" << intersectX
-                           << " intersectY=" << intersectY);
+        // DEBUG_PRINT(" dx=" << deltaX << " dy=" << deltaY
+        //                    << " intersectX=" << intersectX
+        //                    << " intersectY=" << intersectY);
         return true;
     }
     return false;
