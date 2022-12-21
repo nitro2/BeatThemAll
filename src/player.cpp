@@ -33,7 +33,7 @@ void Player::setCharacter(CHARACTER_TYPE c)
         this->character = std::make_shared<Skeleton>();
         break;
     case CHARACTER_TYPE::KNIGHT:
-        this->character = std::make_shared<Skeleton>();
+        this->character = std::make_shared<Knight>();
         break;
     default:
         break;

@@ -13,6 +13,25 @@
 #define CFG_CHARACTER_SPEED (300.0f)
 #define CFG_CHARACTER_JUMP_HEIGHT (1.5f * CFG_CHARACTER_HEIGHT)
 
+// Knight
+#define CFG_KNIGHT_IMG_SCALE (CFG_CHARACTER_HEIGHT / (86.0f))
+#define CFG_KNIGHT_IMG_SWITCH_TIME 1.0f
+#define CFG_KNIGHT_IMG_ATTACK_PATH "assets/char/knight/image/attack.png"
+#define CFG_KNIGHT_IMG_ATTACK_FRAMES 5
+#define CFG_KNIGHT_IMG_DEAD_PATH "assets/char/knight/image/dead.png"
+#define CFG_KNIGHT_IMG_DEAD_FRAMES 6
+#define CFG_KNIGHT_IMG_HIT_PATH "assets/char/knight/image/hit.png"
+#define CFG_KNIGHT_IMG_HIT_FRAMES 2
+#define CFG_KNIGHT_IMG_IDLE_PATH "assets/char/knight/image/idle.png"
+#define CFG_KNIGHT_IMG_IDLE_FRAMES 4
+#define CFG_KNIGHT_IMG_WALK_PATH "assets/char/knight/image/walk.png"
+#define CFG_KNIGHT_IMG_WALK_FRAMES 8
+#define CFG_KNIGHT_IMG_JUMP_PATH "assets/char/knight/image/jump.png"
+#define CFG_KNIGHT_IMG_JUMP_FRAMES 6
+#define CFG_KNIGHT_STAT_ATTACK 8
+#define CFG_KNIGHT_STAT_DEFEND 7
+#define CFG_KNIGHT_STAT_HEALTH CFG_CHARACTER_HEALTH
+
 // Skeleton
 #define CFG_SKELETON_IMG_SCALE (CFG_CHARACTER_HEIGHT / (32.0f))
 #define CFG_SKELETON_IMG_SWITCH_TIME 0.5f

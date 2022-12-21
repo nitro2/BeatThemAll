@@ -103,7 +103,7 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 2");
-            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setCharacter(Player::CHARACTER_TYPE::KNIGHT);
             p->setPosition(800, 400);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
