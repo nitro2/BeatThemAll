@@ -71,18 +71,25 @@ protected:
     void loadImage(State state, std::string filename, int frames, float switchTime);
 };
 
-class Skeleton : public Character
-{
-public:
-    Skeleton();
-    ~Skeleton();
-};
-
 class Knight : public Character
 {
 public:
     Knight();
     ~Knight();
+};
+
+class Ninja : public Character
+{
+public:
+    Ninja();
+    ~Ninja();
+};
+
+class Skeleton : public Character
+{
+public:
+    Skeleton();
+    ~Skeleton();
 };
 
 class Warrior : public Character

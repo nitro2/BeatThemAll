@@ -9,8 +9,9 @@ class Player
 public:
     enum class CHARACTER_TYPE
     {
-        SKELETON,
         KNIGHT,
+        NINJA,
+        SKELETON,
         WARRIOR,
         WIZARD
     };

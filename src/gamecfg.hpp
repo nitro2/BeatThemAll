@@ -14,23 +14,42 @@
 #define CFG_CHARACTER_JUMP_HEIGHT (1.5f * CFG_CHARACTER_HEIGHT)
 
 // Knight
-#define CFG_KNIGHT_IMG_SCALE (CFG_CHARACTER_HEIGHT / (86.0f))
+#define CFG_KNIGHT_IMG_SCALE (CFG_CHARACTER_HEIGHT / (350.0f))
 #define CFG_KNIGHT_IMG_SWITCH_TIME 1.0f
 #define CFG_KNIGHT_IMG_ATTACK_PATH "assets/char/knight/image/attack.png"
-#define CFG_KNIGHT_IMG_ATTACK_FRAMES 5
+#define CFG_KNIGHT_IMG_ATTACK_FRAMES 10
 #define CFG_KNIGHT_IMG_DEAD_PATH "assets/char/knight/image/dead.png"
-#define CFG_KNIGHT_IMG_DEAD_FRAMES 6
+#define CFG_KNIGHT_IMG_DEAD_FRAMES 10
 #define CFG_KNIGHT_IMG_HIT_PATH "assets/char/knight/image/hit.png"
-#define CFG_KNIGHT_IMG_HIT_FRAMES 2
+#define CFG_KNIGHT_IMG_HIT_FRAMES 10
 #define CFG_KNIGHT_IMG_IDLE_PATH "assets/char/knight/image/idle.png"
-#define CFG_KNIGHT_IMG_IDLE_FRAMES 4
+#define CFG_KNIGHT_IMG_IDLE_FRAMES 10
 #define CFG_KNIGHT_IMG_WALK_PATH "assets/char/knight/image/walk.png"
-#define CFG_KNIGHT_IMG_WALK_FRAMES 8
+#define CFG_KNIGHT_IMG_WALK_FRAMES 10
 #define CFG_KNIGHT_IMG_JUMP_PATH "assets/char/knight/image/jump.png"
-#define CFG_KNIGHT_IMG_JUMP_FRAMES 6
+#define CFG_KNIGHT_IMG_JUMP_FRAMES 10
 #define CFG_KNIGHT_STAT_ATTACK 8
 #define CFG_KNIGHT_STAT_DEFEND 7
 #define CFG_KNIGHT_STAT_HEALTH CFG_CHARACTER_HEALTH
+
+// Ninja
+#define CFG_NINJA_IMG_SCALE (CFG_CHARACTER_HEIGHT / (495.0f))
+#define CFG_NINJA_IMG_SWITCH_TIME 0.5f
+#define CFG_NINJA_IMG_ATTACK_PATH "assets/char/ninja/image/attack.png"
+#define CFG_NINJA_IMG_ATTACK_FRAMES 10
+#define CFG_NINJA_IMG_DEAD_PATH "assets/char/ninja/image/dead.png"
+#define CFG_NINJA_IMG_DEAD_FRAMES 10
+#define CFG_NINJA_IMG_HIT_PATH "assets/char/ninja/image/hit.png"
+#define CFG_NINJA_IMG_HIT_FRAMES 10
+#define CFG_NINJA_IMG_IDLE_PATH "assets/char/ninja/image/idle.png"
+#define CFG_NINJA_IMG_IDLE_FRAMES 10
+#define CFG_NINJA_IMG_WALK_PATH "assets/char/ninja/image/walk.png"
+#define CFG_NINJA_IMG_WALK_FRAMES 10
+#define CFG_NINJA_IMG_JUMP_PATH "assets/char/ninja/image/jump.png"
+#define CFG_NINJA_IMG_JUMP_FRAMES 10
+#define CFG_NINJA_STAT_ATTACK 11
+#define CFG_NINJA_STAT_DEFEND 4
+#define CFG_NINJA_STAT_HEALTH CFG_CHARACTER_HEALTH
 
 // Skeleton
 #define CFG_SKELETON_IMG_SCALE (CFG_CHARACTER_HEIGHT / (32.0f))
@@ -52,17 +71,20 @@
 #define CFG_SKELETON_STAT_HEALTH CFG_CHARACTER_HEALTH
 
 // Warrior
-#define CFG_WARRIOR_IMG_SWITCH_TIME 0.08f
-#define CFG_WARRIOR_IMG_ATTACK_PATH "assets/char/warrior/image/warrior_idle.png"
-#define CFG_WARRIOR_IMG_ATTACK_FRAMES
-#define CFG_WARRIOR_IMG_DEAD_PATH "assets/char/warrior/image/warrior_dead.png"
-#define CFG_WARRIOR_IMG_DEAD_FRAMES
-#define CFG_WARRIOR_IMG_HIT_PATH "assets/char/warrior/image/warrior_hit.png"
-#define CFG_WARRIOR_IMG_HIT_FRAMES
-#define CFG_WARRIOR_IMG_IDLE_PATH "assets/char/warrior/image/warrior_idle.png"
-#define CFG_WARRIOR_IMG_IDLE_FRAMES
-#define CFG_WARRIOR_IMG_WALK_PATH "assets/char/warrior/image/warrior_walk.png"
-#define CFG_WARRIOR_IMG_WALK_FRAMES
+#define CFG_WARRIOR_IMG_SCALE (CFG_CHARACTER_HEIGHT / (350.0f))
+#define CFG_WARRIOR_IMG_SWITCH_TIME 0.8f
+#define CFG_WARRIOR_IMG_ATTACK_PATH "assets/char/warrior/image/attack.png"
+#define CFG_WARRIOR_IMG_ATTACK_FRAMES 10
+#define CFG_WARRIOR_IMG_DEAD_PATH "assets/char/warrior/image/dead.png"
+#define CFG_WARRIOR_IMG_DEAD_FRAMES 10
+#define CFG_WARRIOR_IMG_HIT_PATH "assets/char/warrior/image/hit.png"
+#define CFG_WARRIOR_IMG_HIT_FRAMES 10
+#define CFG_WARRIOR_IMG_IDLE_PATH "assets/char/warrior/image/idle.png"
+#define CFG_WARRIOR_IMG_IDLE_FRAMES 10
+#define CFG_WARRIOR_IMG_WALK_PATH "assets/char/warrior/image/walk.png"
+#define CFG_WARRIOR_IMG_WALK_FRAMES 10
+#define CFG_WARRIOR_IMG_JUMP_PATH "assets/char/warrior/image/jump.png"
+#define CFG_WARRIOR_IMG_JUMP_FRAMES 13
 #define CFG_WARRIOR_STAT_ATTACK 10
 #define CFG_WARRIOR_STAT_DEFEND 5
 #define CFG_WARRIOR_STAT_HEALTH CFG_CHARACTER_HEALTH
