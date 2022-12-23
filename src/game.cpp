@@ -2,7 +2,6 @@
 #include <filesystem>
 #include "game.hpp"
 #include "grid.hpp"
-#include "character.hpp"
 #include "utils.hpp"
 #include "wall.hpp"
 
@@ -86,7 +85,7 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 1");
-            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
             p->setPosition(300, 400);
             // Bind movement keys to Player1
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
@@ -104,8 +103,44 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 2");
-            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setCharacter(Player::CHARACTER_TYPE::NINJA);
             p->setPosition(800, 400);
+            // Bind movement keys to Player2
+            p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
+            // Draw all objects associate with the player
+            for (auto &obj : p->getDrawableObjects())
+            {
+                this->drawableObjList.push_back(obj);
+            }
+        }
+        break;
+    }
+    case sf::Keyboard::Key::Num3:
+    {
+        auto p = this->addPlayer("Player3");
+        if (p)
+        {
+            DEBUG_PRINT("Created Player 3");
+            p->setCharacter(Player::CHARACTER_TYPE::KNIGHT);
+            p->setPosition(500, 400);
+            // Bind movement keys to Player3
+            p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
+            // Draw all objects associate with the player
+            for (auto &obj : p->getDrawableObjects())
+            {
+                this->drawableObjList.push_back(obj);
+            }
+        }
+        break;
+    }
+    case sf::Keyboard::Key::Num4:
+    {
+        auto p = this->addPlayer("Player4");
+        if (p)
+        {
+            DEBUG_PRINT("Created Player 4");
+            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setPosition(1000, 400);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
             // Draw all objects associate with the player

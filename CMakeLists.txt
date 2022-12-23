@@ -46,6 +46,7 @@ elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
      "${SFML_LIB_PATH}/libsfml-system.2.5.dylib"
      "${SFML_LIB_PATH}/libsfml-window.2.5.dylib"
     )
+    # TODO: Add asset to Debug for Xcode config
 elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
     message("Build on Linux")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")

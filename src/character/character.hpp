@@ -71,50 +71,39 @@ protected:
     void loadImage(State state, std::string filename, int frames, float switchTime);
 };
 
-class Warrior : public Character
+class Knight : public Character
 {
 public:
-    Warrior()
-    {
-        this->attack = CFG_WARRIOR_STAT_ATTACK;
-        this->defend = CFG_WARRIOR_STAT_DEFEND;
-        this->health = CFG_WARRIOR_STAT_HEALTH;
-    }
-    ~Warrior(){};
+    Knight();
+    ~Knight();
 };
 
-class Wizard : public Character
+class Ninja : public Character
 {
 public:
-    Wizard()
-    {
-        this->attack = 15;
-        this->defend = 3;
-        this->health = 100;
-    }
-    ~Wizard(){};
+    Ninja();
+    ~Ninja();
 };
 
 class Skeleton : public Character
 {
 public:
-    Skeleton() : Character()
-    {
-        this->loadImage(State::Idle, CFG_SKELETON_IMG_IDLE_PATH, CFG_SKELETON_IMG_IDLE_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Attack, CFG_SKELETON_IMG_ATTACK_PATH, CFG_SKELETON_IMG_ATTACK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Dead, CFG_SKELETON_IMG_DEAD_PATH, CFG_SKELETON_IMG_DEAD_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Hit, CFG_SKELETON_IMG_HIT_PATH, CFG_SKELETON_IMG_HIT_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Walk, CFG_SKELETON_IMG_WALK_PATH, CFG_SKELETON_IMG_WALK_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME);
-        this->loadImage(State::Jump, CFG_SKELETON_IMG_JUMP_PATH, CFG_SKELETON_IMG_JUMP_FRAMES, CFG_SKELETON_IMG_SWITCH_TIME * 3);
-        this->attack = CFG_SKELETON_STAT_ATTACK;
-        this->defend = CFG_SKELETON_STAT_DEFEND;
-        this->health = CFG_SKELETON_STAT_HEALTH;
-        this->scale = CFG_SKELETON_IMG_SCALE;
-        this->setState(State::Idle);
-    }
-    ~Skeleton(){};
+    Skeleton();
+    ~Skeleton();
+};
 
-private:
+class Warrior : public Character
+{
+public:
+    Warrior();
+    ~Warrior();
+};
+
+class Wizard : public Character
+{
+public:
+    Wizard();
+    ~Wizard();
 };
 
 #endif // _CHARACTER_HPP_

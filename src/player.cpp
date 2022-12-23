@@ -23,16 +23,22 @@ void Player::setCharacter(CHARACTER_TYPE c)
 {
     switch (c)
     {
+
+    case CHARACTER_TYPE::KNIGHT:
+        this->character = std::make_shared<Knight>();
+        break;
+    case CHARACTER_TYPE::NINJA:
+        this->character = std::make_shared<Ninja>();
+        break;
+    case CHARACTER_TYPE::SKELETON:
+        this->character = std::make_shared<Skeleton>();
+        break;
     case CHARACTER_TYPE::WARRIOR:
         this->character = std::make_shared<Warrior>();
         break;
     case CHARACTER_TYPE::WIZARD:
         this->character = std::make_shared<Wizard>();
         break;
-    case CHARACTER_TYPE::SKELETON:
-        this->character = std::make_shared<Skeleton>();
-        break;
-
     default:
         break;
     }
