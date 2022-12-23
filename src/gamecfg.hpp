@@ -15,7 +15,7 @@
 
 // Knight
 #define CFG_KNIGHT_IMG_SCALE (CFG_CHARACTER_HEIGHT / (350.0f))
-#define CFG_KNIGHT_IMG_SWITCH_TIME 1.0f
+#define CFG_KNIGHT_IMG_SWITCH_TIME 0.5f
 #define CFG_KNIGHT_IMG_ATTACK_PATH "assets/char/knight/image/attack.png"
 #define CFG_KNIGHT_IMG_ATTACK_FRAMES 10
 #define CFG_KNIGHT_IMG_DEAD_PATH "assets/char/knight/image/dead.png"
@@ -84,7 +84,7 @@
 #define CFG_WARRIOR_IMG_WALK_PATH "assets/char/warrior/image/walk.png"
 #define CFG_WARRIOR_IMG_WALK_FRAMES 10
 #define CFG_WARRIOR_IMG_JUMP_PATH "assets/char/warrior/image/jump.png"
-#define CFG_WARRIOR_IMG_JUMP_FRAMES 13
+#define CFG_WARRIOR_IMG_JUMP_FRAMES 10
 #define CFG_WARRIOR_STAT_ATTACK 10
 #define CFG_WARRIOR_STAT_DEFEND 5
 #define CFG_WARRIOR_STAT_HEALTH CFG_CHARACTER_HEALTH
