@@ -3,7 +3,7 @@
 #include "game.hpp"
 #include "grid.hpp"
 #include "utils.hpp"
-#include "wall.hpp"
+#include "map.hpp"
 
 #define SCREEN_WIDTH (1920)
 #define SCREEN_HEIGHT (1080)
@@ -22,22 +22,26 @@ Game::Game()
     // auto s = std::make_shared<Skeleton>();
     // this->drawableObjList.push_back(s);
 
+    auto map = std::make_shared<Map>(SCREEN_WIDTH, SCREEN_HEIGHT);
+    map->loadMap("assets/map/map1.txt", true);
+    this->drawableObjList.push_back(map);
+
     // Add grid to debug pixels
     auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 12, 21, 100.0f, sf::Color::Red);
     this->drawableObjList.push_back(grid);
 
     // Create test wall , we will create map later
-    auto wall = std::make_shared<Wall>(500.0f, 500.0f, 500.0f, 150.0f, sf::Color::Green);
-    this->drawableObjList.push_back(wall);
-    this->obstructionList.push_back(wall);
+    // auto wall = std::make_shared<Wall>(500.0f, 500.0f, 500.0f, 150.0f, sf::Color::Green);
+    // this->drawableObjList.push_back(wall);
+    // this->obstructionList.push_back(wall);
 
-    wall = std::make_shared<Wall>(200.0f, 900.0f, 1000.0f, 150.0f, sf::Color::Green);
-    this->drawableObjList.push_back(wall);
-    this->obstructionList.push_back(wall);
+    // wall = std::make_shared<Wall>(200.0f, 900.0f, 1000.0f, 150.0f, sf::Color::Green);
+    // this->drawableObjList.push_back(wall);
+    // this->obstructionList.push_back(wall);
 
-    wall = std::make_shared<Wall>(1200.0f, 700.0f, 400.0f, 150.0f, sf::Color::Green);
-    this->drawableObjList.push_back(wall);
-    this->obstructionList.push_back(wall);
+    // wall = std::make_shared<Wall>(1200.0f, 700.0f, 400.0f, 150.0f, sf::Color::Green);
+    // this->drawableObjList.push_back(wall);
+    // this->obstructionList.push_back(wall);
 }
 // Destructor
 Game::~Game()
@@ -253,7 +257,7 @@ void Game::run()
         this->update(deltaTime);
 
         // draw...
-        this->window->clear(sf::Color(0, 220, 220));
+        this->window->clear();
         this->draw();
         this->window->display();
     }
