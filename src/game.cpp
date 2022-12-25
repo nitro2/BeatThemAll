@@ -18,34 +18,16 @@ Game::Game()
     this->window->setFramerateLimit(60);
     this->window->setActive(false);
 
-    // Test
-    // auto s = std::make_shared<Skeleton>();
-    // this->drawableObjList.push_back(s);
-
+    // Add map background and walls
     auto map = std::make_shared<Map>(SCREEN_WIDTH, SCREEN_HEIGHT);
     map->loadMap("assets/map/map1.txt", true);
     this->drawableObjList.push_back(map);
+    auto m = map->getWallList();
+    this->obstructionList.insert(this->obstructionList.end(), m.begin(), m.end());
 
-    for (auto &wall : map->getWallList())
-    {
-        this->obstructionList.push_back(wall);
-    }
     // Add grid to debug pixels
     auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 12, 21, 100.0f, sf::Color::Red);
     this->drawableObjList.push_back(grid);
-
-    // Create test wall , we will create map later
-    // auto wall = std::make_shared<Wall>(500.0f, 500.0f, 500.0f, 150.0f, sf::Color::Green);
-    // this->drawableObjList.push_back(wall);
-    // this->obstructionList.push_back(wall);
-
-    // wall = std::make_shared<Wall>(200.0f, 900.0f, 1000.0f, 150.0f, sf::Color::Green);
-    // this->drawableObjList.push_back(wall);
-    // this->obstructionList.push_back(wall);
-
-    // wall = std::make_shared<Wall>(1200.0f, 700.0f, 400.0f, 150.0f, sf::Color::Green);
-    // this->drawableObjList.push_back(wall);
-    // this->obstructionList.push_back(wall);
 }
 // Destructor
 Game::~Game()
