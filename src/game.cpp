@@ -26,6 +26,10 @@ Game::Game()
     map->loadMap("assets/map/map1.txt", true);
     this->drawableObjList.push_back(map);
 
+    for (auto &wall : map->getWallList())
+    {
+        this->obstructionList.push_back(wall);
+    }
     // Add grid to debug pixels
     auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 12, 21, 100.0f, sf::Color::Red);
     this->drawableObjList.push_back(grid);

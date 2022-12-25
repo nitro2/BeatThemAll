@@ -14,6 +14,8 @@ public:
     void loadMap(const std::string mapFile, bool visibleWall);
     void render(std::shared_ptr<sf::RenderWindow> window);
 
+    std::vector<std::shared_ptr<Wall>> getWallList();
+
 private:
     sf::Texture texture;
     std::shared_ptr<sf::Sprite> background;

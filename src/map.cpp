@@ -83,3 +83,8 @@ void Map::render(std::shared_ptr<sf::RenderWindow> window)
         w->render(window);
     }
 }
+
+std::vector<std::shared_ptr<Wall>> Map::getWallList()
+{
+    return this->wallList;
+}
