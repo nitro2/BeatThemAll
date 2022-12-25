@@ -68,7 +68,7 @@ void Map::loadMap(const std::string mapFile, bool visibleWall)
             {
                 color = sf::Color(sf::Color::Transparent);
             }
-            auto wall = std::make_shared<Wall>(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height), color);
+            auto wall = std::make_shared<Wall>(static_cast<float>(x), static_cast<float>(y), static_cast<float>(w), static_cast<float>(h), color);
             this->wallList.push_back(wall);
         }
         file.close();
