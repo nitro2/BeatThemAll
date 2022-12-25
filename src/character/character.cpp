@@ -222,7 +222,7 @@ void Character::setState(State s)
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->body.setScale(this->scale, this->scale);
     // Set origin of image to bottom left corner, so we will have smoothly transition between Idle and Attack
-    this->body.setOrigin((float)(this->aniTexture[this->state].imgWidth / 2), (float)this->aniTexture[this->state].imgHeight);
+    this->body.setOrigin(static_cast<float>(this->aniTexture[this->state].imgWidth / 2), static_cast<float>(this->aniTexture[this->state].imgHeight));
     this->characterAnimation.update(0, 0.0f, this->faceRight);
     this->body.setTextureRect(this->characterAnimation.uvRect);
     DEBUG_PRINT(" state=" << this->state

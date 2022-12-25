@@ -37,10 +37,10 @@ Grid::Grid(sf::Vector2f position, int row_lines, int col_lines, float distance, 
              B
         */
         // Point A of line
-        m_vertices[row_lines * 2 + i * 2].color = sf::Color::Black;
+        m_vertices[row_lines * 2 + i * 2].color = color;
         m_vertices[row_lines * 2 + i * 2].position = sf::Vector2f(position.x + i * distance, position.y);
         // Point B of line
-        m_vertices[row_lines * 2 + i * 2 + 1].color = sf::Color::Black;
+        m_vertices[row_lines * 2 + i * 2 + 1].color = color;
         m_vertices[row_lines * 2 + i * 2 + 1].position = sf::Vector2f(position.x + i * distance, position.y + height);
     }
 }

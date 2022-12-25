@@ -72,7 +72,7 @@ sf::Vector2f Player::getPosition()
 
 void Player::takeDamage(int damage)
 {
-    int actual_damage = (float)damage * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend))));
+    int actual_damage = static_cast<int>(static_cast<float>(damage) * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend)))));
     std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
 }
