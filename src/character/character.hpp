@@ -62,7 +62,7 @@ protected:
     float scale;
 
     Animation characterAnimation;
-    sf::Sprite body;
+    sf::Sprite characterImg;
     bool faceRight;
 
     std::shared_ptr<DebugRectangle> debugShape; // Debug only
