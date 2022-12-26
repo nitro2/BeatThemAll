@@ -70,7 +70,7 @@ sf::Vector2f Player::getPosition()
     return this->character->getPosition();
 }
 
-void Player::takeDamage(int damage)
+void Player::beHit(int damage)
 {
     int actual_damage = static_cast<int>(static_cast<float>(damage) * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend)))));
     std::cout << this->name << " take " << damage
@@ -96,7 +96,7 @@ void Player::test()
 {
     for (auto i = 0; i < 100; i++)
     {
-        this->takeDamage(i);
+        this->beHit(i);
         this->printStat();
     }
 }
@@ -123,6 +123,30 @@ void Player::attackAct()
 {
     // DEBUG_PRINT(this->name);
     this->character->attackAct();
+}
+
+bool Player::isAttacking()
+{
+    return this->character->getState() == Character::State::Attack;
+}
+
+sf::FloatRect Player::getAttackRegion()
+{
+    sf::FloatRect a = this->character->getBounds();
+    // Attack region is faceup 1/3 of width
+    if (this->character->isFaceRight())
+    {
+        return sf::FloatRect(a.left + a.width / 3.0, a.top, a.width, a.height);
+    }
+    else
+    {
+        return sf::FloatRect(a.left - a.width / 3.0, a.top, a.width, a.height);
+    }
+}
+
+sf::FloatRect Player::getBody()
+{
+    return this->character->getBounds();
 }
 
 void Player::bindKey(sf::Keyboard::Key kLeft, sf::Keyboard::Key kRight, sf::Keyboard::Key kJump, sf::Keyboard::Key kAttack)

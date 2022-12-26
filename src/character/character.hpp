@@ -11,7 +11,7 @@ public:
     Character();
     ~Character(){};
 
-    enum State
+    typedef enum State
     {
         Idle = 0,
         Walk,
@@ -20,7 +20,7 @@ public:
         Dead,
         Jump,
         MaxState
-    };
+    } State;
 
     int getAttack() { return this->attack; };
     int getDefend() { return this->defend; };
@@ -28,6 +28,7 @@ public:
 
     void setPosition(float x, float y);
     sf::FloatRect getBounds() override;
+    bool isFaceRight();
 
     void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
     void movementAct(float delta_x, float delta_y);
@@ -39,6 +40,7 @@ public:
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
     void setState(State s);
+    State getState();
 
 protected:
     int attack;
@@ -66,6 +68,7 @@ protected:
     bool faceRight;
 
     std::shared_ptr<DebugRectangle> body; // Body is used to detect hit region when a player is hit/attacked.
+    std::shared_ptr<DebugRectangle> attackRegion;
 
     // Image handle
     void loadImage(State state, std::string filename, int frames, float switchTime);

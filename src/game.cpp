@@ -163,9 +163,9 @@ void Game::update(float deltaTime)
         }
     }
 
-    // Character will be death if moving outside of the screen
     for (auto &p : this->playerList)
     {
+        // Character will be death if moving outside of the screen
         if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
         {
             // DEBUG_PRINT("Character is outside");
@@ -174,6 +174,23 @@ void Game::update(float deltaTime)
                 this->drawableObjList.erase(std::remove(this->drawableObjList.begin(), this->drawableObjList.end(), d), this->drawableObjList.end());
             }
             p->beKilled();
+        }
+
+        // Check if the player is attacking
+        if (p->isAttacking())
+        {
+            // Check if any enemy being hit in the attack region
+            for (auto &e : this->playerList)
+            {
+                if (p->getName() != e->getName())
+                {
+                    if (p->getAttackRegion().intersects(e->getBody()))
+                    {
+                        e->beHit(p->getAttack());
+                        DEBUG_PRINT(p->getName() << " attacked " << e->getName());
+                    }
+                }
+            }
         }
     }
 }

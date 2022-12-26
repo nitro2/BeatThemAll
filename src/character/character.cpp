@@ -16,7 +16,7 @@ Character::Character()
 
     /* Add body of character */
     this->body = std::make_shared<DebugRectangle>(
-        this->x, this->y, this->width, this->height, sf::Color(255, 0, 0, 100));
+        this->x, this->y, this->width, this->height, sf::Color(0, 255, 0, 100));
 }
 
 void Character::setPosition(float x, float y)
@@ -30,6 +30,11 @@ void Character::setPosition(float x, float y)
 sf::FloatRect Character::getBounds()
 {
     return sf::FloatRect(this->x - (this->width / 2.0f), this->y - this->height, this->width, this->height);
+}
+
+bool Character::isFaceRight()
+{
+    return this->faceRight;
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -228,4 +233,9 @@ void Character::setState(State s)
     DEBUG_PRINT(" state=" << this->state
                           << " x=" << x
                           << " y=" << y);
+}
+
+Character::State Character::getState()
+{
+    return this->state;
 }
