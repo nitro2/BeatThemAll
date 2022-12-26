@@ -70,11 +70,20 @@ sf::Vector2f Player::getPosition()
     return this->character->getPosition();
 }
 
-void Player::beHit(int damage)
+void Player::beHit(int damage, float hitPower)
 {
     int actual_damage = static_cast<int>(static_cast<float>(damage) * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend)))));
     std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
+    this->character->setState(Character::State::Hit);
+    if (this->character->isFaceRight())
+    {
+        this->character->move(-hitPower, 0.0f);
+    }
+    else
+    {
+        this->character->move(hitPower, 0.0f);
+    }
 }
 
 void Player::beKilled()
@@ -96,7 +105,7 @@ void Player::test()
 {
     for (auto i = 0; i < 100; i++)
     {
-        this->beHit(i);
+        this->beHit(i, CFG_HIT_POWER);
         this->printStat();
     }
 }

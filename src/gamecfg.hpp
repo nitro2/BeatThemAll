@@ -5,6 +5,8 @@
 #define CFG_GRAVITATION_ACCELERATION 981.0f
 #define CFG_GRAVITY_MAX_FALLING 1000.0f
 
+#define CFG_HIT_POWER 4.5f // Move back pixels if being hit
+
 // Common character config
 #define CFG_CHARACTER_HEALTH 100
 #define CFG_CHARACTER_WIDTH 80.0f

@@ -50,7 +50,7 @@ public:
     sf::FloatRect getBody();
 
     // Get hit animation
-    void beHit(int damage);
+    void beHit(int damage, float hitPower);
     void beKilled();
 
     std::vector<std::shared_ptr<GameObject>> getDrawableObjects();

@@ -186,7 +186,7 @@ void Game::update(float deltaTime)
                 {
                     if (p->getAttackRegion().intersects(e->getBody()))
                     {
-                        e->beHit(p->getAttack());
+                        e->beHit(p->getAttack(), CFG_HIT_POWER);
                         DEBUG_PRINT(p->getName() << " attacked " << e->getName());
                     }
                 }
