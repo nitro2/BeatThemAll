@@ -76,14 +76,7 @@ void Player::beHit(int damage, float hitPower)
     std::cout << this->name << " take " << damage
               << " but receive " << actual_damage << std::endl;
     this->character->setState(Character::State::Hit);
-    if (this->character->isFaceRight())
-    {
-        this->character->move(-hitPower, 0.0f);
-    }
-    else
-    {
-        this->character->move(hitPower, 0.0f);
-    }
+    this->character->move(hitPower, 0.0f);
 }
 
 void Player::beKilled()
