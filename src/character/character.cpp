@@ -14,8 +14,8 @@ Character::Character()
     this->scale = 1.0f;
     this->ableJump = false;
 
-    /* Add debug shape */
-    this->debugShape = std::make_shared<DebugRectangle>(
+    /* Add body of character */
+    this->body = std::make_shared<DebugRectangle>(
         this->x, this->y, this->width, this->height, sf::Color(255, 0, 0, 100));
 }
 
@@ -24,7 +24,7 @@ void Character::setPosition(float x, float y)
     this->x = x;
     this->y = y;
     this->characterImg.setPosition(this->x, this->y);
-    this->debugShape->setPosition(x, y);
+    this->body->setPosition(x, y);
 }
 
 sf::FloatRect Character::getBounds()
@@ -114,7 +114,7 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
     this->velocity.x *= 0.9f;
 
     this->characterImg.setPosition(this->x, this->y);
-    this->debugShape->setPosition(this->x, this->y);
+    this->body->setPosition(this->x, this->y);
     // DEBUG_PRINT(" state=" << this->state
     //                       << " x=" << x
     //                       << " y=" << y
@@ -187,7 +187,7 @@ void Character::attackAct()
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
 {
     window->draw(this->characterImg);
-    this->debugShape->render(window);
+    this->body->render(window);
 }
 
 void Character::setState(State s)

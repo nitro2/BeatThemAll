@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
 #include "animation.hpp"
-#include "debug/box.hpp" // Debug box
+#include "debug/box.hpp"
 class Character : public GameObject
 {
 public:
@@ -65,7 +65,7 @@ protected:
     sf::Sprite characterImg;
     bool faceRight;
 
-    std::shared_ptr<DebugRectangle> debugShape; // Debug only
+    std::shared_ptr<DebugRectangle> body; // Body is used to detect hit region when a player is hit/attacked.
 
     // Image handle
     void loadImage(State state, std::string filename, int frames, float switchTime);
