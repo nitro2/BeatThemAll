@@ -14,22 +14,27 @@ Character::Character()
     this->scale = 1.0f;
     this->ableJump = false;
 
-    /* Add debug shape */
-    this->debugShape = std::make_shared<DebugRectangle>(
-        this->x, this->y, this->width, this->height, sf::Color(255, 0, 0, 100));
+    /* Add body of character */
+    this->body = std::make_shared<DebugRectangle>(
+        this->x, this->y, this->width, this->height, sf::Color(0, 255, 0, 100));
 }
 
 void Character::setPosition(float x, float y)
 {
     this->x = x;
     this->y = y;
-    this->body.setPosition(this->x, this->y);
-    this->debugShape->setPosition(x, y);
+    this->characterImg.setPosition(this->x, this->y);
+    this->body->setPosition(x, y);
 }
 
 sf::FloatRect Character::getBounds()
 {
     return sf::FloatRect(this->x - (this->width / 2.0f), this->y - this->height, this->width, this->height);
+}
+
+bool Character::isFaceRight()
+{
+    return this->faceRight;
 }
 
 void Character::loadImage(State state, std::string filename, int frames, float switchTime)
@@ -44,7 +49,7 @@ void Character::loadImage(State state, std::string filename, int frames, float s
 void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList)
 {
     this->characterAnimation.update(0, deltaTime, this->faceRight);
-    this->body.setTextureRect(this->characterAnimation.uvRect);
+    this->characterImg.setTextureRect(this->characterAnimation.uvRect);
 
     if ((this->state != State::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
@@ -113,8 +118,8 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
     }
     this->velocity.x *= 0.9f;
 
-    this->body.setPosition(this->x, this->y);
-    this->debugShape->setPosition(this->x, this->y);
+    this->characterImg.setPosition(this->x, this->y);
+    this->body->setPosition(this->x, this->y);
     // DEBUG_PRINT(" state=" << this->state
     //                       << " x=" << x
     //                       << " y=" << y
@@ -124,7 +129,7 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
 
 void Character::movementAct(float delta_x, float delta_y)
 {
-    // this->body.move(delta_x, delta_y);
+    // this->characterImg.move(delta_x, delta_y);
     if (delta_x > 0.0f)
     {
         this->faceRight = true;
@@ -186,8 +191,9 @@ void Character::attackAct()
 
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
 {
-    window->draw(this->body);
-    this->debugShape->render(window);
+    window->draw(this->characterImg);
+    // TODO: Comment this to not show debug body rectangle
+    // this->body->render(window);
 }
 
 void Character::setState(State s)
@@ -216,16 +222,21 @@ void Character::setState(State s)
 
     // Change image with to animation if needed
     AnimationTexture_t *ani = &aniTexture[s];
-    this->body.setTexture(aniTexture[this->state].texture);
+    this->characterImg.setTexture(aniTexture[this->state].texture);
     this->characterAnimation.init(&ani->texture, sf::Vector2u(ani->frames, 1), ani->switchTime);
-    this->body.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
+    this->characterImg.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
-    this->body.setScale(this->scale, this->scale);
+    this->characterImg.setScale(this->scale, this->scale);
     // Set origin of image to bottom left corner, so we will have smoothly transition between Idle and Attack
-    this->body.setOrigin(static_cast<float>(this->aniTexture[this->state].imgWidth / 2), static_cast<float>(this->aniTexture[this->state].imgHeight));
+    this->characterImg.setOrigin(static_cast<float>(this->aniTexture[this->state].imgWidth / 2), static_cast<float>(this->aniTexture[this->state].imgHeight));
     this->characterAnimation.update(0, 0.0f, this->faceRight);
-    this->body.setTextureRect(this->characterAnimation.uvRect);
+    this->characterImg.setTextureRect(this->characterAnimation.uvRect);
     DEBUG_PRINT(" state=" << this->state
                           << " x=" << x
                           << " y=" << y);
+}
+
+Character::State Character::getState()
+{
+    return this->state;
 }

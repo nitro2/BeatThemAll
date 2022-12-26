@@ -45,9 +45,12 @@ public:
 
     // Attack animation
     void attackAct();
+    bool isAttacking();
+    sf::FloatRect getAttackRegion();
+    sf::FloatRect getBody();
 
     // Get hit animation
-    void takeDamage(int damage);
+    void beHit(int damage, float hitPower);
     void beKilled();
 
     std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
