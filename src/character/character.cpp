@@ -192,7 +192,8 @@ void Character::attackAct()
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
 {
     window->draw(this->characterImg);
-    this->body->render(window);
+    // TODO: Comment this to not show debug body rectangle
+    // this->body->render(window);
 }
 
 void Character::setState(State s)

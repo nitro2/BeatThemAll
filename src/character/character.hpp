@@ -1,10 +1,13 @@
 #ifndef _CHARACTER_HPP_
 #define _CHARACTER_HPP_
 
+#include <math.h>
+
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
 #include "animation.hpp"
 #include "debug/box.hpp"
+
 class Character : public GameObject
 {
 public:
