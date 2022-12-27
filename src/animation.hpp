@@ -3,7 +3,7 @@
 #define _ANIMATION_HPP_
 
 #include "SFML/Graphics.hpp"
-
+#include "utils.hpp"
 class Animation
 {
 public:
