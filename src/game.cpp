@@ -189,6 +189,7 @@ void Game::update(float deltaTime)
                         float hitPower = (p->getPosition().x < e->getPosition().x) ? CFG_HIT_POWER : -CFG_HIT_POWER;
                         e->beHit(p->getAttack(), hitPower);
                         DEBUG_PRINT(p->getName() << " attacked " << e->getName());
+                        // TODO: add beHit to later process to make sure we have equal chance of attacking process, not FIFO
                     }
                 }
             }

@@ -196,19 +196,24 @@ void Character::render(std::shared_ptr<sf::RenderWindow> window)
     // this->body->render(window);
 }
 
-void Character::setState(State s)
+bool Character::setState(State s)
 {
     // No update if state not change
     if (this->state == s)
     {
-        return;
+        return false;
     }
 
     switch (s)
     {
+    case State::Jump:
     case State::Walk:
-        break;
     case State::Attack:
+        // Cannot move or attack while being hit
+        if (this->state == State::Hit)
+        {
+            return false;
+        }
         break;
     case State::Hit:
         break;
@@ -234,6 +239,7 @@ void Character::setState(State s)
     DEBUG_PRINT(" state=" << this->state
                           << " x=" << x
                           << " y=" << y);
+    return true;
 }
 
 Character::State Character::getState()

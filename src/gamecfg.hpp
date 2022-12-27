@@ -16,7 +16,7 @@
 #define CFG_CHARACTER_JUMP_HEIGHT (1.5f * CFG_CHARACTER_HEIGHT)
 
 // Knight
-#define CFG_KNIGHT_IMG_SCALE roundf((CFG_CHARACTER_HEIGHT / (350.0f)) * 100) / 100 // Round to 2 decimal point
+#define CFG_KNIGHT_IMG_SCALE roundf((CFG_CHARACTER_HEIGHT / (350.0f)) * 10) / 10 // Round to 2 decimal point
 #define CFG_KNIGHT_IMG_SWITCH_TIME 0.5f
 #define CFG_KNIGHT_IMG_ATTACK_PATH "assets/char/knight/image/attack.png"
 #define CFG_KNIGHT_IMG_ATTACK_FRAMES 10

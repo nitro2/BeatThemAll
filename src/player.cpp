@@ -72,10 +72,14 @@ sf::Vector2f Player::getPosition()
 
 void Player::beHit(int damage, float hitPower)
 {
-    int actual_damage = static_cast<int>(static_cast<float>(damage) * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend)))));
-    std::cout << this->name << " take " << damage
-              << " but receive " << actual_damage << std::endl;
-    this->character->setState(Character::State::Hit);
+    // Only take damge 1 time
+    if (this->character->setState(Character::State::Hit))
+    {
+        int actual_damage = static_cast<int>(static_cast<float>(damage) * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend)))));
+        this->health -= actual_damage;
+        std::cout << this->name << " take " << damage
+                  << " but receive " << actual_damage << "damage. Health=" << this->health << std::endl;
+    }
     this->character->move(hitPower, 0.0f);
 }
 

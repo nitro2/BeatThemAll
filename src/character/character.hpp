@@ -42,7 +42,7 @@ public:
     void attackAct();
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
-    void setState(State s);
+    bool setState(State s);
     State getState();
 
 protected:
