@@ -52,6 +52,7 @@ public:
     // Get hit animation
     void beHit(int damage, float hitPower);
     void beKilled();
+    void beDestroyed();
 
     std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
 

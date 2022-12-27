@@ -94,7 +94,7 @@ void Game::handleButton(const sf::Event &event)
         {
             DEBUG_PRINT("Created Player 2");
             p->setCharacter(Player::CHARACTER_TYPE::NINJA);
-            p->setPosition(800, 400);
+            p->setPosition(800, 600);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
             // Draw all objects associate with the player
@@ -188,11 +188,17 @@ void Game::update(float deltaTime)
                     {
                         float hitPower = (p->getPosition().x < e->getPosition().x) ? CFG_HIT_POWER : -CFG_HIT_POWER;
                         e->beHit(p->getAttack(), hitPower);
-                        DEBUG_PRINT(p->getName() << " attacked " << e->getName());
+                        // DEBUG_PRINT(p->getName() << " attacked " << e->getName());
                         // TODO: add beHit to later process to make sure we have equal chance of attacking process, not FIFO
                     }
                 }
             }
+        }
+
+        if (p->getHealth() <= 0)
+        {
+            p->beKilled();
+            // DEBUG_PRINT(p->getName() << " is dead");
         }
     }
 }

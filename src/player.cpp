@@ -85,6 +85,11 @@ void Player::beHit(int damage, float hitPower)
 
 void Player::beKilled()
 {
+    this->character->setState(Character::State::Dead);
+}
+
+void Player::beDestroyed()
+{
     this->health = 0;
     this->destroyCharacter();
 }
