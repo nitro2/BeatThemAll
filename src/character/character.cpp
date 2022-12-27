@@ -102,7 +102,7 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
 
             this->x += pushBack.x;
             this->y += pushBack.y;
-            if (pushBack.y)
+            if (pushBack.y < 0)
             {
                 this->velocity.y = 0;
                 this->ableJump = true;
