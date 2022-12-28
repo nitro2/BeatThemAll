@@ -14,6 +14,15 @@ public:
     Character();
     ~Character(){};
 
+    enum class Type
+    {
+        KNIGHT,
+        NINJA,
+        SKELETON,
+        WARRIOR,
+        WIZARD
+    };
+
     typedef enum State
     {
         // States that have images

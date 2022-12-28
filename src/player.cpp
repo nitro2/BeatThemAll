@@ -18,31 +18,31 @@ Player::Player(std::string name) : GameObject(0, 0, CFG_CHARACTER_WIDTH, CFG_CHA
         this->x, this->y, this->width, this->height, sf::Color(0, 255, 0, 100));
 }
 
-Player::Player(std::string name, CHARACTER_TYPE c) : Player(name)
+Player::Player(std::string name, Character::Type c) : Player(name)
 {
     this->setCharacter(c);
 }
 
 Player::~Player(){};
 
-void Player::setCharacter(CHARACTER_TYPE c)
+void Player::setCharacter(Character::Type c)
 {
     switch (c)
     {
 
-    case CHARACTER_TYPE::KNIGHT:
+    case Character::Type::KNIGHT:
         this->character = std::make_shared<Knight>();
         break;
-    case CHARACTER_TYPE::NINJA:
+    case Character::Type::NINJA:
         this->character = std::make_shared<Ninja>();
         break;
-    case CHARACTER_TYPE::SKELETON:
+    case Character::Type::SKELETON:
         this->character = std::make_shared<Skeleton>();
         break;
-    case CHARACTER_TYPE::WARRIOR:
+    case Character::Type::WARRIOR:
         this->character = std::make_shared<Warrior>();
         break;
-    case CHARACTER_TYPE::WIZARD:
+    case Character::Type::WIZARD:
         this->character = std::make_shared<Wizard>();
         break;
     default:

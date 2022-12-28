@@ -75,7 +75,7 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 1");
-            p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
+            p->setCharacter(Character::Type::WARRIOR);
             p->setPosition(300, 400);
             // Bind movement keys to Player1
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
@@ -89,7 +89,7 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 2");
-            p->setCharacter(Player::CHARACTER_TYPE::NINJA);
+            p->setCharacter(Character::Type::NINJA);
             p->setPosition(800, 600);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
@@ -103,7 +103,7 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 3");
-            p->setCharacter(Player::CHARACTER_TYPE::KNIGHT);
+            p->setCharacter(Character::Type::KNIGHT);
             p->setPosition(500, 400);
             // Bind movement keys to Player3
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
@@ -117,7 +117,7 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 4");
-            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setCharacter(Character::Type::SKELETON);
             p->setPosition(1000, 400);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);

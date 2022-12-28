@@ -7,17 +7,8 @@
 class Player : public GameObject
 {
 public:
-    enum class CHARACTER_TYPE
-    {
-        KNIGHT,
-        NINJA,
-        SKELETON,
-        WARRIOR,
-        WIZARD
-    };
-
     Player(std::string name);
-    Player(std::string name, CHARACTER_TYPE c);
+    Player(std::string name, Character::Type c);
     ~Player();
 
     std::string getName() { return this->name; };
@@ -28,7 +19,7 @@ public:
     void printStat();
 
     void setName(std::string name) { this->name = name; };
-    void setCharacter(CHARACTER_TYPE c);
+    void setCharacter(Character::Type c);
     void destroyCharacter();
     void setPosition(float x, float y);
     sf::Vector2f getPosition();
