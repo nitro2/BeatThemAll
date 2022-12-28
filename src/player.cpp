@@ -91,7 +91,9 @@ void Player::beKilled()
 void Player::beDestroyed()
 {
     this->health = 0;
+    DEBUG_PRINT("");
     this->destroyCharacter();
+    DEBUG_PRINT("");
 }
 
 void Player::printStat()
@@ -204,4 +206,14 @@ void Player::checkKeyPress()
 std::vector<std::shared_ptr<GameObject>> Player::getDrawableObjects()
 {
     return this->drawableObjList;
+}
+
+void Player::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList)
+{
+    this->character->update(deltaTime, obstructionList);
+}
+
+void Player::render(std::shared_ptr<sf::RenderWindow> window)
+{
+    this->character->render(window);
 }

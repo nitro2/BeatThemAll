@@ -4,7 +4,7 @@
 #include "gameobject.hpp"
 #include "character.hpp"
 
-class Player
+class Player : public GameObject
 {
 public:
     enum class CHARACTER_TYPE
@@ -39,8 +39,8 @@ public:
     void checkKeyPress();
 
     // Movement
-    void moveLeft();
-    void moveRight();
+    void moveLeft() override;
+    void moveRight() override;
     void jump();
 
     bool isDead();
@@ -59,6 +59,9 @@ public:
 
     // Just for debugging
     void test();
+
+    void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
+    void render(std::shared_ptr<sf::RenderWindow> window) override;
 
 private:
     std::string name;
