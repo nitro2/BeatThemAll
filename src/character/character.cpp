@@ -9,7 +9,7 @@ Character::Character()
     this->y = 0;
     this->velocity.x = 0;
     this->velocity.y = 0;
-    this->state = State::MaxState; // Dummy init
+    this->state = State::Init; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
     this->ableJump = false;
@@ -53,8 +53,16 @@ void Character::update(float deltaTime, std::vector<std::shared_ptr<GameObject>>
 
     if ((this->state != State::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
-        // Return the character to idle state after do any animation
-        this->setState(State::Idle);
+        if (this->state == State::Dead)
+        {
+            this->setState(State::End);
+            return;
+        }
+        else
+        {
+            // Return the character to idle state after do any animation
+            this->setState(State::Idle);
+        }
     }
 
     /*
@@ -196,39 +204,43 @@ void Character::render(std::shared_ptr<sf::RenderWindow> window)
     // this->body->render(window);
 }
 
-bool Character::setState(State s)
+bool Character::setState(State newState)
 {
     // No update if state not change
-    if (this->state == s)
+    if (this->state == newState)
     {
         return false;
     }
 
-    switch (s)
+    switch (this->state)
     {
-    case State::Jump:
-    case State::Walk:
-    case State::Attack:
-        // Cannot move or attack while being hit
-        if (this->state == State::Hit)
+    case State::Hit:
+        // Cannot jump, move or attack while being hit
+        if ((newState == State::Jump) || (newState == State::Walk) || (newState == State::Attack))
         {
             return false;
         }
-        break;
-    case State::Hit:
-        break;
     case State::Dead:
-        break;
+        // Do not allow user to change state if already dead
+        if (newState < State::MaxImageStates)
+        {
+            return false;
+        }
+    case State::Jump:
+    case State::Walk:
+    case State::Attack:
     case State::Idle:
     default:
         break;
     }
-    this->state = s;
+    this->state = newState;
+    bool isRepeat = (newState == State::Idle) ? true : false;
 
     // Change image with to animation if needed
-    AnimationTexture_t *ani = &aniTexture[s];
+    AnimationTexture_t *ani = &aniTexture[newState];
     this->characterImg.setTexture(aniTexture[this->state].texture);
     this->characterAnimation.init(&ani->texture, sf::Vector2u(ani->frames, 1), ani->switchTime);
+    this->characterAnimation.setRepeat(isRepeat);
     this->characterImg.setTextureRect(sf::IntRect(0, 0, ani->imgWidth, ani->imgHeight));
     // In case the image is smaller than expected rectangle, we have to scale it up
     this->characterImg.setScale(this->scale, this->scale);

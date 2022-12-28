@@ -43,9 +43,10 @@ public:
     void moveRight();
     void jump();
 
+    bool isDead();
+    bool isAttacking();
     // Attack animation
     void attackAct();
-    bool isAttacking();
     sf::FloatRect getAttackRegion();
     sf::FloatRect getBody();
 

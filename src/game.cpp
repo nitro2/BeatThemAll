@@ -165,14 +165,20 @@ void Game::update(float deltaTime)
 
     for (auto &p : this->playerList)
     {
-        // Character will be death if moving outside of the screen
-        if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
+        if (p->isDead())
         {
-            // DEBUG_PRINT("Character is outside");
             for (auto &d : p->getDrawableObjects())
             {
                 this->drawableObjList.erase(std::remove(this->drawableObjList.begin(), this->drawableObjList.end(), d), this->drawableObjList.end());
             }
+            p->beDestroyed();
+            continue;
+        }
+
+        // Character will be death if moving outside of the screen
+        if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
+        {
+            // DEBUG_PRINT("Character is outside");
             p->beKilled();
         }
 

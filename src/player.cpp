@@ -130,15 +130,21 @@ void Player::jump()
     this->character->jump();
 }
 
-void Player::attackAct()
+bool Player::isDead()
 {
-    // DEBUG_PRINT(this->name);
-    this->character->attackAct();
+    // Return only if the Dead animation finishes
+    return this->character->getState() == Character::State::End;
 }
 
 bool Player::isAttacking()
 {
     return this->character->getState() == Character::State::Attack;
+}
+
+void Player::attackAct()
+{
+    // DEBUG_PRINT(this->name);
+    this->character->attackAct();
 }
 
 sf::FloatRect Player::getAttackRegion()

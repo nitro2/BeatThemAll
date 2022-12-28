@@ -16,13 +16,16 @@ public:
 
     typedef enum State
     {
+        // States that have images
         Idle = 0,
         Walk,
         Attack,
         Hit,
-        Dead,
         Jump,
-        MaxState
+        Dead,
+        MaxImageStates,
+        Init = MaxImageStates,
+        End
     } State;
 
     int getAttack() { return this->attack; };
@@ -63,7 +66,7 @@ protected:
         unsigned int imgHeight;
         float switchTime;
     } AnimationTexture_t;
-    AnimationTexture_t aniTexture[State::MaxState];
+    AnimationTexture_t aniTexture[State::MaxImageStates];
     float scale;
 
     Animation characterAnimation;
