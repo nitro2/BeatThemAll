@@ -29,6 +29,7 @@ public:
     virtual void moveDown();
 
     virtual void render(std::shared_ptr<sf::RenderWindow> window);
+    virtual void update();
 
     virtual std::string positionToString();
 

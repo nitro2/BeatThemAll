@@ -2,11 +2,12 @@
 #include "animation.hpp"
 Animation::Animation()
 {
-    uvRect.left = 0;
-    uvRect.top = 0;
-    uvRect.width = 0;
-    uvRect.height = 0;
+    this->uvRect.left = 0;
+    this->uvRect.top = 0;
+    this->uvRect.width = 0;
+    this->uvRect.height = 0;
     this->isFinish = false;
+    this->isRepeat = false;
 }
 
 void Animation::init(sf::Texture *texture, sf::Vector2u imageCount, float switchTime)
@@ -14,11 +15,16 @@ void Animation::init(sf::Texture *texture, sf::Vector2u imageCount, float switch
     this->imageCount = imageCount;
     this->switchTime = switchTime;
     this->isFinish = false;
-    totalTime = 0.0f;
-    currentImage.x = 0;
+    this->totalTime = 0.0f;
+    this->currentImage.x = 0;
 
-    uvRect.width = texture->getSize().x / imageCount.x;
-    uvRect.height = texture->getSize().y / imageCount.y;
+    this->uvRect.width = texture->getSize().x / this->imageCount.x;
+    this->uvRect.height = texture->getSize().y / this->imageCount.y;
+}
+
+void Animation::setRepeat(bool isRepeat)
+{
+    this->isRepeat = isRepeat;
 }
 
 Animation::~Animation()
@@ -27,31 +33,34 @@ Animation::~Animation()
 
 void Animation::update(int row, float deltaTime, bool faceRight)
 {
-    currentImage.y = row;
-    totalTime += deltaTime;
-    if (totalTime >= switchTime)
+    if (!this->isFinish || this->isRepeat)
     {
-        totalTime -= switchTime;
-        currentImage.x++;
-        if (currentImage.x >= imageCount.x)
+        this->currentImage.y = row;
+        this->totalTime += deltaTime;
+        if (this->totalTime >= this->switchTime)
         {
-            currentImage.x = 0;
-            this->isFinish = true;
+            this->totalTime -= this->switchTime;
+            this->currentImage.x++;
+            if (this->currentImage.x >= this->imageCount.x)
+            {
+                this->currentImage.x = 0;
+                this->isFinish = true;
+            }
         }
-    }
 
-    if (faceRight)
-    {
-        uvRect.left = currentImage.x * uvRect.width;
-        uvRect.width = abs(uvRect.width);
-    }
-    else
-    {
-        uvRect.left = (currentImage.x + 1) * abs(uvRect.width);
-        uvRect.width = -abs(uvRect.width);
-    }
+        if (faceRight)
+        {
+            this->uvRect.left = this->currentImage.x * this->uvRect.width;
+            this->uvRect.width = abs(this->uvRect.width);
+        }
+        else
+        {
+            this->uvRect.left = (this->currentImage.x + 1) * abs(this->uvRect.width);
+            this->uvRect.width = -abs(this->uvRect.width);
+        }
 
-    uvRect.top = currentImage.y * uvRect.height;
+        this->uvRect.top = this->currentImage.y * this->uvRect.height;
+    }
 }
 
 bool Animation::isAnimationFinish()

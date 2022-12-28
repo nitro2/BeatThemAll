@@ -21,13 +21,13 @@ Game::Game()
     // Add map background and walls
     auto map = std::make_shared<Map>(SCREEN_WIDTH, SCREEN_HEIGHT);
     map->loadMap("assets/map/map1.txt", false);
-    this->drawableObjList.push_back(map);
+    this->gameObjList.push_back(map);
     auto m = map->getWallList();
     this->obstructionList.insert(this->obstructionList.end(), m.begin(), m.end());
 
     // Add grid to debug pixels
     auto grid = std::make_shared<Grid>(sf::Vector2f(0, 0), 12, 21, 100.0f, sf::Color::Red);
-    this->drawableObjList.push_back(grid);
+    this->gameObjList.push_back(grid);
 }
 // Destructor
 Game::~Game()
@@ -75,15 +75,11 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 1");
-            p->setCharacter(Player::CHARACTER_TYPE::WARRIOR);
+            p->setCharacter(Character::Type::WARRIOR);
             p->setPosition(300, 400);
             // Bind movement keys to Player1
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
-            // Draw all objects associate with the player
-            for (auto &obj : p->getDrawableObjects())
-            {
-                this->drawableObjList.push_back(obj);
-            }
+            this->gameObjList.push_back(p);
         }
         break;
     }
@@ -93,15 +89,11 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 2");
-            p->setCharacter(Player::CHARACTER_TYPE::NINJA);
-            p->setPosition(800, 400);
+            p->setCharacter(Character::Type::NINJA);
+            p->setPosition(800, 600);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
-            // Draw all objects associate with the player
-            for (auto &obj : p->getDrawableObjects())
-            {
-                this->drawableObjList.push_back(obj);
-            }
+            this->gameObjList.push_back(p);
         }
         break;
     }
@@ -111,15 +103,11 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 3");
-            p->setCharacter(Player::CHARACTER_TYPE::KNIGHT);
+            p->setCharacter(Character::Type::KNIGHT);
             p->setPosition(500, 400);
             // Bind movement keys to Player3
             p->bindKey(sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::W, sf::Keyboard::Key::F);
-            // Draw all objects associate with the player
-            for (auto &obj : p->getDrawableObjects())
-            {
-                this->drawableObjList.push_back(obj);
-            }
+            this->gameObjList.push_back(p);
         }
         break;
     }
@@ -129,15 +117,11 @@ void Game::handleButton(const sf::Event &event)
         if (p)
         {
             DEBUG_PRINT("Created Player 4");
-            p->setCharacter(Player::CHARACTER_TYPE::SKELETON);
+            p->setCharacter(Character::Type::SKELETON);
             p->setPosition(1000, 400);
             // Bind movement keys to Player2
             p->bindKey(sf::Keyboard::Key::Left, sf::Keyboard::Key::Right, sf::Keyboard::Key::Up, sf::Keyboard::Key::M);
-            // Draw all objects associate with the player
-            for (auto &obj : p->getDrawableObjects())
-            {
-                this->drawableObjList.push_back(obj);
-            }
+            this->gameObjList.push_back(p);
         }
         break;
     }
@@ -152,27 +136,24 @@ void Game::handleButton(const sf::Event &event)
 
 void Game::update(float deltaTime)
 {
-    for (auto &obj : this->drawableObjList)
+    for (auto &obj : this->gameObjList)
     {
         // TODO: check why this not work
         // if (instanceof <Character>(obj))
-        auto c = std::dynamic_pointer_cast<Character>(obj);
-        if (c)
+        auto p = std::dynamic_pointer_cast<Player>(obj);
+        if (p)
         {
-            std::dynamic_pointer_cast<Character>(obj)->update(deltaTime, obstructionList);
+            p->update(deltaTime, obstructionList);
         }
     }
 
+    // Process events
     for (auto &p : this->playerList)
     {
-        // Character will be death if moving outside of the screen
+        // Player will be death if moving outside of the screen
         if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
         {
-            // DEBUG_PRINT("Character is outside");
-            for (auto &d : p->getDrawableObjects())
-            {
-                this->drawableObjList.erase(std::remove(this->drawableObjList.begin(), this->drawableObjList.end(), d), this->drawableObjList.end());
-            }
+            // DEBUG_PRINT("Player is outside");
             p->beKilled();
         }
 
@@ -188,10 +169,31 @@ void Game::update(float deltaTime)
                     {
                         float hitPower = (p->getPosition().x < e->getPosition().x) ? CFG_HIT_POWER : -CFG_HIT_POWER;
                         e->beHit(p->getAttack(), hitPower);
-                        DEBUG_PRINT(p->getName() << " attacked " << e->getName());
+                        // DEBUG_PRINT(p->getName() << " attacked " << e->getName());
+                        // TODO: add beHit to later process to make sure we have equal chance of attacking process, not FIFO
                     }
                 }
             }
+        }
+
+        if (p->getHealth() <= 0)
+        {
+            p->beKilled();
+            // DEBUG_PRINT(p->getName() << " is dead");
+        }
+    }
+
+    // Process post-event
+    for (auto it = this->playerList.begin(); it != this->playerList.end();)
+    {
+        if ((*it)->isDead())
+        {
+            (*it)->beDestroyed();
+            it = this->playerList.erase(it);
+        }
+        else
+        {
+            ++it;
         }
     }
 }
@@ -200,7 +202,7 @@ void Game::draw()
 {
     this->window->setActive(false);
 
-    for (auto &obj : this->drawableObjList)
+    for (auto &obj : this->gameObjList)
     {
         if (obj)
         {
