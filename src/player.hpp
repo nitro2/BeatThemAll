@@ -11,6 +11,13 @@ public:
     Player(std::string name, Character::Type c);
     ~Player();
 
+    enum class PlayingState
+    {
+        Init,
+        Playing,
+        Dead
+    };
+
     std::string getName() { return this->name; };
 
     int getAttack() { return this->attack; };
@@ -46,8 +53,6 @@ public:
     void beKilled();
     void beDestroyed();
 
-    std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
-
     // Just for debugging
     void test();
 
@@ -59,6 +64,8 @@ private:
     int attack;
     int defend;
     int health;
+
+    PlayingState playingState;
 
     // User input keys will be recorded here. Then update in update() function
     sf::Vector2f velocity;

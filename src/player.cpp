@@ -9,6 +9,7 @@ Player::Player(std::string name) : GameObject(0, 0, CFG_CHARACTER_WIDTH, CFG_CHA
     this->attack = 0;
     this->defend = 0;
     this->health = 0;
+    this->playingState = PlayingState::Playing;
     this->name = name;
     this->velocity.x = 0;
     this->velocity.y = 0;
@@ -53,7 +54,6 @@ void Player::setCharacter(Character::Type c)
         this->attack = this->character->getAttack();
         this->defend = this->character->getDefend();
         this->health = this->character->getHealth();
-        this->drawableObjList.push_back(this->character);
     }
     else
     {
@@ -82,7 +82,7 @@ sf::Vector2f Player::getPosition()
 void Player::beHit(int damage, float hitPower)
 {
     // Only take damge 1 time
-    if (this->character->setState(Character::State::Hit))
+    if (this->character->setState(Character::ImageState::Hit))
     {
         int actual_damage = static_cast<int>(static_cast<float>(damage) * (1 - ((0.06f * this->defend) / (1 + 0.06f * abs(this->defend)))));
         this->health -= actual_damage;
@@ -94,7 +94,7 @@ void Player::beHit(int damage, float hitPower)
 
 void Player::beKilled()
 {
-    this->character->setState(Character::State::Dead);
+    this->character->setState(Character::ImageState::Dead);
 }
 
 void Player::beDestroyed()
@@ -151,12 +151,12 @@ void Player::jump()
 bool Player::isDead()
 {
     // Return only if the Dead animation finishes
-    return this->character->getState() == Character::State::End;
+    return this->playingState == PlayingState::Dead;
 }
 
 bool Player::isAttacking()
 {
-    return this->character->getState() == Character::State::Attack;
+    return this->character->getState() == Character::ImageState::Attack;
 }
 
 void Player::attackAct()
@@ -219,13 +219,13 @@ void Player::checkKeyPress()
     }
 }
 
-std::vector<std::shared_ptr<GameObject>> Player::getDrawableObjects()
-{
-    return this->drawableObjList;
-}
-
 void Player::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList)
 {
+    // Do not process anything if player is not Playing (Eg: Dead)
+    if (this->playingState != PlayingState::Playing)
+    {
+        return;
+    }
     /*
         v = v0 + a*t
         s = v*t
@@ -283,6 +283,11 @@ void Player::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> ob
     this->body->setPosition(this->x, this->y);
     this->character->setPosition(this->x, this->y);
     this->character->update(deltaTime);
+
+    if (this->character->isDead())
+    {
+        this->playingState = PlayingState::Dead;
+    }
     // DEBUG_PRINT(" state=" << this->state
     //                       << " x=" << x
     //                       << " y=" << y
@@ -292,5 +297,11 @@ void Player::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> ob
 
 void Player::render(std::shared_ptr<sf::RenderWindow> window)
 {
+    // Do not process anything if player is not Playing (Eg: Dead)
+    if (this->playingState != PlayingState::Playing)
+    {
+        return;
+    }
+    this->body->render(window);
     this->character->render(window);
 }

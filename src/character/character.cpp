@@ -3,9 +3,10 @@
 
 Character::Character() : GameObject(0, 0, CFG_CHARACTER_WIDTH, CFG_CHARACTER_HEIGHT)
 {
-    this->state = State::Init; // Dummy init
+    this->state = ImageState::MaxImageStates; // Dummy init
     this->faceRight = true;
     this->scale = 1.0f;
+    this->dead = false;
 }
 
 void Character::setPosition(float x, float y)
@@ -25,7 +26,7 @@ bool Character::isFaceRight()
     return this->faceRight;
 }
 
-void Character::loadImage(State state, std::string filename, int frames, float switchTime)
+void Character::loadImage(ImageState state, std::string filename, int frames, float switchTime)
 {
     AnimationTexture_t *ani = &aniTexture[state];
     ani->frames = frames;
@@ -36,47 +37,47 @@ void Character::loadImage(State state, std::string filename, int frames, float s
 
 void Character::update(float deltaTime)
 {
-    this->characterAnimation.update(0, deltaTime, this->faceRight);
-    this->characterImg.setTextureRect(this->characterAnimation.uvRect);
-    this->characterImg.setPosition(this->x, this->y);
-    if ((this->state != State::Idle) && (this->characterAnimation.isAnimationFinish()))
+    if ((this->state != ImageState::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
-        if (this->state == State::Dead)
+        if (this->state == ImageState::Dead)
         {
-            this->setState(State::End);
+            this->dead = true;
             return;
         }
         else
         {
             // Return the character to idle state after do any animation
-            this->setState(State::Idle);
+            this->setState(ImageState::Idle);
         }
     }
+    this->characterAnimation.update(0, deltaTime, this->faceRight);
+    this->characterImg.setTextureRect(this->characterAnimation.uvRect);
+    this->characterImg.setPosition(this->x, this->y);
 }
 
 void Character::moveLeft()
 {
     // DEBUG_PRINT(this->name);
     this->faceRight = false;
-    this->setState(State::Walk);
+    this->setState(ImageState::Walk);
 };
 
 void Character::moveRight()
 {
     // DEBUG_PRINT(this->name);
     this->faceRight = true;
-    this->setState(State::Walk);
+    this->setState(ImageState::Walk);
 };
 
 void Character::jump()
 {
     // DEBUG_PRINT(this->name);
-    this->setState(State::Jump);
+    this->setState(ImageState::Jump);
 }
 
 void Character::attackAct()
 {
-    this->setState(State::Attack);
+    this->setState(ImageState::Attack);
 }
 
 void Character::render(std::shared_ptr<sf::RenderWindow> window)
@@ -86,7 +87,7 @@ void Character::render(std::shared_ptr<sf::RenderWindow> window)
     // this->body->render(window);
 }
 
-bool Character::setState(State newState)
+bool Character::setState(ImageState newState)
 {
     // No update if state not change
     if (this->state == newState)
@@ -96,27 +97,27 @@ bool Character::setState(State newState)
 
     switch (this->state)
     {
-    case State::Hit:
+    case ImageState::Hit:
         // Cannot jump, move or attack while being hit
-        if ((newState == State::Jump) || (newState == State::Walk) || (newState == State::Attack))
+        if ((newState == ImageState::Jump) || (newState == ImageState::Walk) || (newState == ImageState::Attack))
         {
             return false;
         }
-    case State::Dead:
+    case ImageState::Dead:
         // Do not allow user to change state if already dead
-        if (newState < State::MaxImageStates)
+        if (newState < ImageState::MaxImageStates)
         {
             return false;
         }
-    case State::Jump:
-    case State::Walk:
-    case State::Attack:
-    case State::Idle:
+    case ImageState::Jump:
+    case ImageState::Walk:
+    case ImageState::Attack:
+    case ImageState::Idle:
     default:
         break;
     }
     this->state = newState;
-    bool isRepeat = (newState == State::Idle) ? true : false;
+    bool isRepeat = (newState == ImageState::Idle) ? true : false;
 
     // Change image with to animation if needed
     AnimationTexture_t *ani = &aniTexture[newState];
@@ -136,7 +137,12 @@ bool Character::setState(State newState)
     return true;
 }
 
-Character::State Character::getState()
+Character::ImageState Character::getState()
 {
     return this->state;
+}
+
+bool Character::isDead()
+{
+    return this->dead;
 }

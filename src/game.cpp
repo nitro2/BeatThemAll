@@ -147,18 +147,9 @@ void Game::update(float deltaTime)
         }
     }
 
+    // Process events
     for (auto &p : this->playerList)
     {
-        if (p->isDead())
-        {
-            for (auto &d : p->getDrawableObjects())
-            {
-                this->gameObjList.erase(std::remove(this->gameObjList.begin(), this->gameObjList.end(), d), this->gameObjList.end());
-            }
-            p->beDestroyed();
-            continue;
-        }
-
         // Player will be death if moving outside of the screen
         if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
         {
@@ -189,6 +180,20 @@ void Game::update(float deltaTime)
         {
             p->beKilled();
             // DEBUG_PRINT(p->getName() << " is dead");
+        }
+    }
+
+    // Process post-event
+    for (auto it = this->playerList.begin(); it != this->playerList.end();)
+    {
+        if ((*it)->isDead())
+        {
+            (*it)->beDestroyed();
+            it = this->playerList.erase(it);
+        }
+        else
+        {
+            ++it;
         }
     }
 }

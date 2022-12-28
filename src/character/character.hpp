@@ -23,7 +23,7 @@ public:
         WIZARD
     };
 
-    typedef enum State
+    typedef enum ImageState
     {
         // States that have images
         Idle = 0,
@@ -33,9 +33,7 @@ public:
         Jump,
         Dead,
         MaxImageStates,
-        Init = MaxImageStates,
-        End
-    } State;
+    } ImageState;
 
     int getAttack() { return this->attack; };
     int getDefend() { return this->defend; };
@@ -53,14 +51,17 @@ public:
     void attackAct();
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
-    bool setState(State s);
-    State getState();
+    bool setState(ImageState s);
+    ImageState getState();
+
+    bool isDead();
 
 protected:
     int attack;
     int defend;
     int health;
-    State state;
+    ImageState state;
+    bool dead;
 
     typedef struct AnimationTexture_t
     {
@@ -70,7 +71,7 @@ protected:
         unsigned int imgHeight;
         float switchTime;
     } AnimationTexture_t;
-    AnimationTexture_t aniTexture[State::MaxImageStates];
+    AnimationTexture_t aniTexture[ImageState::MaxImageStates];
     float scale;
 
     Animation characterAnimation;
@@ -78,7 +79,7 @@ protected:
     bool faceRight;
 
     // Image handle
-    void loadImage(State state, std::string filename, int frames, float switchTime);
+    void loadImage(ImageState state, std::string filename, int frames, float switchTime);
 };
 
 class Knight : public Character
