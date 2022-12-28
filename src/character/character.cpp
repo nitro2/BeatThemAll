@@ -37,12 +37,16 @@ void Character::loadImage(ImageState state, std::string filename, int frames, fl
 
 void Character::update(float deltaTime)
 {
+    if (this->dead)
+    {
+        return;
+    }
+
     if ((this->state != ImageState::Idle) && (this->characterAnimation.isAnimationFinish()))
     {
         if (this->state == ImageState::Dead)
         {
             this->dead = true;
-            return;
         }
         else
         {
@@ -104,11 +108,6 @@ bool Character::setState(ImageState newState)
             return false;
         }
     case ImageState::Dead:
-        // Do not allow user to change state if already dead
-        if (newState < ImageState::MaxImageStates)
-        {
-            return false;
-        }
     case ImageState::Jump:
     case ImageState::Walk:
     case ImageState::Attack:
