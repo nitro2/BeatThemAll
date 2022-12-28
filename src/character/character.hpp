@@ -36,8 +36,7 @@ public:
     sf::FloatRect getBounds() override;
     bool isFaceRight();
 
-    void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
-    void movementAct(float delta_x, float delta_y);
+    void update(float deltaTime);
     void moveLeft() override;
     void moveRight() override;
     void jump();
@@ -54,10 +53,6 @@ protected:
     int health;
     State state;
 
-    // User input keys will be recorded here. Then update in update() function
-    sf::Vector2f velocity;
-    bool ableJump;
-
     typedef struct AnimationTexture_t
     {
         sf::Texture texture;
@@ -72,9 +67,6 @@ protected:
     Animation characterAnimation;
     sf::Sprite characterImg;
     bool faceRight;
-
-    std::shared_ptr<DebugRectangle> body; // Body is used to detect hit region when a player is hit/attacked.
-    std::shared_ptr<DebugRectangle> attackRegion;
 
     // Image handle
     void loadImage(State state, std::string filename, int frames, float switchTime);

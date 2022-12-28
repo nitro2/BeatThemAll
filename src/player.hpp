@@ -68,7 +68,13 @@ private:
     int attack;
     int defend;
     int health;
+
+    // User input keys will be recorded here. Then update in update() function
+    sf::Vector2f velocity;
+    bool ableJump;
+
     std::shared_ptr<Character> character;
+    std::shared_ptr<DebugRectangle> body; // Body is used to detect hit region when a player is hit/attacked.
 
     std::vector<std::shared_ptr<GameObject>> drawableObjList;
     std::map<sf::Keyboard::Key, void (Player::*)(void)> keyList;
