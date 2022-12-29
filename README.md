@@ -31,7 +31,7 @@ GameObject
    |        
    |--- Grid
    |
-   |--- eMap
+   |--- Map
 ```
 
 ## Player
