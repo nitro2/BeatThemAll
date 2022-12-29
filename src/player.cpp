@@ -13,7 +13,7 @@ Player::Player(std::string name) : GameObject(0, 0, CFG_CHARACTER_WIDTH, CFG_CHA
     this->name = name;
     this->velocity.x = 0;
     this->velocity.y = 0;
-    this->ableJump = false;
+    this->jumpPower = 0;
     /* Add body of character */
     this->body = std::make_shared<DebugRectangle>(
         this->x, this->y, this->width, this->height, sf::Color(0, 255, 0, 100));
@@ -140,11 +140,11 @@ void Player::moveRight()
 void Player::jump()
 {
     // DEBUG_PRINT(this->name);
-    if (this->ableJump)
+    if (this->jumpPower > 0)
     {
-        this->velocity.y -= sqrtf(2.0f * CFG_GRAVITATION_ACCELERATION * CFG_CHARACTER_JUMP_HEIGHT);
+        this->velocity.y = -sqrtf(2.0f * CFG_GRAVITATION_ACCELERATION * CFG_CHARACTER_JUMP_HEIGHT);
         this->character->jump();
-        this->ableJump = false;
+        this->jumpPower -= 1;
     }
 }
 
@@ -274,7 +274,7 @@ void Player::update(float deltaTime, std::vector<std::shared_ptr<GameObject>> ob
             if (pushBack.y < 0)
             {
                 this->velocity.y = 0;
-                this->ableJump = true;
+                this->jumpPower = 2; // Double jump
             }
         }
     }

@@ -151,7 +151,8 @@ void Game::update(float deltaTime)
     for (auto &p : this->playerList)
     {
         // Player will be death if moving outside of the screen
-        if (!sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT).contains(p->getPosition()))
+        // Double screen height for better experience
+        if (!sf::FloatRect(0, -SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT * 2).contains(p->getPosition()))
         {
             // DEBUG_PRINT("Player is outside");
             p->beKilled();
