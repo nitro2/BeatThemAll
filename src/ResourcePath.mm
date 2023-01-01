@@ -55,6 +55,6 @@ std::string resourcePath(void)
 #else
 std::string resourcePath(void)
 {
-    return nullptr;
+    return std::string();
 };
 #endif
