@@ -135,3 +135,9 @@ elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
 else() # Undefined
     message(FATAL_ERROR "Undefined build system")
 endif()
+
+
+if(CMAKE_GENERATOR STREQUAL Xcode)
+    message("Xcode build")
+    add_compile_definitions(Xcode)
+endif()

@@ -5,6 +5,8 @@
 #include "utils.hpp"
 #include "map.hpp"
 
+#include "ResourcePath.hpp"
+
 #define SCREEN_WIDTH (1920)
 #define SCREEN_HEIGHT (1080)
 
@@ -20,7 +22,7 @@ Game::Game()
 
     // Add map background and walls
     auto map = std::make_shared<Map>(SCREEN_WIDTH, SCREEN_HEIGHT);
-    map->loadMap("assets/map/map1.txt", false);
+    map->loadMap(resourcePath() + "assets/map/map1.txt", false);
     this->gameObjList.push_back(map);
     auto m = map->getWallList();
     this->obstructionList.insert(this->obstructionList.end(), m.begin(), m.end());

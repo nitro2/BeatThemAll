@@ -30,7 +30,7 @@ void Character::loadImage(ImageState state, std::string filename, int frames, fl
 {
     AnimationTexture_t *ani = &aniTexture[state];
     ani->frames = frames;
-    ani->texture.loadFromFile(filename);
+    ani->texture.loadFromFile(resourcePath() + filename);
     ani->imgWidth = ani->texture.getSize().x / ani->frames;
     ani->imgHeight = ani->texture.getSize().y;
 }
