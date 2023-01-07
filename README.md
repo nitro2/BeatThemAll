@@ -1,6 +1,8 @@
 # BeatThemAll
 2D fighting game using SFML.
 
+![Gameplay](screen1.png)
+
 # Compile
 ```
 mkdir build
@@ -14,18 +16,24 @@ cmake --build .
 ## GameObject
 GameObject is drawable object in game. 
 
+```
 GameObject
    ^
    |
    |--- Character
    |        ^
+   |        |----- Knight
+   |        |----- Ninja
    |        |----- Skeleton
    |        |----- Warrior
    |
-   |--- Bullet
+   |--- DebugRectangle
+   |        
+   |--- Grid
    |
-   |--- TileMap
-
+   |--- Map
+```
 
 ## Player
 Player is logic object, presents for each player.
+

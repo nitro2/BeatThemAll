@@ -114,6 +114,11 @@ void GameObject::render(std::shared_ptr<sf::RenderWindow> window)
     DEBUG_PRINT("");
 }
 
+void GameObject::update()
+{
+    DEBUG_PRINT("");
+}
+
 std::string GameObject::positionToString()
 {
     return std::string(" x=") + std::to_string(this->x) + std::string(" y=") + std::to_string(this->y) + std::string(" w=") + std::to_string(this->width) + std::string(" h=") + std::to_string(this->height);

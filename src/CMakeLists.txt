@@ -4,6 +4,7 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/gameobject.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/knight.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/character/ninja.cpp
@@ -22,6 +23,7 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/character/character.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/player.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/animation.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/map.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.hpp

@@ -4,21 +4,19 @@
 #include "gameobject.hpp"
 #include "character.hpp"
 
-class Player
+class Player : public GameObject
 {
 public:
-    enum class CHARACTER_TYPE
-    {
-        KNIGHT,
-        NINJA,
-        SKELETON,
-        WARRIOR,
-        WIZARD
-    };
-
     Player(std::string name);
-    Player(std::string name, CHARACTER_TYPE c);
+    Player(std::string name, Character::Type c);
     ~Player();
+
+    enum class PlayingState
+    {
+        Init,
+        Playing,
+        Dead
+    };
 
     std::string getName() { return this->name; };
 
@@ -28,7 +26,7 @@ public:
     void printStat();
 
     void setName(std::string name) { this->name = name; };
-    void setCharacter(CHARACTER_TYPE c);
+    void setCharacter(Character::Type c);
     void destroyCharacter();
     void setPosition(float x, float y);
     sf::Vector2f getPosition();
@@ -39,28 +37,42 @@ public:
     void checkKeyPress();
 
     // Movement
-    void moveLeft();
-    void moveRight();
+    void moveLeft() override;
+    void moveRight() override;
     void jump();
 
+    bool isDead();
+    bool isAttacking();
     // Attack animation
     void attackAct();
+    sf::FloatRect getAttackRegion();
+    sf::FloatRect getBody();
 
     // Get hit animation
-    void takeDamage(int damage);
+    void beHit(int damage, float hitPower);
     void beKilled();
-
-    std::vector<std::shared_ptr<GameObject>> getDrawableObjects();
+    void beDestroyed();
 
     // Just for debugging
     void test();
+
+    void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
+    void render(std::shared_ptr<sf::RenderWindow> window) override;
 
 private:
     std::string name;
     int attack;
     int defend;
     int health;
+
+    PlayingState playingState;
+
+    // User input keys will be recorded here. Then update in update() function
+    sf::Vector2f velocity;
+    int jumpPower;
+
     std::shared_ptr<Character> character;
+    std::shared_ptr<DebugRectangle> body; // Body is used to detect hit region when a player is hit/attacked.
 
     std::vector<std::shared_ptr<GameObject>> drawableObjList;
     std::map<sf::Keyboard::Key, void (Player::*)(void)> keyList;

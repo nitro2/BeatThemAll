@@ -1,6 +1,8 @@
 #ifndef _CHARACTER_HPP_
 #define _CHARACTER_HPP_
 
+#include <math.h>
+
 #include "SFML/Graphics.hpp"
 #include "gameobject.hpp"
 #include "animation.hpp"
@@ -11,16 +13,26 @@ public:
     Character();
     ~Character(){};
 
-    enum State
+    enum class Type
     {
+        KNIGHT,
+        NINJA,
+        SKELETON,
+        WARRIOR,
+        WIZARD
+    };
+
+    typedef enum ImageState
+    {
+        // States that have images
         Idle = 0,
         Walk,
         Attack,
         Hit,
-        Dead,
         Jump,
-        MaxState
-    };
+        Dead,
+        MaxImageStates,
+    } ImageState;
 
     int getAttack() { return this->attack; };
     int getDefend() { return this->defend; };
@@ -28,9 +40,9 @@ public:
 
     void setPosition(float x, float y);
     sf::FloatRect getBounds() override;
+    bool isFaceRight();
 
-    void update(float deltaTime, std::vector<std::shared_ptr<GameObject>> obstructionList);
-    void movementAct(float delta_x, float delta_y);
+    void update(float deltaTime);
     void moveLeft() override;
     void moveRight() override;
     void jump();
@@ -38,17 +50,17 @@ public:
     void attackAct();
     void render(std::shared_ptr<sf::RenderWindow> window) override;
 
-    void setState(State s);
+    bool setState(ImageState s);
+    ImageState getState();
+
+    bool isDead();
 
 protected:
     int attack;
     int defend;
     int health;
-    State state;
-
-    // User input keys will be recorded here. Then update in update() function
-    sf::Vector2f velocity;
-    bool ableJump;
+    ImageState state;
+    bool dead;
 
     typedef struct AnimationTexture_t
     {
@@ -58,17 +70,15 @@ protected:
         unsigned int imgHeight;
         float switchTime;
     } AnimationTexture_t;
-    AnimationTexture_t aniTexture[State::MaxState];
+    AnimationTexture_t aniTexture[ImageState::MaxImageStates];
     float scale;
 
     Animation characterAnimation;
-    sf::Sprite body;
+    sf::Sprite characterImg;
     bool faceRight;
 
-    std::shared_ptr<DebugRectangle> debugShape; // Debug only
-
     // Image handle
-    void loadImage(State state, std::string filename, int frames, float switchTime);
+    void loadImage(ImageState state, std::string filename, int frames, float switchTime);
 };
 
 class Knight : public Character

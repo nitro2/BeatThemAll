@@ -5,16 +5,18 @@
 #define CFG_GRAVITATION_ACCELERATION 981.0f
 #define CFG_GRAVITY_MAX_FALLING 1000.0f
 
+#define CFG_HIT_POWER 4.5f // Move back pixels if being hit
+
 // Common character config
 #define CFG_CHARACTER_HEALTH 100
-#define CFG_CHARACTER_WIDTH 120.0f
-#define CFG_CHARACTER_HEIGHT 160.0f
+#define CFG_CHARACTER_WIDTH 80.0f
+#define CFG_CHARACTER_HEIGHT 112.0f
 #define CFG_CHARACTER_ACCELERATION 300.0f
 #define CFG_CHARACTER_SPEED (300.0f)
 #define CFG_CHARACTER_JUMP_HEIGHT (1.5f * CFG_CHARACTER_HEIGHT)
 
 // Knight
-#define CFG_KNIGHT_IMG_SCALE (CFG_CHARACTER_HEIGHT / (350.0f))
+#define CFG_KNIGHT_IMG_SCALE roundf((CFG_CHARACTER_HEIGHT / (350.0f)) * 10) / 10 // Round to 2 decimal point
 #define CFG_KNIGHT_IMG_SWITCH_TIME 0.5f
 #define CFG_KNIGHT_IMG_ATTACK_PATH "assets/char/knight/image/attack.png"
 #define CFG_KNIGHT_IMG_ATTACK_FRAMES 10
