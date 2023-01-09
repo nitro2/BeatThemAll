@@ -3,6 +3,8 @@
 
 #include <typeinfo>
 
+const float PI = std::atan(1) * 4;
+
 template <typename Base, typename T>
 inline bool instanceof (const std::shared_ptr<T> &)
 {

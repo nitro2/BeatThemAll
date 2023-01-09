@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     //game.run();
 
     SelectCharacterScreen scs = SelectCharacterScreen();
-    scs.init();
     scs.run();
 
     //std::unique_ptr<SelectCharacterScreen> scs = std::make_unique<SelectCharacterScreen>();
