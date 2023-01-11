@@ -54,6 +54,9 @@ elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
 
     if(CMAKE_GENERATOR STREQUAL Xcode)
     message("Xcode build")
+    list(APPEND EXTRA_LIBS "-framework Foundation")
+    list(APPEND EXTRA_LIBS ${FoundationLib})
+
     add_compile_definitions(Xcode)
     list(APPEND ${BUILD_SOURCE}
             MACOSX_BUNDLE
@@ -113,7 +116,7 @@ elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
 
         set_target_properties(${ProjectName} PROPERTIES
             MACOSX_BUNDLE True
-            MACOSX_BUNDLE_GUI_IDENTIFIER my.domain.style.identifier.${ProjectName}
+            MACOSX_BUNDLE_GUI_IDENTIFIER nitro2.games.${ProjectName}
             MACOSX_BUNDLE_BUNDLE_NAME ${ProjectName}
             MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
             MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"

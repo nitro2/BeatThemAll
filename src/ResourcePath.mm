@@ -28,6 +28,7 @@
 ////////////////////////////////////////////////////////////
 #include "ResourcePath.hpp"
 #ifdef Xcode
+#pragma message ("use Xcode Bundle Resource")
 #import <Foundation/Foundation.h>
 
 ////////////////////////////////////////////////////////////
@@ -53,6 +54,7 @@ std::string resourcePath(void)
 }
 
 #else
+#pragma message ("Not use Xcode Bundle Resource")
 std::string resourcePath(void)
 {
     return std::string();
