@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.13)
 
 set(ProjectName BeatThemAll)
 # set the project name and version
-project("${ProjectName}" VERSION 1.0)
+project("${ProjectName}" 
+    VERSION 1.0
+    # LANGUAGES C CXX OBJC OBJCXX
+)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
