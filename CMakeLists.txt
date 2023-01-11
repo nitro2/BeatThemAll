@@ -117,6 +117,7 @@ elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
             MACOSX_BUNDLE_BUNDLE_NAME ${ProjectName}
             MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
             MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
+            MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/xcode_bundle.plist.in
         )
 
         # Individually set the file's path properties.
