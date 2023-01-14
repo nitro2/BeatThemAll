@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "game.hpp"
-#include "select_character_screen.hpp"
+#include "selector/select_character_screen.hpp"
 
 int main(int argc, char *argv[])
 {

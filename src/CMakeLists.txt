@@ -15,11 +15,7 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/select_character_screen.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/selector.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/spring.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/spring_text.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/collision_detection.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_character_screen.cpp
 )
 
 list(APPEND COMMON_HEADERS
@@ -32,12 +28,10 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/select_character_screen.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/selector.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/spring.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/spring_text.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/collision_detection.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/gamecfg.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_character_screen.hpp
+
 )
 
 target_sources(gamecore
