@@ -1,6 +1,9 @@
 #ifndef _GAMECFG_HPP_
 #define _GAMECFG_HPP_
 
+#define SCREEN_WIDTH (1920)
+#define SCREEN_HEIGHT (1080)
+
 // Gravity falling speed
 #define CFG_GRAVITATION_ACCELERATION 981.0f
 #define CFG_GRAVITY_MAX_FALLING 1000.0f

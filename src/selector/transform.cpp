@@ -54,3 +54,13 @@ void Transform::setHeight(float height)
 {
 	mHeight = height;
 }
+
+void Transform::selfCenteringX(float xPos)
+{
+	mX = xPos - mWidth / 2;
+}
+
+void Transform::selfCenteringY(float yPos)
+{
+	mY = yPos - mHeight / 2;
+}

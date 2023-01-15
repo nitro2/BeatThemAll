@@ -47,6 +47,12 @@ void SpringText::transformText()
 	text.setOrigin(mTransform.getWidth() / 2, mTransform.getHeight() / 2);
 }
 
+void SpringText::selfCentering(float posX, float posY)
+{
+	mTransform.selfCenteringX(posX);
+	mTransform.selfCenteringY(posY);
+}
+
 void SpringText::drawDebugRect(sf::RenderWindow& window)
 {
 	sf::RectangleShape rect;

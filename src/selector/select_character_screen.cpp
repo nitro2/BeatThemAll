@@ -15,6 +15,8 @@ SelectCharacterScreen::SelectCharacterScreen()
 	dt = 0;
 
 	springTextList.push_back(std::make_shared<SpringText>("Choose your cool hero!", 500, 500));
+	// test self centering
+	springTextList[0]->selfCentering(0.5 * SCREEN_WIDTH, 0.25 * SCREEN_HEIGHT);
 }
 
 SelectCharacterScreen::~SelectCharacterScreen()

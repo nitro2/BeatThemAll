@@ -5,6 +5,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "spring_text.hpp"
+#include "gamecfg.hpp"
 
 // This is the select character screen game state
 class SelectCharacterScreen
