@@ -13,11 +13,13 @@ SelectCharacterScreen::SelectCharacterScreen()
 
 	// initialize delta time
 	dt = 0;
+
+	springTextList.push_back(std::make_shared<SpringText>("Choose your cool hero!", 500, 500));
 }
 
 SelectCharacterScreen::~SelectCharacterScreen()
 {
-
+	// In this game states, we mainly using shared pointer so we don't need to care about memory deallocate
 }
 
 void SelectCharacterScreen::setRunning(bool b)
@@ -27,15 +29,16 @@ void SelectCharacterScreen::setRunning(bool b)
 
 void SelectCharacterScreen::handleEvents()
 {
-	// Handle window close event
+	// Handle window events
 	sf::Event pEvent;
 	while (window->pollEvent(pEvent))
 	{
+		// close event
 		if (pEvent.type == sf::Event::Closed)
 		{
 			setRunning(false);
 		}
-		
+		// key pressed event
 		if (pEvent.type == sf::Event::KeyPressed)
 		{
 			
@@ -45,19 +48,31 @@ void SelectCharacterScreen::handleEvents()
 
 void SelectCharacterScreen::update()
 {
-	
+	// Get the mouse position related to window and then pass it to update function of every spring text 
+	sf::Vector2i position = sf::Mouse::getPosition(*window);
+	for (size_t i = 0; i < springTextList.size(); i++)
+	{
+		springTextList[i]->update(dt, position);
+	}
 }
 
 void SelectCharacterScreen::render()
 {
 	window->clear(sf::Color(38, 122, 233, 255));
 	// draw stuff here
-	
+
+	// Iterate through all elements in springTextList and draw them
+	for (size_t i = 0; i < springTextList.size(); i++)
+	{
+		springTextList[i]->draw(*window);
+	}
+	//
 	window->display();
 }
 
 void SelectCharacterScreen::checkQuit()
 {
+	// running == false mean the game is end, close the window
 	if (!running)
 	{
 		window->close();

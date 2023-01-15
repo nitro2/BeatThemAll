@@ -16,6 +16,10 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_character_screen.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/transform.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring_text.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/collision_detection.cpp
 )
 
 list(APPEND COMMON_HEADERS
@@ -31,7 +35,10 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/gamecfg.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_character_screen.hpp
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/transform.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring_text.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/collision_detection.hpp
 )
 
 target_sources(gamecore
