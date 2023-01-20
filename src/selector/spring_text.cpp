@@ -8,6 +8,11 @@ SpringText::SpringText(std::string text, float x, float y)
 	sizeInit();
 }
 
+SpringText::~SpringText()
+{
+
+}
+
 void SpringText::loadFont()
 {
 	// Load minecraft font

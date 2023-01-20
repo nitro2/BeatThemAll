@@ -17,6 +17,9 @@ SelectCharacterScreen::SelectCharacterScreen()
 	springTextList.push_back(std::make_shared<SpringText>("Choose your cool hero!", 500, 500));
 	// test self centering
 	springTextList[0]->selfCentering(0.5 * SCREEN_WIDTH, 0.25 * SCREEN_HEIGHT);
+
+	selectPanel = std::make_shared<SelectPanel>(100, 100);
+	selectPanel->selfCentering(0.5 * SCREEN_WIDTH, 0.5 * SCREEN_HEIGHT);
 }
 
 SelectCharacterScreen::~SelectCharacterScreen()
@@ -43,7 +46,38 @@ void SelectCharacterScreen::handleEvents()
 		// key pressed event
 		if (pEvent.type == sf::Event::KeyPressed)
 		{
-			
+			if (pEvent.key.code == sf::Keyboard::A)
+			{
+				selectPanel->moveSelector("left", selectPanel->selector1);
+			}
+			if (pEvent.key.code == sf::Keyboard::D)
+			{
+				selectPanel->moveSelector("right", selectPanel->selector1);
+			}
+			if (pEvent.key.code == sf::Keyboard::W)
+			{
+				selectPanel->moveSelector("up", selectPanel->selector1);
+			}
+			if (pEvent.key.code == sf::Keyboard::S)
+			{
+				selectPanel->moveSelector("down", selectPanel->selector1);
+			}
+			if (pEvent.key.code == sf::Keyboard::Up)
+			{
+				selectPanel->moveSelector("up", selectPanel->selector2);
+			}
+			if (pEvent.key.code == sf::Keyboard::Down)
+			{
+				selectPanel->moveSelector("down", selectPanel->selector2);
+			}
+			if (pEvent.key.code == sf::Keyboard::Left)
+			{
+				selectPanel->moveSelector("left", selectPanel->selector2);
+			}
+			if (pEvent.key.code == sf::Keyboard::Right)
+			{
+				selectPanel->moveSelector("right", selectPanel->selector2);
+			}
 		}
 	}
 }
@@ -56,6 +90,8 @@ void SelectCharacterScreen::update()
 	{
 		springTextList[i]->update(dt, position);
 	}
+	// testing avatar
+	selectPanel->update(dt);
 }
 
 void SelectCharacterScreen::render()
@@ -68,6 +104,8 @@ void SelectCharacterScreen::render()
 	{
 		springTextList[i]->draw(*window);
 	}
+	// testing
+	selectPanel->draw(*window);
 	//
 	window->display();
 }

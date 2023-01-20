@@ -9,6 +9,8 @@ class Transform
 		Transform() = default;
 		// parameterized constructor
 		Transform(float x = 0, float y = 0, float width = 0, float height = 0);
+		// destructor
+		~Transform();
 		// getter and setter
 		float getX(), getY(), getWidth(), getHeight(), getCenterX(), getCenterY();
 		void setX(float x), setY(float y), setWidth(float width), setHeight(float height);

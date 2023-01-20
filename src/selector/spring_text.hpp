@@ -17,8 +17,8 @@ class SpringText
 		SpringText() = default;
 		// Parameterized constructor
 		SpringText(std::string text, float x, float y);
-
-
+		// Destructor
+		~SpringText();
 		// This function help spring text center itselt to a specific position
 		void selfCentering(float posX, float posY);
 		// This function update the spring text

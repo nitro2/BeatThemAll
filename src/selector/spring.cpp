@@ -6,6 +6,11 @@ Spring::Spring(float px, float pk, float pd) : x{ px }, k{ pk }, d{ pd }, target
 
 }
 
+Spring::~Spring()
+{
+
+}
+
 void Spring::update(float dt)
 {
 	// a: accleration

@@ -1,0 +1,5 @@
+./assets/char/knight/image/idle.png 90 60 250 250
+./assets/char/ninja/image/idle.png 0 0 220 220
+./assets/char/skeleton/image/idle.png 2 6 13 13
+./assets/char/warrior/image/idle.png 130 90 170 170
+./assets/char/warrior/image/idle.png 130 90 170 170

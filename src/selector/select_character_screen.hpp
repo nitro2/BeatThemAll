@@ -6,6 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "spring_text.hpp"
 #include "gamecfg.hpp"
+#include "select_panel.hpp"
 
 // This is the select character screen game state
 class SelectCharacterScreen
@@ -39,6 +40,7 @@ class SelectCharacterScreen
 		bool running = false;
 
 		std::vector<std::shared_ptr<SpringText>> springTextList;
+		std::shared_ptr<SelectPanel> selectPanel;
 };
 
 #endif SELECT_CHARACTER_SCREEN_HPP

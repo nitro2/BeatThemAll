@@ -9,6 +9,8 @@ class Spring
 		Spring() = default;
 		// Parameterized constructor
 		Spring(float px = 0, float pk = 100, float pd = 10);
+		// Destructor
+		~Spring();
 		// This function update spring acceleration, velocity and scale over time
 		void update(float dt);
 		// The pull function is called whenever we want to add a force to the spring to make it oscillate

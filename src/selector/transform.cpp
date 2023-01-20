@@ -5,6 +5,11 @@ Transform::Transform(float x, float y, float width, float height) : mX{ x }, mY{
 
 }
 
+Transform::~Transform()
+{
+
+}
+
 float Transform::getX()
 {
 	return mX;
