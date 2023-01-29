@@ -11,4 +11,4 @@ run:
 	cd build && cmake ../ && cmake --build . && ./BeatThemAll
 
 clean:
-	rm -rf build
+	rm -rf build*
