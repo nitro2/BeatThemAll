@@ -141,6 +141,10 @@ elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
             # Optional: Add the file to the 'Resources' folder group in Xcode.
             #           This also preserves folder structure.
             source_group("Resources/${NEW_FILE_PATH}" FILES "${FILE}")
+            set(ASSETS_DST_DIR ${CMAKE_CURRENT_BINARY_DIR}/Debug/${ProjectName}.app/Contents/Resources/${NEW_FILE_PATH})
+            # Copy the files from the source to the destination
+            file(COPY ${FILE} DESTINATION ${ASSETS_DST_DIR})
+
         endforeach ()
     endif()
 elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
