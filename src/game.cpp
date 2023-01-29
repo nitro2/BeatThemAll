@@ -5,12 +5,23 @@
 #include "utils.hpp"
 #include "map.hpp"
 
+#include "ResourcePath.hpp"
+
 #define SCREEN_WIDTH (1920)
 #define SCREEN_HEIGHT (1080)
 
 // Constructor
 Game::Game()
 {
+#ifdef Xcode
+    // Cannot save the log file into app bundle, so we save to Home dir instead
+    const char *home_dir = std::getenv("HOME");
+    auto log_path = std::string{home_dir};
+    initLogger(log_path);
+#else
+    initLogger();
+#endif
+    DEBUG_PRINT("");
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Beat them all");
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
@@ -20,7 +31,7 @@ Game::Game()
 
     // Add map background and walls
     auto map = std::make_shared<Map>(SCREEN_WIDTH, SCREEN_HEIGHT);
-    map->loadMap("assets/map/map1.txt", false);
+    map->loadMap(resourcePath() + "assets/map/map1.txt", false);
     this->gameObjList.push_back(map);
     auto m = map->getWallList();
     this->obstructionList.insert(this->obstructionList.end(), m.begin(), m.end());
@@ -220,7 +231,7 @@ void Game::draw()
 void Game::run()
 {
 
-    DEBUG_PRINT("running");
+    DEBUG_CLASS_PRINT("running");
     this->window->setActive(true);
 
     // delta time

@@ -15,6 +15,7 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ResourcePath.mm
 )
 
 list(APPEND COMMON_HEADERS
@@ -27,6 +28,7 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ResourcePath.hpp
 )
 
 target_sources(gamecore
