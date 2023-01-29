@@ -98,5 +98,40 @@ subject to the following restrictions:
             </dict>
         </dict>
 
+         <!--
+             TARGET
+         -->
+        <key>Targets</key>
+        <array>
+            <dict>
+                <key>BuildPhases</key>
+                <array>
+                    <dict>
+                        <key>Class</key>
+                        <string>Sources</string>
+                    </dict>
+                    <dict>
+                        <key>Class</key>
+                        <string>Frameworks</string>
+                    </dict>
+                    <dict>
+                        <key>Class</key>
+                        <string>Resources</string>
+                    </dict>
+                </array>
+
+                <key>ProductType</key>
+                <string>com.apple.product-type.application</string>
+
+                <key>SharedSettings</key>
+                <dict>
+                    <key>INFOPLIST_FILE</key>
+                    <string>___PACKAGENAME___/___PACKAGENAME___-Info.plist</string>
+
+                    <key>LD_RUNPATH_SEARCH_PATHS</key>
+                    <string>@loader_path/../Frameworks</string>
+                </dict>
+            </dict>
+        </array>
     </dict>
 </plist>
