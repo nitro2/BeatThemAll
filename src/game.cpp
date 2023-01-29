@@ -13,6 +13,8 @@
 // Constructor
 Game::Game()
 {
+    initLogger();
+    DEBUG_PRINT("");
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Beat them all");
     this->window->setPosition({0, 0});
     this->window->setVerticalSyncEnabled(true);
