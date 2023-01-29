@@ -13,7 +13,14 @@
 // Constructor
 Game::Game()
 {
+#ifdef Xcode
+    // Cannot save the log file into app bundle, so we save to Home dir instead
+    const char *home_dir = std::getenv("HOME");
+    auto log_path = std::string{home_dir};
+    initLogger(log_path);
+#else
     initLogger();
+#endif
     DEBUG_PRINT("");
     this->window = std::make_shared<sf::RenderWindow>(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Beat them all");
     this->window->setPosition({0, 0});
@@ -224,7 +231,7 @@ void Game::draw()
 void Game::run()
 {
 
-    DEBUG_PRINT("running");
+    DEBUG_CLASS_PRINT("running");
     this->window->setActive(true);
 
     // delta time

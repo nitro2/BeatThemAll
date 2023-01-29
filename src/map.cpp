@@ -31,7 +31,7 @@ void Map::loadMap(const std::string mapFile, bool visibleWall)
         {
             throw std::runtime_error("Invalid map file - background");
         }
-        this->texture.loadFromFile(line);
+        this->texture.loadFromFile(resourcePath() + line);
         this->background->setTexture(texture);
         this->background->setScale(this->width / this->texture.getSize().x, this->height / this->texture.getSize().y);
 

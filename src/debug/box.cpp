@@ -7,7 +7,7 @@ DebugRectangle::DebugRectangle(float x, float y, float width, float height, sf::
     this->shape->setFillColor(color);
     this->shape->setOrigin(this->width / 2, this->height);
     this->coordinate = std::make_shared<sf::Text>();
-    if (!this->font.loadFromFile("assets/fonts/Mabook.ttf"))
+    if (!this->font.loadFromFile(resourcePath() + "assets/fonts/Mabook.ttf"))
     {
         DEBUG_PRINT("Error while loading font");
     }

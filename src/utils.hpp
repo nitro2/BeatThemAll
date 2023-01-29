@@ -13,10 +13,11 @@ inline bool instanceof (const std::shared_ptr<T> &)
 }
 
 // #define DEBUG_PRINT(msg) std::cout << typeid(*this).name() << "-" << __FUNCTION__ << " at line " << __LINE__ << " - " << msg << std::endl;
+#define DEBUG_CLASS_PRINT(msg) spdlog::info("{} - {} at line {} - {}", typeid(*this).name(), __FUNCTION__, __LINE__, msg)
 #define DEBUG_PRINT(msg) spdlog::info(msg)
-static void initLogger()
+static void initLogger(std::string log_path = ".")
 {
-    auto file_logger = spdlog::basic_logger_mt("basic_logger", "logs.txt");
+    auto file_logger = spdlog::basic_logger_mt("basic_logger", log_path + "/BeatThemAll_logs.txt");
     spdlog::set_default_logger(file_logger);
 }
 #endif // _UTILS_HPP_
