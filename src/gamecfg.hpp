@@ -3,6 +3,7 @@
 
 #define SCREEN_WIDTH (1920)
 #define SCREEN_HEIGHT (1080)
+#include "ResourcePath.hpp"
 
 // Gravity falling speed
 #define CFG_GRAVITATION_ACCELERATION 981.0f

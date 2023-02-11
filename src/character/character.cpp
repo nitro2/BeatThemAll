@@ -30,7 +30,7 @@ void Character::loadImage(ImageState state, std::string filename, int frames, fl
 {
     AnimationTexture_t *ani = &aniTexture[state];
     ani->frames = frames;
-    ani->texture.loadFromFile(filename);
+    ani->texture.loadFromFile(resourcePath() + filename);
     ani->imgWidth = ani->texture.getSize().x / ani->frames;
     ani->imgHeight = ani->texture.getSize().y;
 }
@@ -130,9 +130,6 @@ bool Character::setState(ImageState newState)
     this->characterImg.setOrigin(static_cast<float>(this->aniTexture[this->state].imgWidth / 2), static_cast<float>(this->aniTexture[this->state].imgHeight));
     this->characterAnimation.update(0, 0.0f, this->faceRight);
     this->characterImg.setTextureRect(this->characterAnimation.uvRect);
-    DEBUG_PRINT(" state=" << this->state
-                          << " x=" << x
-                          << " y=" << y);
     return true;
 }
 

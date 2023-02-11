@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.13)
 
 set(ProjectName BeatThemAll)
 # set the project name and version
-project("${ProjectName}" VERSION 1.0)
+project("${ProjectName}" 
+    VERSION 1.0
+    # LANGUAGES C CXX OBJC OBJCXX
+)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
@@ -16,6 +19,10 @@ configure_file(Config.h.in Config.h)
 
 add_library(gamecore "")
 add_subdirectory(src)
+
+list(APPEND BUILD_SOURCE
+    main.cpp
+)
 
 if(MSVC OR MSYS OR MINGW) # for detecting Windows compilers
     message("Build on Windows")
@@ -36,6 +43,7 @@ if(MSVC OR MSYS OR MINGW) # for detecting Windows compilers
     )
     file(COPY ${EXTRA_DLL} DESTINATION ${PROJECT_BINARY_DIR}/Debug)
     file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+
 elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
     message("Build on Mac OSX")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
@@ -46,7 +54,18 @@ elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
      "${SFML_LIB_PATH}/libsfml-system.2.5.dylib"
      "${SFML_LIB_PATH}/libsfml-window.2.5.dylib"
     )
-    # TODO: Add asset to Debug for Xcode config
+
+    if(CMAKE_GENERATOR STREQUAL Xcode)
+    message("Xcode build")
+    list(APPEND EXTRA_LIBS "-framework Foundation")
+    list(APPEND EXTRA_LIBS ${FoundationLib})
+
+    add_compile_definitions(Xcode)
+    list(APPEND ${BUILD_SOURCE}
+            MACOSX_BUNDLE
+            ${RESOURCES})
+    endif()
+
 elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
     message("Build on Linux")
     set(SFML_LIB_PATH "${PROJECT_SOURCE_DIR}/lib/SFML/libOSX_x86_64")
@@ -63,7 +82,8 @@ list(APPEND EXTRA_INCLUDES
 
 
 # add the executable
-add_executable("${ProjectName}" main.cpp)
+add_executable("${ProjectName}" ${BUILD_SOURCE})
+
 
 target_link_libraries("${ProjectName}"
     PUBLIC ${EXTRA_LIBS}    
@@ -86,3 +106,49 @@ add_custom_target(assets
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_LIST_DIR}/copy-assets.cmake
 )
 add_dependencies("${ProjectName}" assets)
+
+# Post-build
+if(MSVC OR MSYS OR MINGW) # for detecting Windows compilers
+    message("Post Build on Windows")
+elseif(APPLE) # for MacOS X or iOS, watchOS, tvOS (since 3.10.3)
+    message("Post Build on Mac OSX")
+
+    if(CMAKE_GENERATOR STREQUAL Xcode)
+        message("Add assets to bundle")
+        file(GLOB_RECURSE RESOURCES "${PROJECT_SOURCE_DIR}/assets/*")
+
+        set_target_properties(${ProjectName} PROPERTIES
+            MACOSX_BUNDLE True
+            MACOSX_BUNDLE_GUI_IDENTIFIER nitro2.games.${ProjectName}
+            MACOSX_BUNDLE_BUNDLE_NAME ${ProjectName}
+            MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
+            MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
+            MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/xcode_bundle.plist.in
+        )
+
+        # Individually set the file's path properties.
+        foreach (FILE ${RESOURCES})
+            # Get the relative path from the data-folder to the particular file.
+            file(RELATIVE_PATH NEW_FILE "${PROJECT_SOURCE_DIR}" ${FILE})
+            message(${NEW_FILE})
+
+            # Get the relative path to the file.
+            get_filename_component(NEW_FILE_PATH ${NEW_FILE} DIRECTORY)
+
+            # Set it's location inside the app package (under Resources).
+            set_property(SOURCE ${FILE} PROPERTY MACOSX_PACKAGE_LOCATION "Resources/${NEW_FILE_PATH}")
+
+            # Optional: Add the file to the 'Resources' folder group in Xcode.
+            #           This also preserves folder structure.
+            source_group("Resources/${NEW_FILE_PATH}" FILES "${FILE}")
+            set(ASSETS_DST_DIR ${CMAKE_CURRENT_BINARY_DIR}/Debug/${ProjectName}.app/Contents/Resources/${NEW_FILE_PATH})
+            # Copy the files from the source to the destination
+            file(COPY ${FILE} DESTINATION ${ASSETS_DST_DIR})
+
+        endforeach ()
+    endif()
+elseif(UNIX AND NOT APPLE) # for Linux, BSD, Solaris, Minix
+    message("Post Build on Linux")
+else() # Undefined
+    message(FATAL_ERROR "Undefined build system")
+endif()

@@ -27,7 +27,7 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/selector.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/character_preview.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/preview_panel.cpp
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/ResourcePath.mm
 )
 
 list(APPEND COMMON_HEADERS
@@ -53,6 +53,7 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/selector.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/character_preview.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/selector/preview_panel.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ResourcePath.hpp
 )
 
 target_sources(gamecore
