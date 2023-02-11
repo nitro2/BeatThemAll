@@ -92,6 +92,7 @@ void SelectCharacterScreen::update()
 	}
 	// testing avatar
 	selectPanel->update(dt);
+
 }
 
 void SelectCharacterScreen::render()

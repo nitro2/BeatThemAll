@@ -1,7 +1,7 @@
 #include "selector.hpp"
 
-Selector::Selector(float x, float y, float width, float height) 
-	: mTransform {x, y, width, height}, arrowX{ -10 }, arrowY{ -10 }, sineCycle { 0 }, mSpring{ 1 }
+Selector::Selector(float x, float y, float width, float height)
+	: mTransform{ x, y, width, height }, arrowX{ -10 }, arrowY{ -10 }, sineCycle{ 0 }, mSpring{ 1 }
 {
 	spriteInit();
 }
@@ -24,10 +24,10 @@ void Selector::spriteInit()
 	}
 	sprite.setTextureRect(sf::IntRect(0, 0, 13, 13));
 	sf::Vector2u textureSize = sprite.getTexture()->getSize();
-	float textureWidth{(float) textureSize.x};
-	float textureHeight{(float) textureSize.y};
+	float textureWidth{ (float)textureSize.x };
+	float textureHeight{ (float)textureSize.y };
 	sprite.setOrigin(sf::Vector2f(textureWidth / 2, textureHeight / 2));
-	float adjustY{  sprite.getTexture()->getSize().y * sprite.getScale().y};
+	float adjustY{ sprite.getTexture()->getSize().y * sprite.getScale().y };
 	sprite.setPosition(mTransform.getX() + arrowX, mTransform.getY() + arrowY - adjustY);
 }
 
@@ -50,8 +50,8 @@ void Selector::update(float dt)
 	sprite.setPosition(mTransform.getX() + arrowX + textureSize.x * spriteScale.x / 2, mTransform.getY() + textureSize.y * spriteScale.y / 2 + arrowY + sinValue * 10 - adjustY);
 	mSpring.update(dt);
 	float springScale = mSpring.getScale();
-	sprite.setScale(springScale*DEFAULT_SCALE, springScale*DEFAULT_SCALE);
-	
+	sprite.setScale(springScale * DEFAULT_SCALE, springScale * DEFAULT_SCALE);
+
 }
 
 void Selector::draw(sf::RenderWindow& window)

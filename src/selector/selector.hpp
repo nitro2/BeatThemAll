@@ -12,24 +12,24 @@
 
 class Selector
 {
-	public:
-		Selector() = default;
-		Selector(float x, float y, float width, float height);
-		~Selector();
+public:
+	Selector() = default;
+	Selector(float x, float y, float width, float height);
+	~Selector();
 
-		void update(float dt);
-		void draw(sf::RenderWindow& window);
+	void update(float dt);
+	void draw(sf::RenderWindow& window);
 
-		float getX(), getY();
-		void setX(float x), setY(float y), pullSpring(float force);
-	private:
-		Transform mTransform;
-		sf::Texture texture;
-		sf::Sprite sprite;
-		Spring mSpring;
-		float arrowX, arrowY, sineCycle;
+	float getX(), getY();
+	void setX(float x), setY(float y), pullSpring(float force);
+private:
+	Transform mTransform;
+	sf::Texture texture;
+	sf::Sprite sprite;
+	Spring mSpring;
+	float arrowX, arrowY, sineCycle;
 
-		void spriteInit();
+	void spriteInit();
 };
 
 #endif // !SELECTOR_HPP

@@ -27,7 +27,7 @@ namespace select_panelNS
 			tokenize(s, ' ', words);
 			characterAvatarPaths.push_back(words[0]);
 			std::vector<int> temp;
-			
+
 			temp.push_back(std::stoi(words[1]));
 			temp.push_back(std::stoi(words[2]));
 			temp.push_back(std::stoi(words[3]));
@@ -39,10 +39,10 @@ namespace select_panelNS
 }
 
 using namespace select_panelNS;// This allows the helper classes and functions
-                       // to be used in the .cpp file without explicit use
-                       // of the namespace.
+// to be used in the .cpp file without explicit use
+// of the namespace.
 
-SelectPanel::SelectPanel(float x, float y) : mTransform {x, y}
+SelectPanel::SelectPanel(float x, float y) : mTransform{ x, y }
 {
 	setPanelSizeAndAddAvatars();
 	addSelector();
@@ -56,20 +56,20 @@ SelectPanel::~SelectPanel()
 
 void SelectPanel::selfCentering(float x, float y)
 {
-	float deltaX{ (x - mTransform.getWidth() / 2) - mTransform.getX()};
-float deltaY{ (y - mTransform.getHeight() / 2) - mTransform.getY() };
-mTransform.selfCenteringX(x);
-mTransform.selfCenteringY(y);
-for (size_t i = 0; i < avatarList.size(); i++)
-{
-	avatarList[i]->setX(avatarList[i]->getX() + deltaX);
-	avatarList[i]->setY(avatarList[i]->getY() + deltaY);
-}
-selector1->setX(selector1->getX() + deltaX);
-selector1->setY(selector1->getY() + deltaY);
+	float deltaX{ (x - mTransform.getWidth() / 2) - mTransform.getX() };
+	float deltaY{ (y - mTransform.getHeight() / 2) - mTransform.getY() };
+	mTransform.selfCenteringX(x);
+	mTransform.selfCenteringY(y);
+	for (size_t i = 0; i < avatarList.size(); i++)
+	{
+		avatarList[i]->setX(avatarList[i]->getX() + deltaX);
+		avatarList[i]->setY(avatarList[i]->getY() + deltaY);
+	}
+	selector1->setX(selector1->getX() + deltaX);
+	selector1->setY(selector1->getY() + deltaY);
 
-selector2->setX(selector2->getX() + deltaX);
-selector2->setY(selector2->getY() + deltaY);
+	selector2->setX(selector2->getX() + deltaX);
+	selector2->setY(selector2->getY() + deltaY);
 }
 
 void SelectPanel::moveEntryInit()
@@ -161,9 +161,9 @@ void SelectPanel::moveSelector(std::string direction, std::shared_ptr<Selector> 
 
 void SelectPanel::addSelector()
 {
-	selector1 = std::make_shared<Selector>(mTransform.getX() + GAP_DISTANCE, 
+	selector1 = std::make_shared<Selector>(mTransform.getX() + GAP_DISTANCE,
 		mTransform.getY() + GAP_DISTANCE, AVATAR_SIZE, AVATAR_SIZE);
-	selector2 = std::make_shared<Selector>(mTransform.getX() + GAP_DISTANCE*2 + AVATAR_SIZE,
+	selector2 = std::make_shared<Selector>(mTransform.getX() + GAP_DISTANCE * 2 + AVATAR_SIZE,
 		mTransform.getY() + GAP_DISTANCE, AVATAR_SIZE, AVATAR_SIZE);
 }
 
@@ -172,7 +172,7 @@ void SelectPanel::setPanelSizeAndAddAvatars()
 	std::vector<std::string> characterAvatarPaths;
 	std::vector<std::vector<int>> characterAvatarCropRects;
 	getCharacterAvatarConfigInfo(characterAvatarPaths, characterAvatarCropRects);
-	
+
 	int characterNum = characterAvatarPaths.size();
 	int rowNum = std::ceil(1.0f * characterNum / MAX_AVATAR_NUMBER_ON_A_ROW);
 	int colNum{ 0 };
@@ -204,9 +204,9 @@ void SelectPanel::setPanelSizeAndAddAvatars()
 					startY + currRow * (GAP_DISTANCE + AVATAR_SIZE),
 					characterAvatarPaths[count],
 					sf::IntRect(characterAvatarCropRects[count][0],
-								characterAvatarCropRects[count][1],
-								characterAvatarCropRects[count][2],
-								characterAvatarCropRects[count][3])));
+						characterAvatarCropRects[count][1],
+						characterAvatarCropRects[count][2],
+						characterAvatarCropRects[count][3])));
 				count++;
 			}
 			characterNum -= MAX_AVATAR_NUMBER_ON_A_ROW;
@@ -215,20 +215,20 @@ void SelectPanel::setPanelSizeAndAddAvatars()
 		else
 		{
 			startX = mTransform.getX()
-				+ ( mTransform.getWidth()
-				- (characterNum * AVATAR_SIZE + (characterNum + 1) * GAP_DISTANCE) ) /2 
+				+ (mTransform.getWidth()
+					- (characterNum * AVATAR_SIZE + (characterNum + 1) * GAP_DISTANCE)) / 2
 				+ GAP_DISTANCE;
-			startY = mTransform.getY() 
+			startY = mTransform.getY()
 				+ GAP_DISTANCE;
 			for (int i = 0; i < characterNum; i++)
 			{
 				avatarList.push_back(std::make_shared<Avatar>(startX + i * (GAP_DISTANCE + AVATAR_SIZE),
 					startY + currRow * (GAP_DISTANCE + AVATAR_SIZE),
-					characterAvatarPaths[count], 
+					characterAvatarPaths[count],
 					sf::IntRect(characterAvatarCropRects[count][0],
-								characterAvatarCropRects[count][1],
-								characterAvatarCropRects[count][2],
-								characterAvatarCropRects[count][3])));
+						characterAvatarCropRects[count][1],
+						characterAvatarCropRects[count][2],
+						characterAvatarCropRects[count][3])));
 				count++;
 			}
 			characterNum = 0;
