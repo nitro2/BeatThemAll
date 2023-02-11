@@ -15,6 +15,18 @@ list(APPEND COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_character_screen.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/transform.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring_text.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/collision_detection.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/avatar.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_debug.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_panel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/character.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/selector.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/character_preview.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/preview_panel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ResourcePath.mm
 )
 
@@ -28,6 +40,19 @@ list(APPEND COMMON_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/grid.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/debug/box.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/obstruction/wall.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/gamecfg.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_character_screen.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/transform.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/spring_text.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/collision_detection.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/avatar.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_debug.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/select_panel.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/selector.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/character_preview.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/selector/preview_panel.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ResourcePath.hpp
 )
 

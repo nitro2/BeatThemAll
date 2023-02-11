@@ -5,6 +5,8 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/basic_file_sink.h"
 
+const float PI = std::atan(1) * 4;
+
 template <typename Base, typename T>
 inline bool instanceof (const std::shared_ptr<T> &)
 {
